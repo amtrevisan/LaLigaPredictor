@@ -20,20 +20,19 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 if not API_KEY:
-    print("ERROR: FOOTBALL_API_KEY not found in .env file")
+    print("ERROR: FOOTBALL_API_KEY")
     exit(1)
 if not SUPABASE_URL:
-    print("ERROR: SUPABASE_URL not found in .env file")
+    print("ERROR: SUPABASE_URL")
     exit(1)
 if not SUPABASE_KEY:
-    print("ERROR: SUPABASE_KEY not found in .env file")
+    print("ERROR: SUPABASE_KEY")
     exit(1)
 
 headers = {"X-Auth-Token": API_KEY}
 
 try:
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-    print("✓ Supabase client initialized")
 except Exception as e:
     print(f"ERROR: Failed to initialize Supabase client: {e}")
     exit(1)
@@ -65,9 +64,8 @@ class LaLigaPredictor:
         )
 
     def get_la_liga_data(self):
-        print("Fetching data from API...")
 
-        # Fetch historical data for training (2000-2024) plus current season (2025)
+        # more games != better accuracy, in my testing... maybe once i add players it can work, or add a way that older games have less importance overtime
         seasons = ["2023", "2024", "2025"]
 
         urls = {
@@ -84,20 +82,13 @@ class LaLigaPredictor:
 
             for attempt in range(max_retries):
                 try:
-                    print(
-                        f"  Fetching {season} season data (attempt {attempt + 1}/{max_retries})..."
-                    )
                     response = requests.get(url, headers=headers, timeout=10)
 
-                    if response.status_code == 200:
-                        responses[season] = response.json()
-                        print(f"  ✓ Successfully fetched {season} season data")
-                        break
-                    elif response.status_code == 429:
-                        print(f"  Rate limit hit. Waiting {retry_delay * 2} seconds...")
+                    if response.status_code == 429:
+                        print(f"  Rate limit hit. Waiting {retry_delay * 2} seconds")
                         time.sleep(retry_delay * 2)
                     elif response.status_code == 403:
-                        print(f"  ERROR: Access forbidden. Check your API key.")
+                        print(f"  ERROR: Access forbidden. Check API key.")
                         exit(1)
                     else:
                         print(f"  Warning: Got status code {response.status_code}")
@@ -106,18 +97,12 @@ class LaLigaPredictor:
 
                 except requests.exceptions.ConnectionError as e:
                     print(f"  ERROR: Connection failed - {str(e)[:100]}")
-                    print(f"  This usually means:")
-                    print(f"    1. No internet connection")
-                    print(f"    2. DNS resolution failure")
-                    print(f"    3. Firewall blocking the connection")
-                    print(f"    4. VPN or proxy issues")
 
                     if attempt < max_retries - 1:
-                        print(f"  Retrying in {retry_delay} seconds...")
+                        print(f"  Retrying in {retry_delay} seconds")
                         time.sleep(retry_delay)
                     else:
                         print(f"\n  Failed to connect after {max_retries} attempts.")
-                        print(f"  Please check your network connection and try again.")
                         exit(1)
 
                 except requests.exceptions.Timeout:
@@ -236,7 +221,7 @@ class LaLigaPredictor:
             )
             h, a = stats[home_id], stats[away_id]
 
-            # Store pre-match statistics
+            # Store pre match stats for live games
             df.at[idx, "home_ppg"] = h["points"] / max(1, h["matches"])
             df.at[idx, "away_ppg"] = a["points"] / max(1, a["matches"])
             df.at[idx, "home_gd"] = (h["gf"] - h["ga"]) / max(1, h["matches"])
@@ -482,6 +467,7 @@ class LaLigaPredictor:
 
         return df
 
+    # Features have rates of importnce, i mess around with this according to what i think, but this has yielded well for now
     def create_features(self, df):
         X = pd.DataFrame()
 
@@ -566,7 +552,6 @@ class LaLigaPredictor:
 
     def save_to_supabase(self, gameweek, predictions, training_accuracy):
         try:
-            print(f"\nSaving predictions to Supabase...")
 
             supabase.table("predictions").delete().eq("gameweek", gameweek).execute()
 
@@ -585,10 +570,14 @@ class LaLigaPredictor:
                     "match_date": pred["date"],
                     "actual_result": pred.get("actual_result"),
                     "home_score": (
-                        int(home_score_val) if pd.notna(home_score_val) and pred.get("status") == "FINISHED" else None
+                        int(home_score_val)
+                        if pd.notna(home_score_val) and pred.get("status") == "FINISHED"
+                        else None
                     ),
                     "away_score": (
-                        int(away_score_val) if pd.notna(away_score_val) and pred.get("status") == "FINISHED" else None
+                        int(away_score_val)
+                        if pd.notna(away_score_val) and pred.get("status") == "FINISHED"
+                        else None
                     ),
                     "is_correct": pred.get("correct"),
                     "predicted_at": datetime.now().isoformat(),
@@ -612,23 +601,18 @@ class LaLigaPredictor:
             else:
                 supabase.table("model_stats").insert(stats_data).execute()
 
-            print(f"✅ Successfully saved {len(predictions)} predictions to Supabase")
-
         except Exception as e:
-            print(f"❌ Error saving to Supabase: {e}")
-            print(f"   Full error details: {str(e)}")
+            print(f" error connecting to supabase details: {str(e)}")
 
     def run_prediction(self):
-        """Main prediction method"""
+        """Main method"""
         print("\n" + "=" * 60)
-        print("LA LIGA PREDICTOR - Starting...")
         print("=" * 60 + "\n")
 
         training_2023_data, training_2024_data, current_2025_data = (
             self.get_la_liga_data()
         )
 
-        print("\nCreating dataframes...")
         training_2023_df = self.create_matches_dataframe(training_2023_data)
         training_2024_df = self.create_matches_dataframe(training_2024_data)
         current_2025_df = self.create_matches_dataframe(current_2025_data)
@@ -636,7 +620,6 @@ class LaLigaPredictor:
         all_2025_matches = current_2025_df.copy()
         current_gameweek = None
 
-        print("\nSearching for current gameweek...")
         for gw in sorted(all_2025_matches["matchday"].unique()):
             if gw < 7:
                 continue
@@ -645,18 +628,17 @@ class LaLigaPredictor:
 
             if incomplete > 0:
                 current_gameweek = gw
-                print(f"✓ Found gameweek {gw} with {incomplete} incomplete matches")
+                print(f"Found gameweek {gw} with {incomplete} incomplete matches")
                 break
 
         if current_gameweek is None:
-            print("❌ No gameweek to predict - all matches may be completed")
+            print("No gameweek to predict - all matches may be completed")
             return
 
         gameweek_matches = all_2025_matches[
             all_2025_matches["matchday"] == current_gameweek
         ].copy()
 
-        print("\nPreparing training data...")
         training_2023_df = training_2023_df[training_2023_df["result"].notna()].copy()
         training_2024_df = training_2024_df[training_2024_df["result"].notna()].copy()
 
@@ -675,9 +657,6 @@ class LaLigaPredictor:
             .reset_index(drop=True)
         )
 
-        print(f"✓ Training on {len(training_matches)} completed matches")
-
-        print("\nCalculating team statistics with enhanced features...")
         all_data = (
             pd.concat([training_matches, gameweek_matches])
             .sort_values("date")
@@ -688,12 +667,10 @@ class LaLigaPredictor:
         training_data = all_data_with_stats.iloc[: len(training_matches)].copy()
         prediction_data = all_data_with_stats.iloc[len(training_matches) :].copy()
 
-        print("Creating enhanced features...")
         training_features = self.create_features(training_data)
         training_target = self.create_target(training_data)
         prediction_features = self.create_features(prediction_data)
 
-        print("Training Random Forest model with optimized hyperparameters...")
         rf = RandomForestClassifier(
             n_estimators=200,
             max_depth=10,
@@ -704,7 +681,6 @@ class LaLigaPredictor:
 
         rf.fit(training_features, training_target)
 
-        print("Making predictions...")
         predictions = rf.predict(prediction_features)
         probabilities = rf.predict_proba(prediction_features)
 
@@ -767,7 +743,6 @@ class LaLigaPredictor:
 
         print(f"\n{'='*60}")
         print(f"Training Accuracy: {training_accuracy:.1f}%")
-        print(f"Predictions saved successfully!")
         print(f"{'='*60}\n")
 
 
@@ -778,7 +753,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n\nProcess interrupted by user")
     except Exception as e:
-        print(f"\n❌ Fatal error: {e}")
+        print(f"\nFatal error: {e}")
         import traceback
 
         traceback.print_exc()

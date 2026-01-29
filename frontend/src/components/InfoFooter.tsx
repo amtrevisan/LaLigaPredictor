@@ -73,66 +73,6 @@ const InfoFooter = () => {
     });
   };
 
-  const sections = [
-    {
-      id: "ml",
-      icon: Brain,
-      title: "Machine Learning Pipeline",
-      gradient: "from-primary/20 to-accent/20",
-      iconColor: "text-primary",
-      content: {
-        algorithm: "Random Forest Classifier with 300 decision trees",
-        features:
-          "50+ engineered features including performance metrics, form analysis, defensive/offensive statistics, venue effects, and head-to-head data",
-        training:
-          "2+ seasons of comprehensive La Liga match statistics with regular retraining cycles",
-      },
-      stats: { accuracy: "~60%", predictions: "300+", updates: "Weekly" },
-    },
-    {
-      id: "tech",
-      icon: Code,
-      title: "Technology Stack",
-      gradient: "from-accent/20 to-primary/20",
-      iconColor: "text-accent",
-      content: {
-        frontend:
-          "React 18 with TypeScript, Tailwind CSS, shadcn/ui components",
-        backend: "Python 3.x, scikit-learn, pandas, NumPy",
-        deployment: "Netlify with continuous deployment and automated testing",
-      },
-      stats: { components: "15+", typescript: "100%", responsive: "Yes" },
-    },
-    {
-      id: "data",
-      icon: Database,
-      title: "Data Engineering",
-      gradient: "from-success/20 to-success/10",
-      iconColor: "text-success",
-      content: {
-        pipeline: "Automated ETL pipeline for football statistics aggregation",
-        sources: "Real-time data collection from football-data.org API",
-        quality:
-          "Data validation, quality checks, and error handling with logging",
-      },
-      stats: { dataPoints: "10K+", sources: "3", automation: "Full" },
-    },
-    {
-      id: "performance",
-      icon: LineChart,
-      title: "Performance Monitoring",
-      gradient: "from-warning/20 to-warning/10",
-      iconColor: "text-warning",
-      content: {
-        tracking: "Model accuracy tracking across different prediction types",
-        metrics: "Calibration metrics to ensure probability accuracy",
-        analysis:
-          "Temporal analysis of prediction performance with A/B testing framework",
-      },
-      stats: { monitoring: "24/7", metrics: "20+", testing: "Continuous" },
-    },
-  ];
-
   const socialLinks = [
     {
       name: "LinkedIn",
@@ -178,7 +118,6 @@ const InfoFooter = () => {
     { label: "Software Engineering", icon: Rocket },
   ];
 
-  // Assign theme colors for alternating icons
   const skillColors = ["text-red-500", "text-success", "text-yellow-400"];
   const skillBgColors = [
     "bg-red-200/30",
@@ -186,7 +125,7 @@ const InfoFooter = () => {
     "bg-yellow-200/30",
   ];
 
-  // Helper to get Tailwind class for a radial gradient based on text color
+  // Helper to get Tailwind class for radial gradient
   const getRadialGradientClass = (textColorClass: string) => {
     switch (textColorClass) {
       case "text-success":
@@ -226,9 +165,7 @@ const InfoFooter = () => {
                   ></div>
                   <Shield className="w-4 h-4 text-success group-hover:scale-110 transition-transform relative z-10" />{" "}
                   {/* Added relative z-10 */}
-                  <span className="relative z-10">
-                    Production-ready deployment pipeline
-                  </span>{" "}
+                  <span className="relative z-10">Deployed web app</span>{" "}
                   {/* Added relative z-10 */}
                 </div>
                 <div className="flex items-center gap-2 group cursor-default relative">
@@ -238,9 +175,7 @@ const InfoFooter = () => {
                     className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gradient-to-radial ${getRadialGradientClass("text-warning")} opacity-20 filter blur-2xl rounded-full`}
                   ></div>
                   <Zap className="w-4 h-4 text-warning group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">
-                    Real-time data processing & predictions
-                  </span>
+                  <span className="relative z-10">Live game predictions</span>
                 </div>
                 <div className="flex items-center gap-2 group cursor-default relative">
                   {" "}
@@ -249,9 +184,7 @@ const InfoFooter = () => {
                     className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gradient-to-radial ${getRadialGradientClass("text-accent")} opacity-20 filter blur-2xl rounded-full`}
                   ></div>
                   <Users className="w-4 h-4 text-accent group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">
-                    Responsive & accessible UI/UX design
-                  </span>
+                  <span className="relative z-10">Historical predicions</span>
                 </div>
               </div>
             </div>
@@ -264,7 +197,6 @@ const InfoFooter = () => {
               <div className="flex flex-wrap justify-center md:justify-end gap-3 mb-3">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
-                  // No radial blur for social icons as per discussion, existing styles are good.
                   return (
                     <a
                       key={social.name}
@@ -288,8 +220,8 @@ const InfoFooter = () => {
 
         <div className="text-center mt-8 pt-6 border-t border-border">
           <p className="text-sm text-muted-foreground">
-            © 2025 La Liga Predictor • Designed for analytical and educational
-            purposes • Last Updated: October 2025
+            © 2026 La Liga Predictor • Designed for analytical and educational
+            purposes • Last Updated: Febuary 2026
           </p>
         </div>
       </div>
