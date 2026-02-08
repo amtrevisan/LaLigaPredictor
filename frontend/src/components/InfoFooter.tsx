@@ -1,60 +1,42 @@
 import { useState, useEffect } from "react";
 import {
-  Brain,
-  Code,
-  Database,
-  LineChart,
-  ChevronDown,
-  ChevronUp,
+  ChevronRight,
   Linkedin,
   Github,
   Youtube,
   Instagram,
-  Sparkles,
   Zap,
   Target,
   TrendingUp,
   Users,
-  Settings,
   Shield,
   Rocket,
 } from "lucide-react";
 
 const InfoFooter = () => {
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(),
-  );
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  console.log("InfoFooter rendered");
   const [animatedStats, setAnimatedStats] = useState({
     accuracy: 0,
     predictions: 0,
     components: 0,
   });
 
-  // Animate stats on mount
   useEffect(() => {
     const duration = 2000;
     const steps = 60;
     const interval = duration / steps;
-
-    const targets = {
-      accuracy: 60,
-      predictions: 300,
-      components: 15,
-    };
-
+    const targets = { accuracy: 60, predictions: 300, components: 15 };
     let step = 0;
+
     const timer = setInterval(() => {
       step++;
       const progress = step / steps;
       const easeOut = 1 - Math.pow(1 - progress, 3);
-
       setAnimatedStats({
         accuracy: Math.round(targets.accuracy * easeOut),
         predictions: Math.round(targets.predictions * easeOut),
         components: Math.round(targets.components * easeOut),
       });
-
       if (step >= steps) {
         clearInterval(timer);
         setAnimatedStats(targets);
@@ -64,40 +46,11 @@ const InfoFooter = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const toggleSection = (section: string) => {
-    setExpandedSections((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(section)) newSet.delete(section);
-      else newSet.add(section);
-      return newSet;
-    });
-  };
-
   const socialLinks = [
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/alex-morales-dev/",
-      icon: Linkedin,
-      color: "hover:text-[#0A66C2]",
-    },
-    {
-      name: "GitHub",
-      url: "https://github.com/AlexMoralesDev",
-      icon: Github,
-      color: "hover:text-foreground",
-    },
-    {
-      name: "YouTube",
-      url: "https://www.youtube.com/@alexmoralesdev",
-      icon: Youtube,
-      color: "hover:text-[#FF0000]",
-    },
-    {
-      name: "Instagram",
-      url: "https://www.instagram.com/alexmoralesdev?igsh=bzBrbnl0Nm0wOXJy&utm_source=qr",
-      icon: Instagram,
-      color: "hover:text-[#E4405F]",
-    },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/alex-morales-dev/", icon: Linkedin },
+    { name: "GitHub", url: "https://github.com/AlexMoralesDev", icon: Github },
+    { name: "YouTube", url: "https://www.youtube.com/@alexmoralesdev", icon: Youtube },
+    { name: "Instagram", url: "https://www.instagram.com/alexmoralesdev", icon: Instagram },
     {
       name: "TikTok",
       url: "https://www.tiktok.com/@alexmoralesdev",
@@ -106,122 +59,68 @@ const InfoFooter = () => {
           <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
         </svg>
       ),
-      color: "hover:text-[#00f2ea]",
     },
   ];
 
-  const skills = [
-    { label: "Machine Learning", icon: Brain },
-    { label: "Data Science", icon: TrendingUp },
-    { label: "Full-Stack Dev", icon: Code },
-    { label: "DevOps", icon: Settings },
-    { label: "Software Engineering", icon: Rocket },
-  ];
-
-  const skillColors = ["text-red-500", "text-success", "text-yellow-400"];
-  const skillBgColors = [
-    "bg-red-200/30",
-    "bg-green-200/30",
-    "bg-yellow-200/30",
-  ];
-
-  // Helper to get Tailwind class for radial gradient
-  const getRadialGradientClass = (textColorClass: string) => {
-    switch (textColorClass) {
-      case "text-success":
-        return "from-success/30 to-transparent";
-      case "text-accent":
-        return "from-accent/30 to-transparent";
-      case "text-warning":
-        return "from-warning/30 to-transparent";
-      case "text-primary":
-        return "from-primary/30 to-transparent";
-      case "text-red-500": // For skills, if needed (already handled there but good to generalize)
-        return "from-red-500/30 to-transparent";
-      case "text-yellow-400": // For skills
-        return "from-yellow-400/30 to-transparent";
-      default:
-        return "from-gray-500/30 to-transparent";
-    }
-  };
-
   return (
-    <footer className="bg-background border-t border-border mt-16">
-      <div className="w-full px-4 py-12">
-        {/* Footer Bottom */}
-        <div className="w-full pt-8">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-8">
-            {/* Project Highlights */}
-            <div className="text-center md:text-left">
-              <h3 className="font-semibold text-foreground mb-3 text-lg">
-                Project Highlights
-              </h3>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2 group cursor-default relative">
-                  {" "}
-                  {/* Added relative */}
-                  <div
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gradient-to-radial ${getRadialGradientClass("text-success")} opacity-20 filter blur-2xl rounded-full`}
-                  ></div>
-                  <Shield className="w-4 h-4 text-success group-hover:scale-110 transition-transform relative z-10" />{" "}
-                  {/* Added relative z-10 */}
-                  <span className="relative z-10">Deployed web app</span>{" "}
-                  {/* Added relative z-10 */}
-                </div>
-                <div className="flex items-center gap-2 group cursor-default relative">
-                  {" "}
-                  {/* Added relative */}
-                  <div
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gradient-to-radial ${getRadialGradientClass("text-warning")} opacity-20 filter blur-2xl rounded-full`}
-                  ></div>
-                  <Zap className="w-4 h-4 text-warning group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">Live game predictions</span>
-                </div>
-                <div className="flex items-center gap-2 group cursor-default relative">
-                  {" "}
-                  {/* Added relative */}
-                  <div
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gradient-to-radial ${getRadialGradientClass("text-accent")} opacity-20 filter blur-2xl rounded-full`}
-                  ></div>
-                  <Users className="w-4 h-4 text-accent group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">Historical predicions</span>
-                </div>
-              </div>
-            </div>
+    <footer className="bg-laliga-navy text-primary-foreground mt-16">
+      <div className="max-w-[1400px] mx-auto px-4 py-12">
+        {/* Divider */}
+        <div className="border-t border-primary-foreground/10 my-8" />
 
-            {/* Connect With Me */}
-            <div className="text-center md:text-right">
-              <h3 className="font-semibold text-foreground mb-3 text-lg">
-                Connect With Me
-              </h3>
-              <div className="flex flex-wrap justify-center md:justify-end gap-3 mb-3">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-2 bg-secondary rounded-lg border border-border transition-all duration-300 hover:scale-110 hover:border-primary/50 hover:-translate-y-1 ${social.color}`}
-                      aria-label={social.name}
-                    >
-                      <Icon />
-                    </a>
-                  );
-                })}
+        {/* Bottom section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Project Highlights */}
+          <div>
+            <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">
+              Project Highlights
+            </h3>
+            <div className="space-y-2 text-sm text-primary-foreground/60">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-success" />
+                <span>Deployed web app</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Alex Morales Trevisan
-              </p>
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4 text-warning" />
+                <span>Live game predictions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" />
+                <span>Historical predictions</span>
+              </div>
             </div>
+          </div>
+
+          {/* Connect */}
+          <div className="text-left md:text-right">
+            <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">
+              Connect With Me
+            </h3>
+            <div className="flex flex-wrap justify-start md:justify-end gap-2 mb-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-primary-foreground/10 rounded-lg border border-primary-foreground/10 transition-all duration-300 hover:scale-110 hover:bg-primary-foreground/20 hover:-translate-y-0.5"
+                    aria-label={social.name}
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
+            </div>
+            <p className="text-sm text-primary-foreground/50">Alex Morales Trevisan</p>
           </div>
         </div>
 
-        <div className="text-center mt-8 pt-6 border-t border-border">
-          <p className="text-sm text-muted-foreground">
-            © 2026 La Liga Predictor • Designed for analytical and educational
-            purposes • Last Updated: Febuary 2026
+        {/* Copyright */}
+        <div className="text-center mt-10 pt-6 border-t border-primary-foreground/10">
+          <p className="text-xs text-primary-foreground/40">
+            © 2026 La Liga Predictor • Designed for analytical and educational purposes • Last Updated: February 2026
           </p>
         </div>
       </div>

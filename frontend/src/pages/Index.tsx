@@ -1,349 +1,200 @@
-import { useState, useEffect, useMemo } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import MatchCard from "@/components/MatchCard";
+import { useState, useMemo, useEffect } from "react";
+import LaLigaHeader from "@/components/LaLigaHeader";
+import HeroSection from "@/components/HeroSection";
+import MatchTable from "@/components/MatchTable";
 import StatsCard from "@/components/StatsCard";
 import InfoFooter from "@/components/InfoFooter";
-import { Trophy, Target, TrendingUp, ArrowUpDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-// Assuming these are your API functions and types
 import { fetchAllPredictions, fetchModelStats } from "@/lib/api";
 import { Prediction } from "@/types/prediction";
 
-// Helper function (Consolidated and simplified)
-const isCorrect = (prediction: Prediction): boolean => {
-  // Only check for correctness if actual scores exist (match is complete)
-  if (
-    prediction.actualHomeScore === null ||
-    prediction.actualAwayScore === null
-  ) {
-    return false;
-  }
-
-  // Use the Python-calculated 'isCorrect' boolean from the database if available
-  if (typeof prediction.isCorrect === "boolean") {
-    return prediction.isCorrect;
-  }
-
-  // Fallback: Compare predicted result (home/away/draw) to actual result
-  const predictedResult =
-    prediction.predictedHomeScore > prediction.predictedAwayScore
-      ? "home"
-      : prediction.predictedHomeScore < prediction.predictedAwayScore
-        ? "away"
-        : "draw";
-
-  const actualResult =
-    prediction.actualHomeScore > prediction.actualAwayScore!
-      ? "home"
-      : prediction.actualHomeScore < prediction.actualAwayScore!
-        ? "away"
-        : "draw";
-
-  return predictedResult === actualResult;
-};
-
-// Component Start
 const Index = () => {
-  const [selectedTeam, setSelectedTeam] = useState("All Teams");
-  const [sortBy, setSortBy] = useState("date");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [allPredictions, setAllPredictions] = useState<Prediction[]>([]);
+  const [activeTab, setActiveTab] = useState<"current" | "history">("current");
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [modelStats, setModelStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // 1. Fetch data on component mount
+  // Determine current gameweek from model stats
+  const currentGameweek = modelStats?.currentGameweek || 1;
+  const [selectedGameweek, setSelectedGameweek] = useState<number>(currentGameweek);
+
+  // Fetch data from Supabase
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
         const [predictionsData, statsData] = await Promise.all([
           fetchAllPredictions(),
-          fetchModelStats(),
+          fetchModelStats()
         ]);
-        setAllPredictions(predictionsData);
+        
+        setPredictions(predictionsData);
         setModelStats(statsData);
-      } catch (e) {
-        console.error("Failed to load all data", e);
+        setSelectedGameweek(statsData?.currentGameweek || 1);
+      } catch (err) {
+        console.error("Error loading data:", err);
+        setError("Failed to load predictions. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
+
     loadData();
   }, []);
 
-  // 2. Separate current and historical predictions & generate team list
-  const { currentPredictions, historicalPredictions, laLigaTeams } =
-    useMemo(() => {
-      const current: Prediction[] = [];
-      const historical: Prediction[] = [];
-      const teams = new Set<string>();
+  // Helper functions for stats calculation
+  const calculateCurrentStreak = (predictions: Prediction[]) => {
+    let streak = 0;
+    for (let i = predictions.length - 1; i >= 0; i--) {
+      if (predictions[i].isCorrect) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+    return streak;
+  };
 
-      const currentGW = modelStats?.currentGameweek;
+  const calculateBestAccuracy = (predictions: Prediction[]) => {
+    const gameweekStats = new Map<number, { correct: number; total: number }>();
+    
+    predictions.forEach(p => {
+      if (p.isCorrect !== undefined && p.actualHomeScore !== null) {
+        const stats = gameweekStats.get(p.gameweek) || { correct: 0, total: 0 };
+        stats.total++;
+        if (p.isCorrect) stats.correct++;
+        gameweekStats.set(p.gameweek, stats);
+      }
+    });
 
-      allPredictions.forEach((p) => {
-        teams.add(p.homeTeam);
-        teams.add(p.awayTeam);
+    let bestAccuracy = 0;
+    gameweekStats.forEach(stats => {
+      const accuracy = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+      if (accuracy > bestAccuracy) bestAccuracy = accuracy;
+    });
 
-        // Match is complete if actualHomeScore is not null.
-        if (p.actualHomeScore !== null) {
-          historical.push(p);
-        } else if (p.gameweek === currentGW && p.actualHomeScore === null) {
-          current.push(p);
-        }
-      });
+    return bestAccuracy;
+  };
 
-      return {
-        currentPredictions: current,
-        historicalPredictions: historical.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-        ),
-        laLigaTeams: ["All Teams", ...Array.from(teams).sort()],
-      };
-    }, [allPredictions, modelStats]);
-
-  // 3. Calculate Stats
-  const calculateStats = useMemo(() => {
-    const withActuals = historicalPredictions.filter(
-      (p) => p.actualHomeScore !== null && p.actualHomeScore !== undefined,
+  // Calculate stats from fetched data
+  const stats = useMemo(() => {
+    const withActuals = predictions.filter(
+      (p) => p.actualHomeScore !== null && p.actualHomeScore !== undefined
     );
-    const correct = withActuals.filter(isCorrect).length;
-    const accuracy =
-      withActuals.length > 0
-        ? ((correct / withActuals.length) * 100).toFixed(1)
-        : "0";
-
-    const historicalConfidence = historicalPredictions
-      .map((p) => p.confidence)
-      .filter((c) => c !== undefined && c !== null);
-
-    const avgConfidence =
-      historicalConfidence.length > 0
-        ? (
-            historicalConfidence.reduce((sum, c) => sum + c, 0) /
-            historicalConfidence.length
-          ).toFixed(1)
-        : "0";
+    const correct = withActuals.filter((p) => p.isCorrect).length;
+    const accuracy = withActuals.length > 0 
+      ? Math.round((correct / withActuals.length) * 100) 
+      : 0;
+    
+    const currentStreak = calculateCurrentStreak(predictions);
+    const bestAccuracy = calculateBestAccuracy(predictions);
 
     return {
       totalPredictions: withActuals.length,
-      correctPredictions: correct,
       accuracy,
-      avgConfidence,
-      trainingAccuracy: modelStats?.trainingAccuracy
-        ? parseFloat(modelStats.trainingAccuracy).toFixed(1)
-        : "-",
-      currentGameweek: modelStats?.currentGameweek || "-",
+      currentStreak,
+      bestAccuracy,
     };
-  }, [historicalPredictions, modelStats]);
+  }, [predictions]);
 
-  // Toggle sort order
-  const toggleSortOrder = () => {
-    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
-  };
+  // Get all available gameweeks
+  const availableGameweeks = useMemo(() => {
+    const gameweeks = [...new Set(predictions.map(p => p.gameweek))].sort((a, b) => a - b);
+    return gameweeks;
+  }, [predictions]);
 
-  // 4. Filter and Sort Predictions
-  const filterPredictions = (predictions: Prediction[]) => {
-    let filtered = [...predictions];
+  // Check if next gameweek has predictions
+  const hasNextGameweek = useMemo(() => {
+    const nextGameweek = selectedGameweek + 1;
+    return availableGameweeks.includes(nextGameweek);
+  }, [selectedGameweek, availableGameweeks]);
 
-    if (selectedTeam !== "All Teams") {
-      filtered = filtered.filter(
-        (p) => p.homeTeam === selectedTeam || p.awayTeam === selectedTeam,
-      );
-    }
+  // Check if previous gameweek has predictions
+  const hasPrevGameweek = useMemo(() => {
+    const prevGameweek = selectedGameweek - 1;
+    return availableGameweeks.includes(prevGameweek);
+  }, [selectedGameweek, availableGameweeks]);
 
-    // Sort based on selected criteria and order
-    if (sortBy === "confidence") {
-      filtered.sort((a, b) => {
-        const diff = a.confidence - b.confidence;
-        return sortOrder === "asc" ? diff : -diff;
-      });
-    } else if (sortBy === "accuracy") {
-      filtered.sort((a, b) => {
-        const aCorrect = isCorrect(a) ? 1 : 0;
-        const bCorrect = isCorrect(b) ? 1 : 0;
-        const diff = aCorrect - bCorrect;
-        return sortOrder === "asc" ? diff : -diff;
-      });
-    } else {
-      // Sort by date
-      filtered.sort((a, b) => {
-        const diff = new Date(a.date).getTime() - new Date(b.date).getTime();
-        return sortOrder === "asc" ? diff : -diff;
-      });
-    }
-    return filtered;
-  };
-
-  // Get sort order label
-  const getSortOrderLabel = () => {
-    if (sortBy === "date") {
-      return sortOrder === "desc" ? "Newest First" : "Oldest First";
-    } else if (sortBy === "confidence") {
-      return sortOrder === "desc" ? "Highest First" : "Lowest First";
-    } else if (sortBy === "accuracy") {
-      return sortOrder === "desc" ? "Correct First" : "Incorrect First";
-    }
-    return "";
-  };
-
-  // HEADER COMPONENT (Extracted for use in both loading and loaded states)
-  const Header = (
-    <header className="bg-gradient-primary border-b border-border">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center gap-3 mb-2">
-          <Trophy className="w-8 h-8 text-foreground" />
-          <h1 className="text-4xl font-bold text-foreground">
-            La Liga Predictor
-          </h1>
-        </div>
-        <p className="text-foreground/80">
-          ML learning powered match predictions with historical accuracy
-          tracking
-        </p>
-      </div>
-    </header>
-  );
-
-  // 5. Handle Loading State
+  // Basic error handling
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        {Header}
-        <div className="flex items-center justify-center text-xl py-12">
-          Loading Predictions...
-        </div>
-      </div>
-    );
+    return <div className="flex justify-center items-center h-screen">Loading predictions...</div>;
   }
 
-  // 6. Main Render
+  if (error) {
+    return <div className="flex justify-center items-center h-screen text-red-500">{error}</div>;
+  }
+
+  if (!predictions || predictions.length === 0) {
+    return <div className="flex justify-center items-center h-screen">No predictions available</div>;
+  }
+
+  console.log("Rendering Index component with data:", {
+    totalPredictions: predictions.length,
+    currentGameweek,
+    selectedGameweek,
+    stats
+  });
+
+  const handleGameweekChange = (gameweek: number) => {
+    setSelectedGameweek(gameweek);
+  };
+
+  // Get predictions for the selected gameweek
+  const currentGameweekPredictions = predictions.filter(p => p.gameweek === selectedGameweek && p.actualHomeScore === null);
+  const historicalGameweekPredictions = predictions.filter(p => p.gameweek === selectedGameweek && p.actualHomeScore !== null);
+
   return (
     <div className="min-h-screen bg-background">
-      {Header}
-      <div className="container mx-auto px-4 py-8">
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <StatsCard
-            title="Historical Accuracy"
-            value={`${calculateStats.accuracy}%`}
-            subtitle={`${calculateStats.correctPredictions}/${calculateStats.totalPredictions} correct`}
-            trend="up"
-          />
-          <StatsCard
-            title="Avg Confidence"
-            value={`${calculateStats.avgConfidence}%`}
-            subtitle={`Model Training: ${calculateStats.trainingAccuracy}%`}
-          />
-          <StatsCard
-            title="Current Gameweek"
-            value={calculateStats.currentGameweek}
-            subtitle={`${currentPredictions.length} matches to be played`}
-          />
-          <StatsCard
-            title="Total Matches"
-            value={historicalPredictions.length + currentPredictions.length}
-            subtitle="Predicted so far"
-          />
-        </div>
+      <LaLigaHeader />
+      <HeroSection />
 
-        {/* Filters and Sort */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0 gap-4">
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-            <Select value={selectedTeam} onValueChange={setSelectedTeam}>
-              <SelectTrigger className="w-full sm:w-[200px] bg-card border-border">
-                <SelectValue placeholder="Filter by Team" />
-              </SelectTrigger>
-              <SelectContent className="bg-popover border-border z-50">
-                {laLigaTeams.map((team) => (
-                  <SelectItem key={team} value={team}>
-                    {team}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full sm:w-[200px] bg-card border-border">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent className="bg-popover border-border z-50">
-                <SelectItem value="date">Date</SelectItem>
-                <SelectItem value="confidence">Confidence</SelectItem>
-                <SelectItem value="accuracy">Accuracy (History)</SelectItem>
-              </SelectContent>
-            </Select>
+      {/* Main Content */}
+      <main className="max-w-[1400px] mx-auto px-4 py-8">
+        {/* Stats Section */}
+        <section id="stats" className="mb-10 animate-fade-in">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <StatsCard
+              title="Total Predictions"
+              value={stats.totalPredictions}
+              subtitle="All-time"
+              trend="up"
+            />
+            <StatsCard
+              title="Accuracy"
+              value={`${stats.accuracy}%`}
+              subtitle="Overall rate"
+              trend="up"
+            />
+            <StatsCard
+              title="Current Streak"
+              value={stats.currentStreak}
+              subtitle="Correct in a row"
+              trend="up"
+            />
+            <StatsCard
+              title="Best Accuracy"
+              value={`${stats.bestAccuracy}%`}
+              subtitle="Gameweek 18"
+              trend="neutral"
+            />
           </div>
+        </section>
 
-          <Button
-            variant="outline"
-            size="default"
-            onClick={toggleSortOrder}
-            className="w-full sm:w-auto bg-card border-border hover:bg-secondary hover:border-primary/50 transition-all"
-          >
-            <ArrowUpDown className="w-4 h-4 mr-2" />
-            {getSortOrderLabel()}
-          </Button>
-        </div>
+        {/* Match Table */}
+        <section id="predictions" className="mb-8">
+          <div className="animate-fade-in">
+            <MatchTable 
+              predictions={currentGameweekPredictions.length > 0 ? currentGameweekPredictions : historicalGameweekPredictions}
+              showActual={historicalGameweekPredictions.length > 0}
+              onGameweekChange={handleGameweekChange}
+              currentGameweek={currentGameweek}
+              hasNextGameweek={hasNextGameweek}
+              hasPrevGameweek={hasPrevGameweek}
+            />
+          </div>
+        </section>
+      </main>
 
-        {/* Tabs */}
-        <Tabs defaultValue="current" className="w-full">
-          <TabsList className="w-full sm:w-auto bg-card border-border mb-6">
-            <TabsTrigger
-              value="current"
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-            >
-              <Target className="w-4 h-4 mr-2" />
-              Current Predictions
-            </TabsTrigger>
-            <TabsTrigger
-              value="history"
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-            >
-              <TrendingUp className="w-4 h-4 mr-2" />
-              History
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="current" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filterPredictions(currentPredictions).map((prediction) => (
-                <MatchCard key={prediction.id} prediction={prediction} />
-              ))}
-            </div>
-            {filterPredictions(currentPredictions).length === 0 && (
-              <div className="text-center py-12 text-muted-foreground">
-                No predictions found for the selected filters.
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="history" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filterPredictions(historicalPredictions).map((prediction) => (
-                <MatchCard
-                  key={prediction.id}
-                  prediction={prediction}
-                  showActual
-                />
-              ))}
-            </div>
-            {filterPredictions(historicalPredictions).length === 0 && (
-              <div className="text-center py-12 text-muted-foreground">
-                No historical predictions found for the selected filters.
-              </div>
-            )}
-          </TabsContent>
-        </Tabs>
-      </div>
-      {/* Interactive Footer */}
       <InfoFooter />
     </div>
   );

@@ -10,6 +10,9 @@ export const currentPredictions: Prediction[] = [
     predictedAwayScore: 1,
     confidence: 72,
     date: "2025-10-05T20:00:00Z",
+    homeWinProbability: 45,
+    drawProbability: 30,
+    awayWinProbability: 25,
   },
   {
     id: "gw8-2",
@@ -20,6 +23,9 @@ export const currentPredictions: Prediction[] = [
     predictedAwayScore: 1,
     confidence: 65,
     date: "2025-10-05T18:00:00Z",
+    homeWinProbability: 35,
+    drawProbability: 40,
+    awayWinProbability: 25,
   },
   {
     id: "gw8-3",
@@ -30,6 +36,9 @@ export const currentPredictions: Prediction[] = [
     predictedAwayScore: 2,
     confidence: 58,
     date: "2025-10-06T16:00:00Z",
+    homeWinProbability: 30,
+    drawProbability: 45,
+    awayWinProbability: 25,
   },
   {
     id: "gw8-4",
@@ -40,6 +49,9 @@ export const currentPredictions: Prediction[] = [
     predictedAwayScore: 0,
     confidence: 68,
     date: "2025-10-06T14:00:00Z",
+    homeWinProbability: 40,
+    drawProbability: 35,
+    awayWinProbability: 25,
   },
   {
     id: "gw8-5",
@@ -50,6 +62,9 @@ export const currentPredictions: Prediction[] = [
     predictedAwayScore: 1,
     confidence: 75,
     date: "2025-10-06T20:00:00Z",
+    homeWinProbability: 50,
+    drawProbability: 30,
+    awayWinProbability: 20,
   },
 ];
 
@@ -65,6 +80,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 1,
     confidence: 82,
     date: "2025-09-28T20:00:00Z",
+    homeWinProbability: 60,
+    drawProbability: 25,
+    awayWinProbability: 15,
+    isCorrect: false,
   },
   {
     id: "gw7-2",
@@ -77,6 +96,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 1,
     confidence: 70,
     date: "2025-09-28T18:00:00Z",
+    homeWinProbability: 40,
+    drawProbability: 35,
+    awayWinProbability: 25,
+    isCorrect: false,
   },
   {
     id: "gw7-3",
@@ -89,6 +112,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 1,
     confidence: 65,
     date: "2025-09-29T16:00:00Z",
+    homeWinProbability: 30,
+    drawProbability: 50,
+    awayWinProbability: 20,
+    isCorrect: true,
   },
   {
     id: "gw7-4",
@@ -101,6 +128,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 1,
     confidence: 71,
     date: "2025-09-29T14:00:00Z",
+    homeWinProbability: 45,
+    drawProbability: 30,
+    awayWinProbability: 25,
+    isCorrect: true,
   },
   {
     id: "gw7-5",
@@ -113,6 +144,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 2,
     confidence: 68,
     date: "2025-09-29T20:00:00Z",
+    homeWinProbability: 25,
+    drawProbability: 30,
+    awayWinProbability: 45,
+    isCorrect: true,
   },
   {
     id: "gw6-1",
@@ -125,6 +160,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 3,
     confidence: 78,
     date: "2025-09-21T20:00:00Z",
+    homeWinProbability: 20,
+    drawProbability: 25,
+    awayWinProbability: 55,
+    isCorrect: true,
   },
   {
     id: "gw6-2",
@@ -137,6 +176,10 @@ export const historicalPredictions: Prediction[] = [
     actualAwayScore: 1,
     confidence: 85,
     date: "2025-09-21T18:00:00Z",
+    homeWinProbability: 65,
+    drawProbability: 20,
+    awayWinProbability: 15,
+    isCorrect: true,
   },
 ];
 

@@ -84,7 +84,11 @@ class LaLigaPredictor:
                 try:
                     response = requests.get(url, headers=headers, timeout=10)
 
-                    if response.status_code == 429:
+                    if response.status_code == 200:
+                        responses[season] = response.json()
+                        print(f"  Successfully fetched data for season {season}")
+                        break
+                    elif response.status_code == 429:
                         print(f"  Rate limit hit. Waiting {retry_delay * 2} seconds")
                         time.sleep(retry_delay * 2)
                     elif response.status_code == 403:
@@ -618,132 +622,160 @@ class LaLigaPredictor:
         current_2025_df = self.create_matches_dataframe(current_2025_data)
 
         all_2025_matches = current_2025_df.copy()
+        # Find the current gameweek (first incomplete one)
         current_gameweek = None
-
+        gameweeks_to_process = []
+        
         for gw in sorted(all_2025_matches["matchday"].unique()):
-            if gw < 7:
-                continue
             gw_matches = all_2025_matches[all_2025_matches["matchday"] == gw]
             incomplete = len(gw_matches[gw_matches["result"].isna()])
+            completed = len(gw_matches[gw_matches["result"].notna()])
+            
+            if incomplete > 0 or completed > 0:  # Process if has any matches
+                gameweeks_to_process.append(gw)
+                print(f"Gameweek {gw}: {completed} completed, {incomplete} incomplete")
+                
+                # Set current gameweek to the first incomplete one found
+                if incomplete > 0 and current_gameweek is None:
+                    current_gameweek = gw
 
-            if incomplete > 0:
-                current_gameweek = gw
-                print(f"Found gameweek {gw} with {incomplete} incomplete matches")
-                break
-
-        if current_gameweek is None:
-            print("No gameweek to predict - all matches may be completed")
+        if not gameweeks_to_process:
+            print("No gameweeks to process - all matches may be completed")
             return
 
-        gameweek_matches = all_2025_matches[
-            all_2025_matches["matchday"] == current_gameweek
-        ].copy()
+        # Only process up to current gameweek (not future ones)
+        if current_gameweek:
+            gameweeks_to_process = [gw for gw in gameweeks_to_process if gw <= current_gameweek]
+            print(f"Processing up to current gameweek {current_gameweek}")
+        else:
+            # If no incomplete gameweek found, use the last completed one
+            current_gameweek = max(gameweeks_to_process)
+            gameweeks_to_process = [gw for gw in gameweeks_to_process if gw <= current_gameweek]
+            print(f"No incomplete gameweek found, processing up to gameweek {current_gameweek}")
 
-        training_2023_df = training_2023_df[training_2023_df["result"].notna()].copy()
-        training_2024_df = training_2024_df[training_2024_df["result"].notna()].copy()
+        # Process each gameweek
+        for current_gameweek in gameweeks_to_process:
+            print(f"\n{'='*60}")
+            print(f"PROCESSING GAMEWEEK {current_gameweek}")
+            print(f"{'='*60}\n")
 
-        training_matches = (
-            pd.concat(
-                [
-                    training_2023_df,
-                    training_2024_df,
-                    current_2025_df[
-                        (current_2025_df["matchday"] < current_gameweek)
-                        & (current_2025_df["result"].notna())
-                    ],
-                ]
+            gameweek_matches = all_2025_matches[
+                all_2025_matches["matchday"] == current_gameweek
+            ].copy()
+
+            training_2023_df = training_2023_df[training_2023_df["result"].notna()].copy()
+            training_2024_df = training_2024_df[training_2024_df["result"].notna()].copy()
+
+            training_matches = (
+                pd.concat(
+                    [
+                        training_2023_df,
+                        training_2024_df,
+                        current_2025_df[
+                            (current_2025_df["matchday"] < current_gameweek)
+                            & (current_2025_df["result"].notna())
+                        ],
+                    ]
+                )
+                .sort_values("date")
+                .reset_index(drop=True)
             )
-            .sort_values("date")
-            .reset_index(drop=True)
-        )
 
-        all_data = (
-            pd.concat([training_matches, gameweek_matches])
-            .sort_values("date")
-            .reset_index(drop=True)
-        )
-        all_data_with_stats = self.calculate_stats(all_data.copy())
+            all_data = (
+                pd.concat([training_matches, gameweek_matches])
+                .sort_values("date")
+                .reset_index(drop=True)
+            )
+            all_data_with_stats = self.calculate_stats(all_data.copy())
 
-        training_data = all_data_with_stats.iloc[: len(training_matches)].copy()
-        prediction_data = all_data_with_stats.iloc[len(training_matches) :].copy()
+            training_data = all_data_with_stats.iloc[: len(training_matches)].copy()
+            prediction_data = all_data_with_stats.iloc[len(training_matches) :].copy()
 
-        training_features = self.create_features(training_data)
-        training_target = self.create_target(training_data)
-        prediction_features = self.create_features(prediction_data)
+            training_features = self.create_features(training_data)
+            training_target = self.create_target(training_data)
+            prediction_features = self.create_features(prediction_data)
 
-        rf = RandomForestClassifier(
-            n_estimators=200,
-            max_depth=10,
-            min_samples_split=10,
-            random_state=42,
-            class_weight="balanced",
-        )
+            rf = RandomForestClassifier(
+                n_estimators=200,
+                max_depth=10,
+                min_samples_split=10,
+                random_state=42,
+                class_weight="balanced",
+            )
 
-        rf.fit(training_features, training_target)
+            rf.fit(training_features, training_target)
 
-        predictions = rf.predict(prediction_features)
-        probabilities = rf.predict_proba(prediction_features)
+            predictions = rf.predict(prediction_features)
+            probabilities = rf.predict_proba(prediction_features)
 
-        training_accuracy = rf.score(training_features, training_target) * 100
+            training_accuracy = rf.score(training_features, training_target) * 100
 
-        print(f"\n{'='*60}")
-        print(f"GAMEWEEK {current_gameweek} PREDICTIONS")
-        print(f"{'='*60}\n")
+            print(f"GAMEWEEK {current_gameweek} PREDICTIONS")
+            print(f"{'='*60}\n")
 
-        matches_predictions = []
+            matches_predictions = []
 
-        for i, (idx, match) in enumerate(prediction_data.iterrows()):
-            home_team = match["home_team_name"]
-            away_team = match["away_team_name"]
+            for i, (idx, match) in enumerate(prediction_data.iterrows()):
+                home_team = match["home_team_name"]
+                away_team = match["away_team_name"]
 
-            if predictions[i] == 0:
-                predicted_result = f"{away_team} Win"
-            elif predictions[i] == 1:
-                predicted_result = f"{home_team} Win"
-            else:
-                predicted_result = "Draw"
-
-            home_prob = probabilities[i][1] * 100
-            away_prob = probabilities[i][0] * 100
-            draw_prob = probabilities[i][2] * 100
-
-            prediction_record = {
-                "home_team": home_team,
-                "away_team": away_team,
-                "predicted_result": predicted_result,
-                "home_prob": round(home_prob, 1),
-                "away_prob": round(away_prob, 1),
-                "draw_prob": round(draw_prob, 1),
-                "date": match["date"].isoformat(),
-            }
-
-            if pd.notna(match["result"]):
-                if match["result"] == "HOME_TEAM":
-                    actual_result = f"{home_team} Win"
-                elif match["result"] == "AWAY_TEAM":
-                    actual_result = f"{away_team} Win"
+                if predictions[i] == 0:
+                    predicted_result = f"{away_team} Win"
+                elif predictions[i] == 1:
+                    predicted_result = f"{home_team} Win"
                 else:
-                    actual_result = "Draw"
+                    predicted_result = "Draw"
 
-                prediction_record["actual_result"] = actual_result
-                prediction_record["home_score"] = match["home_score"]
-                prediction_record["away_score"] = match["away_score"]
-                prediction_record["status"] = match["status"]
-                prediction_record["correct"] = predicted_result == actual_result
+                home_prob = probabilities[i][1] * 100
+                away_prob = probabilities[i][0] * 100
+                draw_prob = probabilities[i][2] * 100
 
-            matches_predictions.append(prediction_record)
+                prediction_record = {
+                    "home_team": home_team,
+                    "away_team": away_team,
+                    "predicted_result": predicted_result,
+                    "home_prob": round(home_prob, 1),
+                    "away_prob": round(away_prob, 1),
+                    "draw_prob": round(draw_prob, 1),
+                    "date": match["date"].isoformat(),
+                }
 
-            print(f"{home_team} vs {away_team}")
-            print(f"Prediction: {predicted_result}")
-            print(
-                f"Confidence: {home_team} {home_prob:.1f}% | Draw {draw_prob:.1f}% | {away_team} {away_prob:.1f}%\n"
-            )
+                if pd.notna(match["result"]):
+                    if match["result"] == "HOME_TEAM":
+                        actual_result = f"{home_team} Win"
+                    elif match["result"] == "AWAY_TEAM":
+                        actual_result = f"{away_team} Win"
+                    else:
+                        actual_result = "Draw"
 
-        self.save_to_supabase(current_gameweek, matches_predictions, training_accuracy)
+                    prediction_record["actual_result"] = actual_result
+                    prediction_record["home_score"] = match["home_score"]
+                    prediction_record["away_score"] = match["away_score"]
+                    prediction_record["status"] = match["status"]
+                    
+                    # Fix accuracy calculation: compare actual match outcomes, not just result strings
+                    # Check if prediction matches the actual winner
+                    if match["result"] == "HOME_TEAM" and predictions[i] == 1:  # Home team won and predicted home win
+                        prediction_record["correct"] = True
+                    elif match["result"] == "AWAY_TEAM" and predictions[i] == 0:  # Away team won and predicted away win
+                        prediction_record["correct"] = True
+                    elif match["result"] == "DRAW" and predictions[i] == 2:  # Draw and predicted draw
+                        prediction_record["correct"] = True
+                    else:
+                        prediction_record["correct"] = False
 
-        print(f"\n{'='*60}")
-        print(f"Training Accuracy: {training_accuracy:.1f}%")
-        print(f"{'='*60}\n")
+                matches_predictions.append(prediction_record)
+
+                print(f"{home_team} vs {away_team}")
+                print(f"Prediction: {predicted_result}")
+                print(
+                    f"Confidence: {home_team} {home_prob:.1f}% | Draw {draw_prob:.1f}% | {away_team} {away_prob:.1f}%\n"
+                )
+
+            self.save_to_supabase(current_gameweek, matches_predictions, training_accuracy)
+
+            print(f"Training Accuracy: {training_accuracy:.1f}%")
+            print(f"{'='*60}\n")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,212 @@
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gradient classes for the new design */
+.laliga-hero-gradient {
+  background: linear-gradient(135deg, #1a1a3e 0%, #2d2d6b 50%, #1a1a3e 100%);
+}
+
+.laliga-navy {
+  background-color: #1a1a3e;
+}
+
+.laliga-navy-light {
+  background-color: #2d2d6b;
+}
+
+.laliga-coral-light {
+  background-color: #ff6b6b;
+}
+
+/* Basic fallback styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+}
+
+.bg-primary {
+  background-color: #38bdf8;
+}
+
+.bg-secondary {
+  background-color: #1e293b;
+}
+
+.text-primary {
+  color: #38bdf8;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.border {
+  border: 1px solid #334155;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hidden\.md\:block {
+    display: block;
+  }
+}
+
+/* Probability bar colors */
+.probability-bar-green {
+  background-color: #5DC169;
+}
+
+.probability-bar-yellow {
+  background-color: #DEB94C;
+}
+
+.probability-bar-red {
+  background-color: #813835;
+}
+
+/* Gradient card background */
+.bg-gradient-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+}
+
+/* Font heading class */
+.font-heading {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 800;
+}
+
+/* Animation classes */
+.animate-ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

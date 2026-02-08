@@ -9,6 +9,10 @@ export interface Prediction {
   actualHomeScore?: number;
   actualAwayScore?: number;
   date: string;
+  homeWinProbability?: number;
+  drawProbability?: number;
+  awayWinProbability?: number;
+  isCorrect?: boolean;
 }
 
 export interface GameweekStats {
