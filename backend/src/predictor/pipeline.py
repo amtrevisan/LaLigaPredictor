@@ -134,26 +134,23 @@ def _fixture_base(
     }
 
 
-def _meetings(events: list[dict], kickoff: pd.Timestamp) -> list[dict]:
-    """Earlier meetings between the two clubs, newest first, drawn on the site as score cards.
-
-    TheSportsDB's event thumbnails are a templated crest graphic rather than match photography,
-    so they are not exported.
-    """
-    day = kickoff.strftime("%Y-%m-%d")
-    earlier = [
+def _meetings(league: League, history: pd.DataFrame, row: pd.Series) -> list[dict]:
+    """Earlier league meetings between the two clubs (either venue), newest first."""
+    pair = {row["home"], row["away"]}
+    earlier = history[
+        history["home"].isin(pair) & history["away"].isin(pair) & (history["date"] < row["date"])
+    ].sort_values("date", ascending=False)
+    return [
         {
-            "date": e["date"],
-            "home": e["home"],
-            "away": e["away"],
-            "score": [e["home_score"], e["away_score"]],
-            "competition": e["competition"],
-            "video": e["video"],
+            "date": f"{m['date']:%Y-%m-%d}",
+            "home": team_info(m["home"]).name,
+            "away": team_info(m["away"]).name,
+            "score": [int(m["home_goals"]), int(m["away_goals"])],
+            "competition": league.name,
+            "video": None,
         }
-        for e in events
-        if e["date"] < day and e["home_score"] is not None
+        for _, m in earlier.head(MEETINGS_PER_FIXTURE).iterrows()
     ]
-    return earlier[:MEETINGS_PER_FIXTURE]
 
 
 def _standings(
@@ -331,7 +328,6 @@ def run(config: RunConfig) -> dict:
             registry = media.classify_photos(registry)
         except Exception:  # noqa: BLE001 - enrichment must never fail a run
             log.exception("photo classification failed")
-    meetings_cache = media.load_meetings()
     client = media.SportsDb() if config.fetch_media else None
 
     export_dir = config.export_dir
@@ -347,6 +343,7 @@ def run(config: RunConfig) -> dict:
             except Exception:  # noqa: BLE001 - enrichment must never fail a run
                 log.exception("team media resolution failed for %s", league.id)
 
+        league_played = matches[played & (matches["league"] == league.id)]
         fixtures = []
         for idx, row in future[future["league"] == league.id].sort_values("date").iterrows():
             item = _fixture_base(league, row, features.loc[idx], registry)
@@ -358,31 +355,8 @@ def run(config: RunConfig) -> dict:
                 {"score": [int(i), int(j)], "p": r(grid[i, j])}
                 for i, j in zip(*np.unravel_index(flat, grid.shape), strict=True)
             ]
-            item["meetings"] = []
-            home_media = registry.get(f"{league.id}/{row['home']}")
-            away_media = registry.get(f"{league.id}/{row['away']}")
-            if home_media and away_media:
-                try:
-                    events = (
-                        media.meetings_for(
-                            client,
-                            meetings_cache,
-                            league,
-                            home_media,
-                            away_media,
-                            season,
-                            now.to_pydatetime(),
-                        )
-                        if client is not None and client.available
-                        else _cached_meetings(meetings_cache, home_media, away_media, season)
-                    )
-                    item["meetings"] = _meetings(events, row["date"])
-                except Exception:  # noqa: BLE001
-                    log.exception("meeting lookup failed for %s", item["id"])
+            item["meetings"] = _meetings(league, league_played, row)
             fixtures.append(item)
-        if client is not None:
-            # Persist per league so an interrupted run keeps the lookups it already paid for.
-            media.save_meetings(meetings_cache)
 
         results = []
         league_walk = walk[(walk["league"] == league.id) & (walk["season"] == season)]
@@ -490,15 +464,6 @@ def run(config: RunConfig) -> dict:
         "blendWeight": weight,
         "overall": model_payload["backtest"]["overall"],
     }
-
-
-def _cached_meetings(cache: dict, home: dict, away: dict, season: int) -> list[dict]:
-    events: list[dict] = []
-    for first, second in ((home, away), (away, home)):
-        for year in (season, season - 1):
-            events.extend(cache.get(f"{first['id']}-{second['id']}-{year}", {}).get("events", []))
-    unique = {(e["date"], e["home"], e["away"]): e for e in events}
-    return sorted(unique.values(), key=lambda e: e["date"], reverse=True)
 
 
 def default_now() -> datetime:

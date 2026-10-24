@@ -10,7 +10,8 @@ from predictor.data import normalize
 from predictor.data.teams import team_info
 from predictor.export import write_json
 from predictor.models.dixon_coles import outcome_probabilities, score_matrix
-from predictor.pipeline import align_scoreline_grid, choose_blend_weight
+from predictor.pipeline import _meetings, align_scoreline_grid, choose_blend_weight
+from tests.factories import make_matches
 
 LA_LIGA = LEAGUES_BY_ID["la-liga"]
 
@@ -122,3 +123,14 @@ def test_fallback_crest_only_for_listed_clubs() -> None:
         == "https://media.api-sports.io/football/teams/529.png"
     )
     assert team_info("Arsenal").fallback_crest is None
+
+
+def test_meetings_come_from_earlier_results_between_the_pair():
+    history = make_matches(n_seasons=3, teams=4)
+    fixture = pd.Series({"home": "T0", "away": "T1", "date": pd.Timestamp("2017-01-01", tz="UTC")})
+    meetings = _meetings(LEAGUES_BY_ID["la-liga"], history, fixture)
+
+    # Both venues of 2015 and 2016 (2017 kicks off after the fixture), newest first.
+    assert [m["date"][:4] for m in meetings] == ["2016", "2016", "2015", "2015"]
+    assert all({m["home"], m["away"]} == {"T0", "T1"} for m in meetings)
+    assert meetings[0]["competition"] == "La Liga"

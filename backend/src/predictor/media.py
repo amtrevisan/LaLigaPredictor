@@ -1,11 +1,9 @@
-"""Club imagery from TheSportsDB: crests, club photographs and recent meetings.
+"""Club imagery from TheSportsDB: crests and club photographs.
 
 Everything here is best-effort enrichment. A failed lookup leaves a fixture without images and
-never fails the pipeline. Results are cached in two committed JSON files so the free API tier
-(roughly 30 requests a minute) is only hit for new teams and new pairings:
-
-* ``data/team_media.json``  ``{"<league>/<feed name>": TeamMedia}``
-* ``data/meetings.json``    ``{"<home id>-<away id>-<season>": {"fetched": iso, "events": [...]}}``
+never fails the pipeline. Results are cached in ``data/team_media.json``
+(``{"<league>/<feed name>": TeamMedia}``) so the free API tier (roughly 30 requests a minute) is
+only hit for new teams.
 
 Images are hot-linked from TheSportsDB's CDN rather than copied into the repository.
 """
@@ -19,7 +17,7 @@ import re
 import time
 import unicodedata
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 import requests
@@ -32,16 +30,11 @@ log = logging.getLogger(__name__)
 
 API = "https://www.thesportsdb.com/api/v1/json/123"
 REQUEST_INTERVAL = 2.1
-# A fixture's own event often gets its artwork close to kick-off; re-check after this long.
-EVENT_REFRESH = timedelta(hours=20)
-# A lookup that found nothing is retried after this long, in case the free tier dropped it.
-EMPTY_REFRESH = timedelta(days=7)
 # Wall-clock budget for all lookups in one run; the scheduled job must stay well inside its
 # timeout even when the API is slow rather than refusing.
 RUN_BUDGET_SECONDS = 15 * 60
 
 TEAM_MEDIA_PATH = DATA_DIR / "team_media.json"
-MEETINGS_PATH = DATA_DIR / "meetings.json"
 
 
 @dataclass
@@ -108,18 +101,6 @@ def classify_photos(registry: dict) -> dict:
     _save(TEAM_MEDIA_PATH, registry)
     log.info("classified fan-art for %d clubs", len(pending))
     return registry
-
-
-@dataclass
-class Meeting:
-    date: str
-    home: str
-    away: str
-    home_score: int | None
-    away_score: int | None
-    competition: str | None
-    thumb: str | None
-    video: str | None
 
 
 class MediaUnavailable(requests.RequestException):
@@ -291,78 +272,6 @@ def resolve_teams(client: SportsDb, league: League, feed_names: list[str]) -> di
     if changed:
         _save(TEAM_MEDIA_PATH, registry)
     return registry
-
-
-def sportsdb_season(league: League, season: int) -> str:
-    return str(season) if league.source == "extra" else f"{season}-{season + 1}"
-
-
-def _meeting(event: dict) -> Meeting:
-    def score(value: str | None) -> int | None:
-        return int(value) if value not in (None, "") else None
-
-    return Meeting(
-        date=event.get("dateEvent") or "",
-        home=event.get("strHomeTeam") or "",
-        away=event.get("strAwayTeam") or "",
-        home_score=score(event.get("intHomeScore")),
-        away_score=score(event.get("intAwayScore")),
-        competition=event.get("strLeague"),
-        thumb=event.get("strThumb"),
-        video=event.get("strVideo") or None,
-    )
-
-
-def meetings_for(
-    client: SportsDb,
-    cache: dict,
-    league: League,
-    home: dict,
-    away: dict,
-    season: int,
-    now: datetime,
-) -> list[dict]:
-    """Events between two clubs in the given and previous season (both venues), newest first."""
-    events: list[dict] = []
-    lookups = [
-        (home, away, season),
-        (away, home, season),
-        (home, away, season - 1),
-        (away, home, season - 1),
-    ]
-    for first, second, year in lookups:
-        key = f"{first['id']}-{second['id']}-{year}"
-        entry = cache.get(key)
-        is_current = year == season
-        age = now - datetime.fromisoformat(entry["fetched"]) if entry else None
-        stale = (
-            entry is None
-            or (is_current and age > EVENT_REFRESH)
-            or (not entry["events"] and age > EMPTY_REFRESH)
-        )
-        if stale:
-            name = f"{first['name']}_vs_{second['name']}".replace(" ", "_")
-            try:
-                found = client.get("searchevents.php", e=name, s=sportsdb_season(league, year))
-            except requests.RequestException as exc:
-                log.warning("event lookup failed for %s: %s", name, exc)
-                continue
-            entry = {
-                "fetched": now.isoformat(),
-                "events": [asdict(_meeting(e)) for e in found.get("event") or []],
-            }
-            cache[key] = entry
-        events.extend(entry["events"])
-    unique = {(e["date"], e["home"], e["away"]): e for e in events}
-    return sorted(unique.values(), key=lambda e: e["date"], reverse=True)
-
-
-def load_meetings() -> dict:
-    return _load(MEETINGS_PATH)
-
-
-def save_meetings(cache: dict) -> None:
-    _save(MEETINGS_PATH, cache)
 
 
 def sized(url: str | None, size: str) -> str | None:
