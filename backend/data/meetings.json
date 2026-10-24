@@ -405,6 +405,314 @@
   ],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
  },
+ "133667-133679-2025": {
+  "events": [
+   {
+    "away": "Udinese",
+    "away_score": 3,
+    "competition": "Italian Serie A",
+    "date": "2026-04-11",
+    "home": "AC Milan",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/44yabn1755934945.jpg",
+    "video": "https://www.youtube.com/watch?v=P7ehdct6fUA"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133667-133679-2026": {
+  "events": [
+   {
+    "away": "Udinese",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-05-30",
+    "home": "AC Milan",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/44yabn1755934945.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133668-135728-2025": {
+  "events": [
+   {
+    "away": "Parma",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2026-04-04",
+    "home": "Lazio",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/2c7www1755934899.jpg",
+    "video": "https://www.youtube.com/watch?v=Nhjv2fpoVKc"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133668-135728-2026": {
+  "events": [
+   {
+    "away": "Parma",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-24",
+    "home": "Lazio",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/2c7www1755934899.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133670-133682-2025": {
+  "events": [
+   {
+    "away": "Roma",
+    "away_score": 2,
+    "competition": "Italian Serie A",
+    "date": "2026-02-15",
+    "home": "Napoli",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/45ugac1765442630.jpg",
+    "video": "https://www.youtube.com/watch?v=7BSBFaPYy58"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133670-133682-2026": {
+  "events": [
+   {
+    "away": "Roma",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-24",
+    "home": "Napoli",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/45ugac1765442630.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133674-133681-2025": {
+  "events": [
+   {
+    "away": "Inter Milan",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2026-03-22",
+    "home": "Fiorentina",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zmo61c1755934867.jpg",
+    "video": "https://www.youtube.com/watch?v=AGF81zYwwz4"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133674-133681-2026": {
+  "events": [
+   {
+    "away": "Inter Milan",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-02-21",
+    "home": "Fiorentina",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zmo61c1755934867.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133675-134234-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133675-134234-2026": {
+  "events": [
+   {
+    "away": "Venezia",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-25",
+    "home": "Genoa",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/c6odye1780899994.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133676-133678-2025": {
+  "events": [
+   {
+    "away": "Lecce",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2026-01-03",
+    "home": "Juventus",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/twlc6i1755934427.jpg",
+    "video": "https://www.youtube.com/watch?v=tKBtzpFDe94"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133676-133678-2026": {
+  "events": [
+   {
+    "away": "Lecce",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-04-11",
+    "home": "Juventus",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/twlc6i1755934427.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133678-133676-2025": {
+  "events": [
+   {
+    "away": "Juventus",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2026-05-09",
+    "home": "Lecce",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/f12you1755935118.jpg",
+    "video": "https://www.youtube.com/watch?v=1UEAXBScdo0"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133678-133676-2026": {
+  "events": [
+   {
+    "away": "Juventus",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-25",
+    "home": "Lecce",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/f12you1755935118.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133679-133667-2025": {
+  "events": [
+   {
+    "away": "AC Milan",
+    "away_score": 3,
+    "competition": "Italian Serie A",
+    "date": "2025-09-20",
+    "home": "Udinese",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/vfkvhn1755933842.jpg",
+    "video": "https://www.youtube.com/watch?v=F_3HIdYPx3g"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133679-133667-2026": {
+  "events": [
+   {
+    "away": "AC Milan",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-25",
+    "home": "Udinese",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/vfkvhn1755933842.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133681-133674-2025": {
+  "events": [
+   {
+    "away": "Fiorentina",
+    "away_score": 0,
+    "competition": "Italian Serie A",
+    "date": "2025-10-29",
+    "home": "Inter Milan",
+    "home_score": 3,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/driijm1755934047.jpg",
+    "video": "https://www.youtube.com/watch?v=5eDb7IblNss"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133681-133674-2026": {
+  "events": [
+   {
+    "away": "Fiorentina",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-25",
+    "home": "Inter Milan",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/driijm1755934047.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133682-133670-2025": {
+  "events": [
+   {
+    "away": "Napoli",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2025-11-30",
+    "home": "Roma",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/e9dvpl1765442587.jpg",
+    "video": "https://www.youtube.com/watch?v=3Vjnuhk5Pbk"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133682-133670-2026": {
+  "events": [
+   {
+    "away": "Napoli",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-05-02",
+    "home": "Roma",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/e9dvpl1765442587.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133687-134270-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133687-134270-2026": {
+  "events": [
+   {
+    "away": "Monza",
+    "away_score": 1,
+    "competition": "Coppa Italia",
+    "date": "2026-09-01",
+    "home": "Torino",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/wjk04f1789452876.jpg",
+    "video": "https://www.youtube.com/watch?v=C_7ZpkwurQc"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
  "133720-133622-2025": {
   "events": [],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
@@ -424,6 +732,311 @@
   ],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
  },
+ "133724-133732-2025": {
+  "events": [
+   {
+    "away": "Levante",
+    "away_score": 0,
+    "competition": "Spanish La Liga",
+    "date": "2026-04-04",
+    "home": "Real Sociedad",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/hfm6361751450313.jpg",
+    "video": "https://www.youtube.com/watch?v=2FAf18k8CAk"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133724-133732-2026": {
+  "events": [
+   {
+    "away": "Levante",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-25",
+    "home": "Real Sociedad",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/786jzk1784904544.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133725-133740-2025": {
+  "events": [
+   {
+    "away": "Villarreal",
+    "away_score": 2,
+    "competition": "Spanish La Liga",
+    "date": "2025-10-25",
+    "home": "Valencia",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/2u4vq11751450024.jpg",
+    "video": "https://www.youtube.com/watch?v=_NW9kiih100"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133725-133740-2026": {
+  "events": [
+   {
+    "away": "Villarreal",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-24",
+    "home": "Valencia",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/d2idyv1784904538.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133726-133734-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133726-133734-2026": {
+  "events": [
+   {
+    "away": "Espanyol",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-24",
+    "home": "Racing de Santander",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/mwmbup1784904546.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133728-134384-2025": {
+  "events": [
+   {
+    "away": "Elche",
+    "away_score": 0,
+    "competition": "Spanish La Liga",
+    "date": "2026-04-03",
+    "home": "Rayo Vallecano",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ksug6u1751450311.jpg",
+    "video": "https://www.youtube.com/watch?v=OI--TveohlY"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133728-134384-2026": {
+  "events": [
+   {
+    "away": "Elche",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-24",
+    "home": "Rayo Vallecano",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/o4bdlr1784904545.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133730-133735-2025": {
+  "events": [
+   {
+    "away": "Sevilla",
+    "away_score": 1,
+    "competition": "Spanish La Liga",
+    "date": "2026-04-26",
+    "home": "Osasuna",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/edqmz11751450339.jpg",
+    "video": "https://www.youtube.com/watch?v=MfqtrAJrTjE"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133730-133735-2026": {
+  "events": [
+   {
+    "away": "Sevilla",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-02-28",
+    "home": "Osasuna",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/o3vasw1784904782.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133732-133724-2025": {
+  "events": [
+   {
+    "away": "Real Sociedad",
+    "away_score": 1,
+    "competition": "Spanish La Liga",
+    "date": "2025-12-20",
+    "home": "Levante",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/5nx0xo1751450117.jpg",
+    "video": "https://www.youtube.com/watch?v=O8O7XR7GpQc"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133732-133724-2026": {
+  "events": [
+   {
+    "away": "Real Sociedad",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-01-31",
+    "home": "Levante",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/dihz1j1784904720.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133734-133726-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133734-133726-2026": {
+  "events": [
+   {
+    "away": "Racing de Santander",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-03-07",
+    "home": "Espanyol",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/7mh5s81784904792.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133735-133730-2025": {
+  "events": [
+   {
+    "away": "Osasuna",
+    "away_score": 0,
+    "competition": "Spanish La Liga",
+    "date": "2025-11-08",
+    "home": "Sevilla",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/olgkon1751450051.jpg",
+    "video": "https://www.youtube.com/watch?v=_5D6kQf2H1M"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133735-133730-2026": {
+  "events": [
+   {
+    "away": "Osasuna",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-26",
+    "home": "Sevilla",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/8dk7cn1784904539.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133740-133725-2025": {
+  "events": [
+   {
+    "away": "Valencia",
+    "away_score": 1,
+    "competition": "Spanish La Liga",
+    "date": "2026-02-22",
+    "home": "Villarreal",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/g8evsa1751450242.jpg",
+    "video": "https://www.youtube.com/watch?v=U0hS58bSjkQ"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133740-133725-2026": {
+  "events": [
+   {
+    "away": "Valencia",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-02-21",
+    "home": "Villarreal",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/k014431784904760.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133818-134782-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133818-134782-2026": {
+  "events": [
+   {
+    "away": "Atalanta",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-05-09",
+    "home": "Frosinone",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/g7viy91780900065.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134234-133675-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134234-133675-2026": {
+  "events": [
+   {
+    "away": "Genoa",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-02-07",
+    "home": "Venezia",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/a5047y1780900033.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134270-133687-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134270-133687-2026": {
+  "events": [
+   {
+    "away": "Torino",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-05-30",
+    "home": "Monza",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/pzr09g1780900072.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
  "134355-133617-2025": {
   "events": [],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
@@ -442,6 +1055,36 @@
    }
   ],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134384-133728-2025": {
+  "events": [
+   {
+    "away": "Rayo Vallecano",
+    "away_score": 0,
+    "competition": "Spanish La Liga",
+    "date": "2025-12-21",
+    "home": "Elche",
+    "home_score": 4,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/wteian1751450113.jpg",
+    "video": "https://www.youtube.com/watch?v=_mjJXmyW3C8"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134384-133728-2026": {
+  "events": [
+   {
+    "away": "Rayo Vallecano",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-01-24",
+    "home": "Elche",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/89lybk1784904708.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
  "134777-133632-2025": {
   "events": [
@@ -472,5 +1115,54 @@
    }
   ],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134782-133818-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134782-133818-2026": {
+  "events": [
+   {
+    "away": "Frosinone",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2026-10-25",
+    "home": "Atalanta",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/e95jam1780899995.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "135728-133668-2025": {
+  "events": [
+   {
+    "away": "Lazio",
+    "away_score": 1,
+    "competition": "Italian Serie A",
+    "date": "2025-12-13",
+    "home": "Parma",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/4zh6ri1755934264.jpg",
+    "video": "https://www.youtube.com/watch?v=GdIEPCV0lqk"
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "135728-133668-2026": {
+  "events": [
+   {
+    "away": "Lazio",
+    "away_score": null,
+    "competition": "Italian Serie A",
+    "date": "2027-03-21",
+    "home": "Parma",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/4zh6ri1755934264.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:40:30.804658+00:00"
  }
 }

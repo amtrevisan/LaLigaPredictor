@@ -9,6 +9,7 @@
   ],
   "id": "134297",
   "name": "Athletico Paranaense",
+  "photos": [],
   "stadium": "Arena da Baixada"
  },
  "brasileirao/Atletico-MG": {
@@ -21,6 +22,7 @@
   ],
   "id": "134299",
   "name": "Atlético Mineiro",
+  "photos": [],
   "stadium": "Arena MRV"
  },
  "brasileirao/Chapecoense-SC": {
@@ -33,6 +35,7 @@
   ],
   "id": "134464",
   "name": "Chapecoense",
+  "photos": [],
   "stadium": "Arena Condá"
  },
  "brasileirao/Corinthians": {
@@ -45,6 +48,12 @@
   ],
   "id": "134284",
   "name": "Corinthians",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/kyswl31635443364.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/63jh781635444283.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/flbg481635446535.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/oky14t1635450527.jpg"
+  ],
   "stadium": "Neo Química Arena"
  },
  "brasileirao/Coritiba": {
@@ -57,6 +66,12 @@
   ],
   "id": "134298",
   "name": "Coritiba",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/rwusyv1422237480.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xptysw1422237549.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yssywr1422237233.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/upstwr1422239041.jpg"
+  ],
   "stadium": "Estádio Major Antônio Couto Pereira"
  },
  "brasileirao/Cruzeiro": {
@@ -69,6 +84,7 @@
   ],
   "id": "134294",
   "name": "Cruzeiro",
+  "photos": [],
   "stadium": "Estádio Mineirão"
  },
  "brasileirao/Flamengo RJ": {
@@ -81,6 +97,7 @@
   ],
   "id": "134287",
   "name": "Flamengo",
+  "photos": [],
   "stadium": "Estádio do Maracanã"
  },
  "brasileirao/Fluminense": {
@@ -93,6 +110,11 @@
   ],
   "id": "134296",
   "name": "Fluminense",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/3xg6fg1660281191.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/72saft1660281555.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rsoryg1660281660.jpg"
+  ],
   "stadium": "Estádio do Maracanã"
  },
  "brasileirao/Gremio": {
@@ -105,6 +127,7 @@
   ],
   "id": "134288",
   "name": "Grêmio",
+  "photos": [],
   "stadium": "Arena do Grêmio"
  },
  "brasileirao/Internacional": {
@@ -117,6 +140,7 @@
   ],
   "id": "134281",
   "name": "Internacional",
+  "photos": [],
   "stadium": "Estádio Beira-Rio"
  },
  "brasileirao/Mirassol": {
@@ -129,6 +153,7 @@
   ],
   "id": "141181",
   "name": "Mirassol",
+  "photos": [],
   "stadium": "Estádio José Maria de Campos Maia"
  },
  "brasileirao/Palmeiras": {
@@ -141,6 +166,9 @@
   ],
   "id": "134465",
   "name": "Palmeiras",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uuqqus1420508024.jpg"
+  ],
   "stadium": "Nubank Parque"
  },
  "brasileirao/Remo": {
@@ -153,6 +181,7 @@
   ],
   "id": "137818",
   "name": "Remo",
+  "photos": [],
   "stadium": "Estádio Evandro Almeida"
  },
  "brasileirao/Santos": {
@@ -165,6 +194,7 @@
   ],
   "id": "134286",
   "name": "Santos",
+  "photos": [],
   "stadium": "Estádio Urbano Caldeira"
  },
  "brasileirao/Sao Paulo": {
@@ -177,6 +207,10 @@
   ],
   "id": "134291",
   "name": "São Paulo",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/rvppyx1420407751.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vqwwxu1420407826.jpg"
+  ],
   "stadium": "Estádio do Morumbi"
  },
  "brasileirao/Vasco": {
@@ -189,6 +223,7 @@
   ],
   "id": "134282",
   "name": "Vasco da Gama",
+  "photos": [],
   "stadium": "Estádio São Januário"
  },
  "brasileirao/Vitoria": {
@@ -201,6 +236,7 @@
   ],
   "id": "134280",
   "name": "Vitória",
+  "photos": [],
   "stadium": "Estádio Manoel Barradas"
  },
  "bundesliga/Augsburg": {
@@ -213,6 +249,12 @@
   ],
   "id": "133652",
   "name": "Augsburg",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tpwrpu1424317480.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xy227v1535563867.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uysf571535563819.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/mhb2401535563901.jpg"
+  ],
   "stadium": "WWK Arena"
  },
  "bundesliga/Ein Frankfurt": {
@@ -225,6 +267,11 @@
   ],
   "id": "133814",
   "name": "Eintracht Frankfurt",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uvxpyy1424316870.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/fmbw191540544459.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/j7itkv1540544512.jpg"
+  ],
   "stadium": "Deutsche Bank Park"
  },
  "bundesliga/Elversberg": {
@@ -232,6 +279,7 @@
   "fanart": [],
   "id": "138411",
   "name": "Elversberg",
+  "photos": [],
   "stadium": "Waldstadion Kaiserlinde"
  },
  "bundesliga/FC Koln": {
@@ -244,6 +292,12 @@
   ],
   "id": "133654",
   "name": "Köln",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tvywtt1424317694.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/tmjee11578231462.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/8xocqd1578231463.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/35ky2o1578231463.jpg"
+  ],
   "stadium": "RheinEnergieStadion"
  },
  "bundesliga/Freiburg": {
@@ -256,6 +310,12 @@
   ],
   "id": "133653",
   "name": "Freiburg",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/bgprbv1543486524.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rtbq6o1543486483.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/czw7aj1543486491.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/o8444i1543486498.jpg"
+  ],
   "stadium": "Europa-Park Stadion"
  },
  "bundesliga/Hoffenheim": {
@@ -268,6 +328,12 @@
   ],
   "id": "133657",
   "name": "Hoffenheim",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/sxsvvv1424536655.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/9xpyfc1543771558.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ir034c1543771566.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/8cd0v91543771574.jpg"
+  ],
   "stadium": "PreZero Arena"
  },
  "bundesliga/Mainz": {
@@ -280,6 +346,12 @@
   ],
   "id": "133665",
   "name": "Mainz",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uyrxwt1424537020.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/c72e0j1542879905.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/cmrwjx1542879944.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/spwyqv1424537590.jpg"
+  ],
   "stadium": "MEWA ARENA"
  },
  "bundesliga/Paderborn": {
@@ -292,6 +364,12 @@
   ],
   "id": "134551",
   "name": "Paderborn",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uxysxu1424536482.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uqpdux1578232434.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/0shn631578232434.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/8ple321578232435.jpg"
+  ],
   "stadium": "Home Deluxe Arena"
  },
  "bundesliga/RB Leipzig": {
@@ -304,6 +382,11 @@
   ],
   "id": "134695",
   "name": "RB Leipzig",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/3nbr0z1543772220.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/q9lw3o1543772228.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/k8efrh1543772237.jpg"
+  ],
   "stadium": "Red Bull Arena Leipzig"
  },
  "bundesliga/Schalke 04": {
@@ -316,6 +399,12 @@
   ],
   "id": "133661",
   "name": "Schalke 04",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/gupwtp1532719098.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/iopa8q1532719126.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/fb66631532719058.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/2zt4h71532719228.jpg"
+  ],
   "stadium": "VELTINS-Arena"
  },
  "bundesliga/Stuttgart": {
@@ -328,6 +417,12 @@
   ],
   "id": "133660",
   "name": "Stuttgart",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/yuxsst1424316364.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uvxrpy1424316390.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vasryo1543771815.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/x3u9zc1543771823.jpg"
+  ],
   "stadium": "MHP Arena"
  },
  "la-liga/Ath Madrid": {
@@ -340,6 +435,12 @@
   ],
   "id": "133729",
   "name": "Atlético Madrid",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/qwpxxy1420327141.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/bngp3v1505653922.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xrstrr1424111042.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yyvrsw1424123851.jpg"
+  ],
   "stadium": "Riyadh Air Metropolitano"
  },
  "la-liga/Celta": {
@@ -352,6 +453,11 @@
   ],
   "id": "133937",
   "name": "Celta Vigo",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vvvuqp1420373291.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/mfwnyl1514404193.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/95o2ug1514404300.jpg"
+  ],
   "stadium": "Estadio Abanca-Balaídos"
  },
  "la-liga/Elche": {
@@ -364,6 +470,11 @@
   ],
   "id": "134384",
   "name": "Elche",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/q2cldn1604828774.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/sqsvry1424185912.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yrrvrx1424185945.jpg"
+  ],
   "stadium": "Estadio Martínez Valero"
  },
  "la-liga/Espanol": {
@@ -376,6 +487,12 @@
   ],
   "id": "133734",
   "name": "Espanyol",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tuvuss1424482964.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/5qo4ku1532346961.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/f2cm1w1532347020.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qv9fc01532346915.jpg"
+  ],
   "stadium": "RCDE Stadium"
  },
  "la-liga/Getafe": {
@@ -388,6 +505,12 @@
   ],
   "id": "133731",
   "name": "Getafe",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/ypwuww1420375380.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/r47s9u1532347840.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qljon41532347903.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ghjf8b1532347930.jpg"
+  ],
   "stadium": "Estadio Coliseum"
  },
  "la-liga/Levante": {
@@ -400,6 +523,11 @@
   ],
   "id": "133732",
   "name": "Levante",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/o252p11532373628.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/otd9ez1532373825.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/7guofv1532373665.jpg"
+  ],
   "stadium": "Estadio Ciudad de Valencia"
  },
  "la-liga/Malaga": {
@@ -412,6 +540,11 @@
   ],
   "id": "133736",
   "name": "Málaga",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/rtvttw1423672991.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rsuyxs1423673005.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vxypsq1423673095.jpg"
+  ],
   "stadium": "Estadio La Rosaleda"
  },
  "la-liga/Osasuna": {
@@ -424,6 +557,12 @@
   ],
   "id": "133730",
   "name": "Osasuna",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vjvfyh1678900263.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/dj5w0m1678900071.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/4xsvcc1678900327.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/dz0qjo1678900414.jpg"
+  ],
   "stadium": "Estadio El Sadar"
  },
  "la-liga/Real Madrid": {
@@ -436,6 +575,10 @@
   ],
   "id": "133738",
   "name": "Real Madrid",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/qxsyvs1420395095.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yqxusv1430844607.jpg"
+  ],
   "stadium": "Estadio Santiago Bernabéu"
  },
  "la-liga/Santander": {
@@ -443,6 +586,7 @@
   "fanart": [],
   "id": "133726",
   "name": "Racing de Santander",
+  "photos": [],
   "stadium": "Campos de Sport de El Sardinero"
  },
  "la-liga/Sevilla": {
@@ -455,6 +599,11 @@
   ],
   "id": "133735",
   "name": "Sevilla",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vpyysp1433183959.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wuttxs1433183764.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rurryw1424111302.jpg"
+  ],
   "stadium": "Estadio Ramón Sánchez Pizjuán"
  },
  "la-liga/Sociedad": {
@@ -467,6 +616,7 @@
   ],
   "id": "133724",
   "name": "Real Sociedad",
+  "photos": [],
   "stadium": "Reale Arena"
  },
  "la-liga/Valencia": {
@@ -479,6 +629,10 @@
   ],
   "id": "133725",
   "name": "Valencia",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/b9ntg31558906786.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/sixgoa1511474372.jpg"
+  ],
   "stadium": "Estadio de Mestalla"
  },
  "la-liga/Vallecano": {
@@ -491,6 +645,12 @@
   ],
   "id": "133728",
   "name": "Rayo Vallecano",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/4dlpoe1534894003.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qu8efg1534893825.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/04551x1534893979.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/8sei4n1534894055.jpg"
+  ],
   "stadium": "Estadio de Vallecas"
  },
  "la-liga/Villarreal": {
@@ -503,6 +663,12 @@
   ],
   "id": "133740",
   "name": "Villarreal",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wxuwvv1424484977.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/p50na81532346582.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/4as2l51682404563.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/mvycyp1532346636.jpg"
+  ],
   "stadium": "Estadio de la Cerámica"
  },
  "ligue-1/Angers": {
@@ -515,6 +681,12 @@
   ],
   "id": "134709",
   "name": "Angers",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/d3rxh71549710963.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/65lg3c1549710970.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/sf0e8x1549710976.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/anrakh1549710983.jpg"
+  ],
   "stadium": "Stade Raymond Kopa"
  },
  "ligue-1/Auxerre": {
@@ -527,6 +699,12 @@
   ],
   "id": "134788",
   "name": "Auxerre",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/rjp48e1681058005.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/1i5mef1681058018.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ukt4rf1681058033.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/l6vy9x1681058045.jpg"
+  ],
   "stadium": "Stade de l'Abbé Deschamps"
  },
  "ligue-1/Le Havre": {
@@ -539,6 +717,12 @@
   ],
   "id": "133862",
   "name": "Le Havre",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/ielupg1685904994.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/o25q9y1685905264.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/l3cckz1685905508.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/af7k191685905146.jpg"
+  ],
   "stadium": "Stade Océane"
  },
  "ligue-1/Le Mans": {
@@ -551,6 +735,7 @@
   ],
   "id": "133848",
   "name": "Le Mans",
+  "photos": [],
   "stadium": "Stade Marie-Marvingt"
  },
  "ligue-1/Lens": {
@@ -563,6 +748,12 @@
   ],
   "id": "133822",
   "name": "Lens",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/qxyqxq1420762717.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yrsswp1420762782.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xwxtpx1420762846.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/1wp9dg1608329932.jpg"
+  ],
   "stadium": "Stade Bollaert-Delelis"
  },
  "ligue-1/Lorient": {
@@ -575,6 +766,11 @@
   ],
   "id": "133715",
   "name": "Lorient",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tusryr1420594074.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/trvtps1420594086.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/usstqp1420594119.jpg"
+  ],
   "stadium": "Stade du Moustoir"
  },
  "ligue-1/Lyon": {
@@ -587,6 +783,12 @@
   ],
   "id": "133713",
   "name": "Lyon",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/sxvqqq1420506345.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yxuqvx1420582853.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ryvtsu1420582948.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wvxypr1420583534.jpg"
+  ],
   "stadium": "Groupama Stadium"
  },
  "ligue-1/Marseille": {
@@ -599,6 +801,11 @@
   ],
   "id": "133707",
   "name": "Marseille",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uxvyqt1420732162.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/tsrsyq1420731904.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vrtwxy1420731838.jpg"
+  ],
   "stadium": "Orange Vélodrome"
  },
  "ligue-1/Nice": {
@@ -611,6 +818,12 @@
   ],
   "id": "133712",
   "name": "Nice",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vvssuq1420595040.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rwrrsx1420595124.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xrqwwt1420595177.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/sxrswv1420595602.jpg"
+  ],
   "stadium": "Allianz Riviera"
  },
  "ligue-1/Paris FC": {
@@ -623,6 +836,7 @@
   ],
   "id": "135465",
   "name": "Paris FC",
+  "photos": [],
   "stadium": "Stade Jean-Bouin"
  },
  "ligue-1/Rennes": {
@@ -635,6 +849,12 @@
   ],
   "id": "133719",
   "name": "Rennes",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/uwtxpq1421530863.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/tvqvqt1420592949.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qsswrx1420593192.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xwxsus1420593236.jpg"
+  ],
   "stadium": "Roazhon Park"
  },
  "ligue-1/Strasbourg": {
@@ -647,6 +867,12 @@
   ],
   "id": "133882",
   "name": "Strasbourg",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/hya3wj1551973913.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/hynzmo1551973988.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/zy573j1551974128.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wwey601551973959.jpg"
+  ],
   "stadium": "Stade de la Meinau"
  },
  "ligue-1/Toulouse": {
@@ -659,6 +885,12 @@
   ],
   "id": "133703",
   "name": "Toulouse",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/iyvswq1551973709.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/tbnjl91689576790.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/m28eg61551973721.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/y0vma41689576600.jpg"
+  ],
   "stadium": "Stadium de Toulouse"
  },
  "ligue-1/Troyes": {
@@ -671,6 +903,12 @@
   ],
   "id": "134789",
   "name": "Troyes",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wywppp1433264674.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/f0xdkf1653389301.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/txpryq1433264688.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uqqprv1433264701.jpg"
+  ],
   "stadium": "Stade de l'Aube"
  },
  "premier-league/Arsenal": {
@@ -683,6 +921,7 @@
   ],
   "id": "133604",
   "name": "Arsenal",
+  "photos": [],
   "stadium": "Emirates Stadium"
  },
  "premier-league/Aston Villa": {
@@ -695,6 +934,11 @@
   ],
   "id": "133601",
   "name": "Aston Villa",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/ywquwr1421747828.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/cal7fg1485707947.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qvpvwq1421747716.jpg"
+  ],
   "stadium": "Villa Park"
  },
  "premier-league/Brentford": {
@@ -707,6 +951,7 @@
   ],
   "id": "134355",
   "name": "Brentford",
+  "photos": [],
   "stadium": "Brentford Community Stadium"
  },
  "premier-league/Brighton": {
@@ -719,6 +964,11 @@
   ],
   "id": "133619",
   "name": "Brighton and Hove Albion",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/2f41gp1504211039.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/bfasc71504211054.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/nfo32o1504211067.jpg"
+  ],
   "stadium": "American Express Stadium"
  },
  "premier-league/Chelsea": {
@@ -731,6 +981,7 @@
   ],
   "id": "133610",
   "name": "Chelsea",
+  "photos": [],
   "stadium": "Stamford Bridge"
  },
  "premier-league/Coventry": {
@@ -743,6 +994,12 @@
   ],
   "id": "133625",
   "name": "Coventry City",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/ay2hf91534861338.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/w3ylmq1534861316.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/9tcz911534861367.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/eqts3i1534861408.jpg"
+  ],
   "stadium": "The Coventry Building Society Arena"
  },
  "premier-league/Crystal Palace": {
@@ -755,6 +1012,12 @@
   ],
   "id": "133632",
   "name": "Crystal Palace",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/svsvqv1424367005.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/3trd0z1547482101.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yvuwup1424367035.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ryuspy1424367053.jpg"
+  ],
   "stadium": "Selhurst Park"
  },
  "premier-league/Everton": {
@@ -767,6 +1030,12 @@
   ],
   "id": "133615",
   "name": "Everton",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/yyuypw1420393451.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yvxsuy1421360829.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/tuvwus1421361016.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/sppyvw1421360906.jpg"
+  ],
   "stadium": "Hill Dickinson Stadium"
  },
  "premier-league/Fulham": {
@@ -779,6 +1048,12 @@
   ],
   "id": "133600",
   "name": "Fulham",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/jv19st1532296431.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vtj30z1532296500.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/o4lhkf1532296527.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/flhg8e1532296446.jpg"
+  ],
   "stadium": "Craven Cottage"
  },
  "premier-league/Hull": {
@@ -791,6 +1066,12 @@
   ],
   "id": "133617",
   "name": "Hull City",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wsqyss1424365992.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yyuttp1424366011.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uvxusy1424366026.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wwxvxp1424366045.jpg"
+  ],
   "stadium": "The MKM Stadium"
  },
  "premier-league/Ipswich": {
@@ -803,6 +1084,9 @@
   ],
   "id": "133622",
   "name": "Ipswich Town",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/x8c9jo1537208459.jpg"
+  ],
   "stadium": "Portman Road"
  },
  "premier-league/Leeds": {
@@ -815,6 +1099,7 @@
   ],
   "id": "133635",
   "name": "Leeds United",
+  "photos": [],
   "stadium": "Elland Road"
  },
  "premier-league/Liverpool": {
@@ -827,6 +1112,11 @@
   ],
   "id": "133602",
   "name": "Liverpool",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/6nqa501550062129.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wwyxss1454449556.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xuxttq1424215976.jpg"
+  ],
   "stadium": "Anfield"
  },
  "premier-league/Man City": {
@@ -839,6 +1129,11 @@
   ],
   "id": "133613",
   "name": "Manchester City",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vpswup1420244120.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qxvuqw1424220465.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rupryr1424220639.jpg"
+  ],
   "stadium": "Etihad Stadium"
  },
  "premier-league/Man United": {
@@ -851,6 +1146,11 @@
   ],
   "id": "133612",
   "name": "Manchester United",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/1x84vm1641155665.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/9pl9fi1641155714.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/quuytw1424229564.jpg"
+  ],
   "stadium": "Old Trafford"
  },
  "premier-league/Newcastle": {
@@ -863,6 +1163,12 @@
   ],
   "id": "134777",
   "name": "Newcastle United",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wrryur1420579232.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/srxqux1420579374.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/utpttq1424547277.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ytsupr1424547300.jpg"
+  ],
   "stadium": "St James Park"
  },
  "premier-league/Nott'm Forest": {
@@ -875,6 +1181,7 @@
   ],
   "id": "133720",
   "name": "Nottingham Forest",
+  "photos": [],
   "stadium": "City Ground"
  },
  "premier-league/Sunderland": {
@@ -887,6 +1194,7 @@
   ],
   "id": "133603",
   "name": "Sunderland",
+  "photos": [],
   "stadium": "Stadium of Light"
  },
  "premier-league/Tottenham": {
@@ -899,6 +1207,10 @@
   ],
   "id": "133616",
   "name": "Tottenham Hotspur",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tuuwpy1424110617.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xywqqs1421078139.jpg"
+  ],
   "stadium": "Tottenham Hotspur Stadium"
  },
  "serie-a/Atalanta": {
@@ -911,6 +1223,11 @@
   ],
   "id": "134782",
   "name": "Atalanta",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/a38vbc1546086008.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/d3kt481546086018.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/squqvw1421077900.jpg"
+  ],
   "stadium": "New Balance Arena"
  },
  "serie-a/Cagliari": {
@@ -923,6 +1240,12 @@
   ],
   "id": "134783",
   "name": "Cagliari",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/siwyj01546618257.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/4krzi51546618271.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/bgjtri1546618288.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/62p93c1546618459.jpg"
+  ],
   "stadium": "Unipol Domus"
  },
  "serie-a/Fiorentina": {
@@ -935,6 +1258,7 @@
   ],
   "id": "133674",
   "name": "Fiorentina",
+  "photos": [],
   "stadium": "Stadio Artemio Franchi"
  },
  "serie-a/Frosinone": {
@@ -947,6 +1271,12 @@
   ],
   "id": "133818",
   "name": "Frosinone",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/2yu86c1546791788.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ovpp7b1546791806.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/cg71gd1546791820.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/dhicbp1546791837.jpg"
+  ],
   "stadium": "Stadio Benito Stirpe"
  },
  "serie-a/Genoa": {
@@ -959,6 +1289,11 @@
   ],
   "id": "133675",
   "name": "Genoa",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/33xsyr1546116217.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/gmiji51546116538.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/498e5l1546116934.jpg"
+  ],
   "stadium": "Stadio Luigi Ferraris"
  },
  "serie-a/Inter": {
@@ -971,6 +1306,11 @@
   ],
   "id": "133681",
   "name": "Inter Milan",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/6rnerf1546088608.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rtwqpv1429294176.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uvswsr1421077771.jpg"
+  ],
   "stadium": "Stadio Giuseppe Meazza"
  },
  "serie-a/Juventus": {
@@ -983,6 +1323,12 @@
   ],
   "id": "133676",
   "name": "Juventus",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wwtuxx1420504589.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/vqh3kj1548875099.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rqwwqx1424111979.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/wvvpws1430771058.jpg"
+  ],
   "stadium": "Allianz Stadium Turin"
  },
  "serie-a/Lazio": {
@@ -995,6 +1341,7 @@
   ],
   "id": "133668",
   "name": "Lazio",
+  "photos": [],
   "stadium": "Stadio Olimpico"
  },
  "serie-a/Lecce": {
@@ -1007,6 +1354,7 @@
   ],
   "id": "133678",
   "name": "Lecce",
+  "photos": [],
   "stadium": "Stadio Via del mare"
  },
  "serie-a/Milan": {
@@ -1019,6 +1367,12 @@
   ],
   "id": "133667",
   "name": "AC Milan",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/ypxxqs1420507288.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/txvurv1420507301.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yxtrst1420507320.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uvsqrx1421077633.jpg"
+  ],
   "stadium": "Stadio Giuseppe Meazza"
  },
  "serie-a/Monza": {
@@ -1031,6 +1385,7 @@
   ],
   "id": "134270",
   "name": "Monza",
+  "photos": [],
   "stadium": "U-Power Stadium"
  },
  "serie-a/Napoli": {
@@ -1043,6 +1398,7 @@
   ],
   "id": "133670",
   "name": "Napoli",
+  "photos": [],
   "stadium": "Stadio Diego Armando Maradona"
  },
  "serie-a/Parma": {
@@ -1055,6 +1411,12 @@
   ],
   "id": "135728",
   "name": "Parma",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/qciluh1546597123.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/nnqmvk1546597130.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/9i3xs61546597137.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/96jo2f1546597145.jpg"
+  ],
   "stadium": "Stadio Ennio Tardini"
  },
  "serie-a/Roma": {
@@ -1067,6 +1429,12 @@
   ],
   "id": "133682",
   "name": "Roma",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/wptpuu1420507611.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/usutts1420507624.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/usxxtx1421077390.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/rtwvpq1421077414.jpg"
+  ],
   "stadium": "Stadio Olimpico"
  },
  "serie-a/Sassuolo": {
@@ -1079,6 +1447,12 @@
   ],
   "id": "133701",
   "name": "Sassuolo",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/79erva1546545363.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/ydta1g1546545371.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/cf335g1546545381.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/qxyz5e1546545391.jpg"
+  ],
   "stadium": "Mapei Stadium – Città del Tricolore"
  },
  "serie-a/Torino": {
@@ -1091,6 +1465,12 @@
   ],
   "id": "133687",
   "name": "Torino",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/vyqsyt1420561434.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/quyvrx1426211614.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/uwxyrq1426211523.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/yuvprw1426211761.jpg"
+  ],
   "stadium": "Stadio Olimpico Grande Torino"
  },
  "serie-a/Udinese": {
@@ -1103,6 +1483,12 @@
   ],
   "id": "133679",
   "name": "Udinese",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/jamzul1546521989.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/j1h7gd1546522007.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/k3hog61546522082.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/hthbjw1546522097.jpg"
+  ],
   "stadium": "Bluenergy Stadium"
  },
  "serie-a/Venezia": {
@@ -1115,6 +1501,7 @@
   ],
   "id": "134234",
   "name": "Venezia",
+  "photos": [],
   "stadium": "Stadio Pierluigi Penzo"
  }
 }
