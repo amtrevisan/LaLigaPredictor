@@ -405,6 +405,44 @@
   ],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
  },
+ "133654-133661-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133654-133661-2026": {
+  "events": [
+   {
+    "away": "Schalke 04",
+    "away_score": null,
+    "competition": "German Bundesliga",
+    "date": "2026-10-24",
+    "home": "Köln",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ebpjpk1783076759.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133661-133654-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133661-133654-2026": {
+  "events": [
+   {
+    "away": "Köln",
+    "away_score": null,
+    "competition": "German Bundesliga",
+    "date": "2027-03-02",
+    "home": "Schalke 04",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/k99qro1783076813.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
  "133667-133679-2025": {
   "events": [
    {
@@ -713,6 +751,123 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "133703-134789-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133703-134789-2026": {
+  "events": [
+   {
+    "away": "Troyes",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-25",
+    "home": "Toulouse",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/eqdryf1781249138.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133707-133862-2025": {
+  "events": [
+   {
+    "away": "Le Havre",
+    "away_score": 2,
+    "competition": "French Ligue 1",
+    "date": "2025-10-18",
+    "home": "Marseille",
+    "home_score": 6,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/gxo4gh1754726970.jpg",
+    "video": "https://www.youtube.com/watch?v=c12w_L1brBM"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133707-133862-2026": {
+  "events": [
+   {
+    "away": "Le Havre",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-25",
+    "home": "Marseille",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/wmfs6k1781249488.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133713-153855-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133713-153855-2026": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133715-134709-2025": {
+  "events": [
+   {
+    "away": "Angers",
+    "away_score": 0,
+    "competition": "French Ligue 1",
+    "date": "2026-02-15",
+    "home": "Lorient",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/mty1b11754808625.jpg",
+    "video": "https://www.youtube.com/watch?v=ZPS7kwp0BHc"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133715-134709-2026": {
+  "events": [
+   {
+    "away": "Angers",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-02-27",
+    "home": "Lorient",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/mty1b11754808625.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133719-133882-2025": {
+  "events": [
+   {
+    "away": "Strasbourg",
+    "away_score": 1,
+    "competition": "French Ligue 1",
+    "date": "2025-11-02",
+    "home": "Rennes",
+    "home_score": 4,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/68a55z1754727123.jpg",
+    "video": "https://www.youtube.com/watch?v=HsyI31vqJNE"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133719-133882-2026": {
+  "events": [
+   {
+    "away": "Strasbourg",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-25",
+    "home": "Rennes",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/68a55z1754727123.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
  "133720-133622-2025": {
   "events": [],
   "fetched": "2026-10-24T01:12:15.085159+00:00"
@@ -999,6 +1154,115 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "133822-135465-2025": {
+  "events": [
+   {
+    "away": "Paris FC",
+    "away_score": 1,
+    "competition": "French Ligue 1",
+    "date": "2025-10-19",
+    "home": "Lens",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/u7dw9n1754726962.jpg",
+    "video": "https://www.youtube.com/watch?v=gahN3tz02Oc"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133822-135465-2026": {
+  "events": [
+   {
+    "away": "Paris FC",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-24",
+    "home": "Lens",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/u7dw9n1754726962.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133848-134788-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133848-134788-2026": {
+  "events": [
+   {
+    "away": "Auxerre",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-04-10",
+    "home": "Le Mans",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/kc6ka21781249203.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133862-133707-2025": {
+  "events": [
+   {
+    "away": "Marseille",
+    "away_score": 1,
+    "competition": "French Ligue 1",
+    "date": "2026-05-10",
+    "home": "Le Havre",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/fecwal1754809053.jpg",
+    "video": "https://www.youtube.com/watch?v=LNY5SOamNuQ"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133862-133707-2026": {
+  "events": [
+   {
+    "away": "Marseille",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-04-17",
+    "home": "Le Havre",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/isc4w81781249506.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133882-133719-2025": {
+  "events": [
+   {
+    "away": "Rennes",
+    "away_score": 3,
+    "competition": "French Ligue 1",
+    "date": "2026-04-19",
+    "home": "Strasbourg",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/8k7dwj1754808942.jpg",
+    "video": "https://www.youtube.com/watch?v=YeYA5OMFv_0"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "133882-133719-2026": {
+  "events": [
+   {
+    "away": "Rennes",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-04-24",
+    "home": "Strasbourg",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/8k7dwj1754808942.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
  "134234-133675-2025": {
   "events": [],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
@@ -1036,6 +1300,25 @@
    }
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134294-137818-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134294-137818-2026": {
+  "events": [
+   {
+    "away": "Remo",
+    "away_score": 0,
+    "competition": "Brazilian Serie A",
+    "date": "2026-10-23",
+    "home": "Cruzeiro",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/5vfapu1769684037.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
  },
  "134355-133617-2025": {
   "events": [],
@@ -1086,6 +1369,55 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "134695-138411-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134695-138411-2026": {
+  "events": [
+   {
+    "away": "Elversberg",
+    "away_score": null,
+    "competition": "German Bundesliga",
+    "date": "2026-10-24",
+    "home": "RB Leipzig",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/1rwltx1783076756.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134709-133715-2025": {
+  "events": [
+   {
+    "away": "Lorient",
+    "away_score": 0,
+    "competition": "French Ligue 1",
+    "date": "2025-10-26",
+    "home": "Angers",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/f6lbvo1754808462.jpg",
+    "video": "https://www.youtube.com/watch?v=XT8-4fv_fsQ"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134709-133715-2026": {
+  "events": [
+   {
+    "away": "Lorient",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-25",
+    "home": "Angers",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/f6lbvo1754808462.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
  "134777-133632-2025": {
   "events": [
    {
@@ -1135,6 +1467,74 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "134788-133848-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134788-133848-2026": {
+  "events": [
+   {
+    "away": "Le Mans",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2026-10-25",
+    "home": "Auxerre",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/138svc1781249139.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134789-133703-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134789-133703-2026": {
+  "events": [
+   {
+    "away": "Toulouse",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-04-24",
+    "home": "Troyes",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/0ec47x1781249209.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "135465-133822-2025": {
+  "events": [
+   {
+    "away": "Lens",
+    "away_score": 5,
+    "competition": "French Ligue 1",
+    "date": "2026-02-14",
+    "home": "Paris FC",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/r6yq6j1754808643.jpg",
+    "video": "https://www.youtube.com/watch?v=vh-nqj4gHGY"
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "135465-133822-2026": {
+  "events": [
+   {
+    "away": "Lens",
+    "away_score": null,
+    "competition": "French Ligue 1",
+    "date": "2027-04-24",
+    "home": "Paris FC",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/r6yq6j1754808643.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
  "135728-133668-2025": {
   "events": [
    {
@@ -1164,5 +1564,47 @@
    }
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "137818-134294-2026": {
+  "events": [
+   {
+    "away": "Cruzeiro",
+    "away_score": 1,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-25",
+    "home": "Remo",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/oznpdv1769682947.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "138411-134695-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "138411-134695-2026": {
+  "events": [
+   {
+    "away": "RB Leipzig",
+    "away_score": null,
+    "competition": "German Bundesliga",
+    "date": "2027-03-02",
+    "home": "Elversberg",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/m7wbuu1783076815.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "153855-133713-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "153855-133713-2026": {
+  "events": [],
+  "fetched": "2026-10-24T01:59:27.928935+00:00"
  }
 }
