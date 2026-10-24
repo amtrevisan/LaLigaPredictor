@@ -4,33 +4,45 @@ import { OutcomeBar } from "@/components/OutcomeBar";
 import { SeasonBarcode } from "@/components/SeasonBarcode";
 import { EmptyState } from "@/components/States";
 import { useI18n } from "@/i18n";
-import { fill, kickoffDay, percent, probabilityOf } from "@/lib/format";
+import { fill, fold, kickoffDay, percent, probabilityOf } from "@/lib/format";
 import type { LeagueData } from "@/types/data";
 import styles from "./views.module.css";
 
 export function ResultsView({ data }: { data: LeagueData }) {
   const { t, intl } = useI18n();
   const [round, setRound] = useState<number | "all">("all");
+  const [query, setQuery] = useState("");
   const rounds = useMemo(
     () => [...new Set(data.results.map((r) => r.round))].sort((a, b) => b - a),
     [data.results],
   );
-  const rows = useMemo(
-    () => (round === "all" ? data.results : data.results.filter((r) => r.round === round)),
-    [data.results, round],
+  const rows = useMemo(() => {
+    const q = fold(query);
+    return data.results.filter(
+      (r) =>
+        (round === "all" || r.round === round) &&
+        (!q || fold(r.home.name).includes(q) || fold(r.away.name).includes(q)),
+    );
+  }, [data.results, round, query]);
+  const hits = useMemo(
+    () => data.results.filter((r) => r.correct).length,
+    [data.results],
   );
-  const hits = useMemo(() => data.results.filter((r) => r.correct).length, [data.results]);
 
   return (
     <div className={styles.stack}>
       <header className={styles.viewHead}>
         <h1 className={styles.viewTitle}>
-          {t.results.title} <span>{data.league.name} · {data.season}</span>
+          {t.results.title}{" "}
+          <span>
+            {data.league.name} · {data.season}
+          </span>
         </h1>
         {data.results.length > 0 && (
           <div className={styles.viewMeta}>
             <span>
-              {hits} {t.results.hit} · {data.results.length - hits} {t.results.miss}
+              {hits} {t.results.hit} · {data.results.length - hits}{" "}
+              {t.results.miss}
             </span>
           </div>
         )}
@@ -52,7 +64,11 @@ export function ResultsView({ data }: { data: LeagueData }) {
               <span>{t.results.filter}</span>
               <select
                 value={round}
-                onChange={(e) => setRound(e.target.value === "all" ? "all" : Number(e.target.value))}
+                onChange={(e) =>
+                  setRound(
+                    e.target.value === "all" ? "all" : Number(e.target.value),
+                  )
+                }
               >
                 <option value="all">{t.results.allRounds}</option>
                 {rounds.map((r) => (
@@ -62,58 +78,89 @@ export function ResultsView({ data }: { data: LeagueData }) {
                 ))}
               </select>
             </label>
+            <label className={styles.select}>
+              <span>{t.results.search}</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                autoComplete="off"
+              />
+            </label>
           </div>
 
-          <table className={styles.table} aria-label={t.results.title}>
-            <thead>
-              <tr>
-                <th scope="col">{t.fixtures.kickoff}</th>
-                <th scope="col">{t.results.result}</th>
-                <th scope="col" className={styles.wide}>
-                  {t.results.prediction}
-                </th>
-                <th scope="col" className={styles.right}>
-                  <span className="visually-hidden">{t.results.hit}</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r.id} className={r.correct ? undefined : styles.missRow}>
-                  <td className={styles.dim}>{kickoffDay(r.kickoff, intl)}</td>
-                  <td>
-                    <span className={styles.match}>
-                      <span className={styles.club}>
-                        <Crest team={r.home} size={20} />
-                        {r.home.name}
-                      </span>
-                      <b className={styles.scoreCell}>
-                        {r.result.score[0]}–{r.result.score[1]}
-                      </b>
-                      <span className={styles.club}>
-                        <Crest team={r.away} size={20} />
-                        {r.away.name}
-                      </span>
-                    </span>
-                  </td>
-                  <td className={styles.wide}>
-                    <span className={styles.predCell}>
-                      <OutcomeBar probs={r.probs} orientation="horizontal" compact />
-                      <span className={styles.dim}>
-                        {t.outcome.short[r.pick]} ·{" "}
-                        {fill(t.results.gave, { p: percent(probabilityOf(r.probs, r.result.outcome), intl) })}
-                      </span>
-                    </span>
-                  </td>
-                  <td className={styles.right}>
-                    <span className={r.correct ? styles.hitTag : styles.missTag}>
-                      {r.correct ? t.results.hit : t.results.miss}
-                    </span>
-                  </td>
+          {rows.length === 0 ? (
+            <EmptyState>
+              {fill(t.results.noMatch, { q: query.trim() })}
+            </EmptyState>
+          ) : (
+            <table className={styles.table} aria-label={t.results.title}>
+              <thead>
+                <tr>
+                  <th scope="col">{t.fixtures.kickoff}</th>
+                  <th scope="col">{t.results.result}</th>
+                  <th scope="col" className={styles.wide}>
+                    {t.results.prediction}
+                  </th>
+                  <th scope="col" className={styles.right}>
+                    <span className="visually-hidden">{t.results.hit}</span>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {rows.map((r) => (
+                  <tr
+                    key={r.id}
+                    className={r.correct ? undefined : styles.missRow}
+                  >
+                    <td className={styles.dim}>
+                      {kickoffDay(r.kickoff, intl)}
+                    </td>
+                    <td>
+                      <span className={styles.match}>
+                        <span className={styles.club}>
+                          <Crest team={r.home} size={20} />
+                          {r.home.name}
+                        </span>
+                        <b className={styles.scoreCell}>
+                          {r.result.score[0]}–{r.result.score[1]}
+                        </b>
+                        <span className={styles.club}>
+                          <Crest team={r.away} size={20} />
+                          {r.away.name}
+                        </span>
+                      </span>
+                    </td>
+                    <td className={styles.wide}>
+                      <span className={styles.predCell}>
+                        <OutcomeBar
+                          probs={r.probs}
+                          orientation="horizontal"
+                          compact
+                        />
+                        <span className={styles.dim}>
+                          {t.outcome.short[r.pick]} ·{" "}
+                          {fill(t.results.gave, {
+                            p: percent(
+                              probabilityOf(r.probs, r.result.outcome),
+                              intl,
+                            ),
+                          })}
+                        </span>
+                      </span>
+                    </td>
+                    <td className={styles.right}>
+                      <span
+                        className={r.correct ? styles.hitTag : styles.missTag}
+                      >
+                        {r.correct ? t.results.hit : t.results.miss}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </>
       )}
     </div>

@@ -50,6 +50,8 @@ const de: Messages = {
     gave: "Das Modell gab dem Ergebnis {p}",
     allRounds: "Alle Spieltage",
     filter: "Spieltag",
+    search: "Team",
+    noMatch: "Keine Spiele für „{q}“.",
     empty: "In dieser Saison wurde noch kein Spiel ausgetragen.",
   },
   table: {

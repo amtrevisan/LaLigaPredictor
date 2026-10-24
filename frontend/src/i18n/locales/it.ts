@@ -50,6 +50,8 @@ const it: Messages = {
     gave: "Il modello dava al risultato il {p}",
     allRounds: "Tutte le giornate",
     filter: "Giornata",
+    search: "Squadra",
+    noMatch: "Nessuna partita per «{q}».",
     empty: "Nessuna partita giocata in questa stagione.",
   },
   table: {

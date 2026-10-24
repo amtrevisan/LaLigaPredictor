@@ -79,3 +79,8 @@ export const OUTCOME_INDEX: Record<Outcome, 0 | 1 | 2> = { H: 0, D: 1, A: 2 };
 export function probabilityOf(probs: Triple, outcome: Outcome): number {
   return probs[OUTCOME_INDEX[outcome]];
 }
+
+/** Case- and accent-insensitive form for search, so "atletico" finds "Atlético". */
+export function fold(s: string): string {
+  return s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().trim();
+}

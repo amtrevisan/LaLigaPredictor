@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fill, percent, points, probabilityOf } from "./format";
+import { fill, fold, percent, points, probabilityOf } from "./format";
 
 describe("fill", () => {
   it("replaces known placeholders and keeps unknown ones visible", () => {
@@ -27,5 +27,12 @@ describe("probabilityOf", () => {
   it("reads the probability of an outcome", () => {
     expect(probabilityOf([0.5, 0.3, 0.2], "D")).toBe(0.3);
     expect(probabilityOf([0.5, 0.3, 0.2], "A")).toBe(0.2);
+  });
+});
+
+describe("fold", () => {
+  it("ignores case, accents and surrounding space", () => {
+    expect(fold(" Atlético ")).toBe("atletico");
+    expect(fold("Bayern München")).toContain("munchen");
   });
 });

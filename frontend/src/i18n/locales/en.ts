@@ -48,6 +48,8 @@ const en = {
     gave: "Model gave the result {p}",
     allRounds: "All rounds",
     filter: "Round",
+    search: "Team",
+    noMatch: "No matches for “{q}”.",
     empty: "No matches played this season yet.",
   },
   table: {
