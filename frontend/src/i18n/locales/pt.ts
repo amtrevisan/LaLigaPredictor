@@ -35,7 +35,7 @@ const pt: Messages = {
     highlights: "Melhores momentos",
     preview: "Arte do jogo",
     select: "Selecione um jogo para ver o detalhamento completo.",
-    gap: "Diferença",
+    gap: "vs mercado",
     empty: "Nenhum jogo marcado ainda. A próxima rodada aparece aqui assim que for divulgada.",
     legend: "As barras mostram a probabilidade do modelo de vitória do mandante, empate e vitória do visitante.",
   },

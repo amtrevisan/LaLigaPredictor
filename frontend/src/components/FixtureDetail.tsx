@@ -45,7 +45,7 @@ function safeHttps(url: string | null): string | null {
   }
 }
 
-function MeetingTile({ meeting, revealed }: { meeting: Meeting; revealed: boolean }) {
+function MeetingTile({ meeting }: { meeting: Meeting }) {
   const { t, intl } = useI18n();
   const score = meeting.score ? `${meeting.score[0]}–${meeting.score[1]}` : "–";
   const caption = (
@@ -66,7 +66,7 @@ function MeetingTile({ meeting, revealed }: { meeting: Meeting; revealed: boolea
   );
   // The caption carries the facts, so the image itself is decorative.
   const image = meeting.image ? (
-    <DitherImage src={meeting.image} alt="" fallback={placeholder} revealed={revealed} />
+    <DitherImage src={meeting.image} alt="" fallback={placeholder} />
   ) : (
     placeholder
   );
@@ -110,14 +110,22 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
   const band = [
     ...[fixture.home].flatMap((team) => {
       const src = pickPhoto(team, fixture.id);
-      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null }] : [];
+      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null, club: true }] : [];
     }),
     ...(fixture.poster
-      ? [{ key: "poster", src: fixture.poster, title: t.fixtures.preview, detail: longDate(fixture.kickoff, intl) }]
+      ? [
+          {
+            key: "poster",
+            src: fixture.poster,
+            title: t.fixtures.preview,
+            detail: longDate(fixture.kickoff, intl),
+            club: false,
+          },
+        ]
       : []),
     ...[fixture.away].flatMap((team) => {
       const src = pickPhoto(team, fixture.id);
-      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null }] : [];
+      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null, club: true }] : [];
     }),
   ];
 
@@ -152,7 +160,9 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
               <DitherImage
                 src={item.src}
                 alt=""
-                revealed={revealed}
+                // Only club colour belongs on the page: TheSportsDB's templated match artwork
+                // stays 1-bit unless pointed at.
+                revealed={revealed && item.club}
                 fallback={<span className={styles.noImage} />}
               />
               <figcaption className={styles.caption}>
@@ -240,7 +250,7 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
         <h3 className={styles.blockTitle}>{t.fixtures.meetings}</h3>
         <div className={styles.tiles}>
           {fixture.meetings.map((meeting) => (
-            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} revealed={revealed} />
+            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} />
           ))}
         </div>
         {fixture.meetings.length === 0 && <p className={styles.note}>{t.fixtures.noMeetings}</p>}

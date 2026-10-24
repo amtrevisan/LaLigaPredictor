@@ -33,7 +33,7 @@ const en = {
     highlights: "Highlights",
     preview: "Match artwork",
     select: "Select a fixture for the full breakdown.",
-    gap: "Edge",
+    gap: "vs market",
     empty: "No fixtures scheduled yet. The next round appears here once it is published.",
     legend: "Bars show the model's probability of a home win, draw and away win.",
   },

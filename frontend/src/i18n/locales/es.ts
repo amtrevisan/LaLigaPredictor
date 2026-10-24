@@ -35,7 +35,7 @@ const es: Messages = {
     highlights: "Resumen",
     preview: "Cartel del partido",
     select: "Selecciona un partido para ver el desglose completo.",
-    gap: "Diferencia",
+    gap: "vs mercado",
     empty: "Aún no hay partidos programados. La próxima jornada aparecerá aquí en cuanto se publique.",
     legend: "Las barras muestran la probabilidad del modelo de victoria local, empate y victoria visitante.",
   },

@@ -35,7 +35,7 @@ const fr: Messages = {
     highlights: "Résumé",
     preview: "Affiche du match",
     select: "Sélectionnez un match pour le détail complet.",
-    gap: "Écart",
+    gap: "vs marché",
     empty: "Aucun match programmé pour l'instant. La prochaine journée apparaîtra ici dès sa publication.",
     legend: "Les barres montrent la probabilité du modèle pour une victoire à domicile, un nul et une victoire à l'extérieur.",
   },
