@@ -1,0 +1,476 @@
+{
+ "133600-133625-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133600-133625-2026": {
+  "events": [
+   {
+    "away": "Coventry City",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Fulham",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/48s6351784549578.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133601-133613-2025": {
+  "events": [
+   {
+    "away": "Manchester City",
+    "away_score": 0,
+    "competition": "English Premier League",
+    "date": "2025-10-26",
+    "home": "Aston Villa",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/8ita3g1750320313.jpg",
+    "video": "https://www.youtube.com/watch?v=tYmpk4k1pvQ"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133601-133613-2026": {
+  "events": [
+   {
+    "away": "Manchester City",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-24",
+    "home": "Aston Villa",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/74zob51787740858.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133602-133619-2025": {
+  "events": [
+   {
+    "away": "Brighton and Hove Albion",
+    "away_score": 0,
+    "competition": "FA Cup",
+    "date": "2026-02-14",
+    "home": "Liverpool",
+    "home_score": 3,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/piy7k21770969295.jpg",
+    "video": "https://www.youtube.com/watch?v=RDLry7ST-4k"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133602-133619-2026": {
+  "events": [
+   {
+    "away": "Brighton and Hove Albion",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-25",
+    "home": "Liverpool",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/k1wix31784549341.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133603-133635-2025": {
+  "events": [
+   {
+    "away": "Leeds United",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2025-12-28",
+    "home": "Sunderland",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ur6ash1750320564.jpg",
+    "video": "https://www.youtube.com/watch?v=Um9rMxAp-SA"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133603-133635-2026": {
+  "events": [
+   {
+    "away": "Leeds United",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-25",
+    "home": "Sunderland",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ykbz2h1784549347.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133604-133615-2025": {
+  "events": [
+   {
+    "away": "Everton",
+    "away_score": 0,
+    "competition": "English Premier League",
+    "date": "2026-03-14",
+    "home": "Arsenal",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/47wpbj1750320851.jpg",
+    "video": "https://www.youtube.com/watch?v=rGgyxS9AHLc"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133604-133615-2026": {
+  "events": [
+   {
+    "away": "Everton",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-24",
+    "home": "Arsenal",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ldysmn1784549342.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133610-133616-2025": {
+  "events": [
+   {
+    "away": "Tottenham Hotspur",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2026-05-19",
+    "home": "Chelsea",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/qbykd21750321048.jpg",
+    "video": "https://www.youtube.com/watch?v=Y3cx4gdWzbE"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133610-133616-2026": {
+  "events": [
+   {
+    "away": "Tottenham Hotspur",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-24",
+    "home": "Chelsea",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zr2ezf1785931540.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133613-133601-2025": {
+  "events": [
+   {
+    "away": "Aston Villa",
+    "away_score": 2,
+    "competition": "English Premier League",
+    "date": "2026-05-24",
+    "home": "Manchester City",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/3gdtcc1750321076.jpg",
+    "video": "https://www.youtube.com/watch?v=4hcwfvEqaZc"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133613-133601-2026": {
+  "events": [
+   {
+    "away": "Aston Villa",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Manchester City",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/txcd341787740882.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133615-133604-2025": {
+  "events": [
+   {
+    "away": "Arsenal",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2025-12-20",
+    "home": "Everton",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zakdm01750320525.jpg",
+    "video": "https://www.youtube.com/watch?v=s7Ul-X9TBIs"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133615-133604-2026": {
+  "events": [
+   {
+    "away": "Arsenal",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Everton",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/tc31bu1784549579.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133616-133610-2025": {
+  "events": [
+   {
+    "away": "Chelsea",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2025-11-01",
+    "home": "Tottenham Hotspur",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/0el7dq1750320358.jpg",
+    "video": "https://www.youtube.com/watch?v=-j04I7M29Mg"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133616-133610-2026": {
+  "events": [
+   {
+    "away": "Chelsea",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-08",
+    "home": "Tottenham Hotspur",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/33j08x1785931582.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133617-134355-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133617-134355-2026": {
+  "events": [
+   {
+    "away": "Brentford",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-25",
+    "home": "Hull City",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/tlt4uj1784549345.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133619-133602-2025": {
+  "events": [
+   {
+    "away": "Liverpool",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2026-03-21",
+    "home": "Brighton and Hove Albion",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/z49yxm1750320884.jpg",
+    "video": "https://www.youtube.com/watch?v=dsK-lpwbYZQ"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133619-133602-2026": {
+  "events": [
+   {
+    "away": "Liverpool",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Brighton and Hove Albion",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/l0lwf31784549582.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133622-133720-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133622-133720-2026": {
+  "events": [
+   {
+    "away": "Nottingham Forest",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2026-10-23",
+    "home": "Ipswich Town",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/g6038k1784549344.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133625-133600-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133625-133600-2026": {
+  "events": [
+   {
+    "away": "Fulham",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-24",
+    "home": "Coventry City",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/3qg9tg1784549348.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133632-134777-2025": {
+  "events": [
+   {
+    "away": "Newcastle United",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2026-04-12",
+    "home": "Crystal Palace",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/f2k38q1750320915.jpg",
+    "video": "https://www.youtube.com/watch?v=LJYmVywzWPs"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133632-134777-2026": {
+  "events": [
+   {
+    "away": "Newcastle United",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2026-10-25",
+    "home": "Crystal Palace",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/6lx8wa1784549344.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133635-133603-2025": {
+  "events": [
+   {
+    "away": "Sunderland",
+    "away_score": 1,
+    "competition": "English Premier League",
+    "date": "2026-03-03",
+    "home": "Leeds United",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zwszf31750320839.jpg",
+    "video": "https://www.youtube.com/watch?v=_yjYPsnn6Fk"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133635-133603-2026": {
+  "events": [
+   {
+    "away": "Sunderland",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Leeds United",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/tr3q331784549583.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133720-133622-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "133720-133622-2026": {
+  "events": [
+   {
+    "away": "Ipswich Town",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Nottingham Forest",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/2i624i1784549584.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134355-133617-2025": {
+  "events": [],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134355-133617-2026": {
+  "events": [
+   {
+    "away": "Hull City",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Brentford",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/4ey1zv1784549582.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134777-133632-2025": {
+  "events": [
+   {
+    "away": "Crystal Palace",
+    "away_score": 0,
+    "competition": "English Premier League",
+    "date": "2026-01-04",
+    "home": "Newcastle United",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/zw0xd51750320613.jpg",
+    "video": "https://www.youtube.com/watch?v=2CmOwyf28HU"
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ },
+ "134777-133632-2026": {
+  "events": [
+   {
+    "away": "Crystal Palace",
+    "away_score": null,
+    "competition": "English Premier League",
+    "date": "2027-05-23",
+    "home": "Newcastle United",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/shee3c1784549577.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T01:12:15.085159+00:00"
+ }
+}
