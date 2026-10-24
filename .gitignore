@@ -1,21 +1,23 @@
 # Environment files
 .env
-.env.development
-.env.local
-
-# Local development
-predictions_dev.db
-backend/logs/*.log
+.env.*
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[co]
 *.egg-info/
+.pytest_cache/
+.ruff_cache/
 dist/
 build/
 
-# IDE
+# Design tooling scratch output (decision mockups, review screenshots)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/build/
+
+# OS / IDE
+.DS_Store
 .vscode/
 .idea/
 *.swp
