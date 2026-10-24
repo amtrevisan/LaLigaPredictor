@@ -1,0 +1,52 @@
+name: Refresh predictions
+
+# Results land overnight and fixtures/odds move during the day; four runs cover both without
+# hammering the free data sources. A commit is only made when the exported data changed, and
+# that commit is what triggers the Netlify deploy.
+on:
+  schedule:
+    - cron: "15 5,11,17,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: predictions
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      # Completed seasons never change; keep the raw CSV cache between runs.
+      - uses: actions/cache@v4
+        with:
+          path: backend/.cache
+          key: football-data-${{ github.run_id }}
+          restore-keys: football-data-
+
+      - name: Run pipeline
+        working-directory: backend
+        run: |
+          uv sync --locked
+          uv run predictor run
+
+      - name: Commit changed data
+        run: |
+          git add frontend/public/data backend/data
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh predictions ($(date -u '+%Y-%m-%d %H:%M') UTC)"
+          git push
