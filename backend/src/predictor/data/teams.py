@@ -180,6 +180,7 @@ _TEAMS: dict[str, tuple[str, str, str | None]] = {
 # women's side). Resolved by id instead.
 _SPORTSDB_IDS: dict[str, str] = {
     "Nott'm Forest": "133720",
+    "La Coruna": "133816",
 }
 
 

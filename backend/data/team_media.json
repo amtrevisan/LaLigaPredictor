@@ -513,6 +513,24 @@
   ],
   "stadium": "Estadio Coliseum"
  },
+ "la-liga/La Coruna": {
+  "badge": "https://r2.thesportsdb.com/images/media/team/badge/62bvwv1783013156.png",
+  "fanart": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tvttqv1424484540.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/urvtpv1424484552.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xhzwb31690060115.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/kfx2i01690060272.jpg"
+  ],
+  "id": "133816",
+  "name": "Deportivo de A Coruña",
+  "photos": [
+   "https://r2.thesportsdb.com/images/media/team/fanart/tvttqv1424484540.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/urvtpv1424484552.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/xhzwb31690060115.jpg",
+   "https://r2.thesportsdb.com/images/media/team/fanart/kfx2i01690060272.jpg"
+  ],
+  "stadium": "Estadio Abanca-Riazor"
+ },
  "la-liga/Levante": {
   "badge": "https://r2.thesportsdb.com/images/media/team/badge/xwtxsx1473503739.png",
   "fanart": [
@@ -844,7 +862,7 @@
   "fanart": [],
   "id": "153855",
   "name": "Torcy",
-  "photos": null,
+  "photos": [],
   "stadium": "Stade du Frémoy"
  },
  "ligue-1/Rennes": {
