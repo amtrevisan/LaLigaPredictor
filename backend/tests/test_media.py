@@ -83,3 +83,13 @@ def test_client_gives_up_after_repeated_refusals() -> None:
     with pytest.raises(media.MediaUnavailable):
         client.get("searchteams.php", t="Arsenal")
     assert session.calls == calls, "no request should be sent once the client has given up"
+
+
+def test_pick_team_requires_the_searched_name() -> None:
+    reserve = _team("Deportivo Fabril", strCountry="Spain", strLeague="Spanish Segunda Federacion")
+    unrelated = _team("Torcy", strCountry="France", strLeague="French National 3")
+    real = _team("Deportivo La Coruña", strCountry="Spain", strLeague="Spanish La Liga")
+    la_liga = LEAGUES_BY_ID["la-liga"]
+    assert media._pick_team([reserve], la_liga, "Deportivo La Coruna") is None
+    assert media._pick_team([unrelated], LEAGUES_BY_ID["ligue-1"], "Paris SG") is None
+    assert media._pick_team([real], la_liga, "Deportivo La Coruna") is real

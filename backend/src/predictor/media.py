@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import logging
 import time
+import unicodedata
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -129,11 +130,40 @@ def _save(path: Path, data: dict) -> None:
 # The free tier returns a single search hit, which is often a women's, youth or other-sport
 # namesake ("Nottingham Forest" is also a netball club). Anything else is rejected rather than
 # shown with the wrong crest.
-_NOT_FIRST_TEAM = ("women", "femen", "femin", "frauen", "ladies", "u19", "u21", "u23", " ii", " b")
+_NOT_FIRST_TEAM = (
+    "women",
+    "femen",
+    "femin",
+    "frauen",
+    "ladies",
+    "u19",
+    "u21",
+    "u23",
+    " ii",
+    " b",
+    "fabril",
+    "castilla",
+    "atletic",
+    "promesas",
+    "reserves",
+)
+
+
+def _fold(text: str) -> str:
+    """Lower-case and strip accents, so "Coruña" matches "Coruna"."""
+    decomposed = unicodedata.normalize("NFKD", text.lower())
+    return "".join(ch for ch in decomposed if not unicodedata.combining(ch))
+
+
+def _names_match(search: str, team: dict) -> bool:
+    """Every significant word of the search term appears in the club's name or alternates."""
+    haystack = _fold(f"{team.get('strTeam', '')} {team.get('strTeamAlternate') or ''}")
+    words = [w for w in _fold(search).replace("-", " ").split() if len(w) >= 4]
+    return all(word in haystack for word in words)
 
 
 def _is_first_team(team: dict, league: League) -> bool:
-    name = f" {team.get('strTeam', '').lower()}"
+    name = f" {_fold(team.get('strTeam', ''))}"
     return (
         team.get("strSport") == "Soccer"
         and team.get("strGender") != "Female"
@@ -142,8 +172,12 @@ def _is_first_team(team: dict, league: League) -> bool:
     )
 
 
-def _pick_team(candidates: list[dict], league: League) -> dict | None:
-    valid = [t for t in candidates if _is_first_team(t, league)]
+def _pick_team(candidates: list[dict], league: League, search: str = "") -> dict | None:
+    valid = [
+        t
+        for t in candidates
+        if _is_first_team(t, league) and (not search or _names_match(search, t))
+    ]
     for team in valid:
         leagues = {team.get(f"strLeague{suffix}") for suffix in ("", "2", "3", "4", "5", "6", "7")}
         if league.sportsdb_league in leagues:
@@ -156,7 +190,8 @@ def _lookup(client: SportsDb, feed_name: str, league: League) -> dict | None:
     if info.sportsdb_id:
         teams = client.get("lookupteam.php", id=info.sportsdb_id).get("teams") or []
         return teams[0] if teams else None
-    return _pick_team(client.get("searchteams.php", t=info.search).get("teams") or [], league)
+    teams = client.get("searchteams.php", t=info.search).get("teams") or []
+    return _pick_team(teams, league, info.search)
 
 
 def resolve_teams(client: SportsDb, league: League, feed_names: list[str]) -> dict[str, dict]:
