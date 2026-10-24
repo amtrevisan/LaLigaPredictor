@@ -397,6 +397,7 @@ def run(config: RunConfig) -> dict:
                 "matches": summary["matches"],
                 "model": summary["model"],
                 "market": summary["market"],
+                "baseline": summary["baseline"],
             }
 
         payload = {
