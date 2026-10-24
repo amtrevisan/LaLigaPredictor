@@ -1,7 +1,0 @@
-numpy
-pandas
-requests
-python-dotenv
-scikit-learn
-supabase
-soccerdata
