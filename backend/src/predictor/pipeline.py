@@ -103,7 +103,7 @@ def _team(league: League, feed_name: str, registry: dict, photos: bool = True) -
     return {
         "name": info.name,
         "short": info.short,
-        "crest": media.sized(entry.get("badge"), "small"),
+        "crest": media.sized(entry.get("badge"), "small") or info.fallback_crest,
         "photos": [media.sized(url, "medium") for url in club_photos],
         "stadium": entry.get("stadium") if photos else None,
     }

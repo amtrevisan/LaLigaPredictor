@@ -17,6 +17,7 @@ class TeamInfo:
     short: str
     search: str
     sportsdb_id: str | None = None
+    fallback_crest: str | None = None
 
 
 # (feed name) -> (display name, short code, TheSportsDB search term or None to reuse the name)
@@ -182,10 +183,44 @@ _SPORTSDB_IDS: dict[str, str] = {
 }
 
 
+# Crest fallback for clubs TheSportsDB hasn't resolved (its shared free key is often rate
+# limited). API-Football's public image CDN needs no key; each id below was checked by eye.
+_FALLBACK_CREST_IDS: dict[str, int] = {
+    "Bournemouth": 35,
+    "Barcelona": 529,
+    "Betis": 543,
+    "Alaves": 542,
+    "Ath Bilbao": 531,
+    "Como": 895,
+    "Bologna": 500,
+    "Bayern Munich": 157,
+    "Dortmund": 165,
+    "Leverkusen": 168,
+    "Werder Bremen": 162,
+    "Hamburg": 175,
+    "Union Berlin": 182,
+    "M'gladbach": 163,
+    "Lille": 79,
+    "Monaco": 91,
+    "Brest": 106,
+    "Bahia": 118,
+    "Bragantino": 794,
+    "Botafogo RJ": 120,
+}
+FALLBACK_CREST_URL = "https://media.api-sports.io/football/teams/{}.png"
+
+
+def _fallback_crest(feed_name: str) -> str | None:
+    team_id = _FALLBACK_CREST_IDS.get(feed_name)
+    return FALLBACK_CREST_URL.format(team_id) if team_id else None
+
+
 def team_info(feed_name: str) -> TeamInfo:
     entry = _TEAMS.get(feed_name)
     if entry is None:
         letters = "".join(ch for ch in feed_name.upper() if ch.isalpha())
         return TeamInfo(feed_name, letters[:3] or "???", feed_name)
     name, short, search = entry
-    return TeamInfo(name, short, search or name, _SPORTSDB_IDS.get(feed_name))
+    return TeamInfo(
+        name, short, search or name, _SPORTSDB_IDS.get(feed_name), _fallback_crest(feed_name)
+    )

@@ -114,3 +114,11 @@ def test_commit_hash_alone_does_not_rewrite(tmp_path) -> None:
     path = tmp_path / "model.json"
     write_json(path, {"commit": "abc1234", "value": 1})
     assert not write_json(path, {"commit": "def5678", "value": 1})
+
+
+def test_fallback_crest_only_for_listed_clubs() -> None:
+    assert (
+        team_info("Barcelona").fallback_crest
+        == "https://media.api-sports.io/football/teams/529.png"
+    )
+    assert team_info("Arsenal").fallback_crest is None
