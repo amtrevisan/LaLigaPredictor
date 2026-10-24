@@ -5,6 +5,7 @@ import { dateTime, fill } from "@/lib/format";
 import { homeLeague, isLeagueId, type LeagueId } from "@/lib/leagues";
 import { useLastLeague } from "@/lib/useLastLeague";
 import { ArrowUpRight } from "./icons";
+import { LogoMark } from "./Logo";
 import styles from "./Shell.module.css";
 
 export const SOURCE_URL = "https://github.com/amtrevisan/LaLigaPredictor";
@@ -41,8 +42,9 @@ export function Shell() {
         {t.nav.skip}
       </a>
       <header className={styles.header}>
-        <NavLink to={`/${league}`} className={styles.wordmark} aria-label="Matchfield">
-          MATCH<span aria-hidden="true">/</span>FIELD
+        <NavLink to={`/${league}`} className={styles.wordmark} aria-label="Oddsless">
+          <LogoMark />
+          <span aria-hidden="true">ODDSLESS</span>
         </NavLink>
         <nav className={styles.tabs} aria-label={t.nav.sections}>
           {tabs.map((tab) => (
