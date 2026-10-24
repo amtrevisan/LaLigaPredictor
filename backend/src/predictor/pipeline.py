@@ -99,12 +99,12 @@ def _team(league: League, feed_name: str, registry: dict, photos: bool = True) -
     results would otherwise repeat every club's image list hundreds of times."""
     info = team_info(feed_name)
     entry = registry.get(f"{league.id}/{feed_name}", {})
-    fanart = (entry.get("fanart") or []) if photos else []
+    club_photos = (entry.get("photos") or []) if photos else []
     return {
         "name": info.name,
         "short": info.short,
         "crest": media.sized(entry.get("badge"), "small"),
-        "fanart": [media.sized(url, "medium") for url in fanart],
+        "photos": [media.sized(url, "medium") for url in club_photos],
         "stadium": entry.get("stadium") if photos else None,
     }
 
@@ -134,24 +134,26 @@ def _fixture_base(
     }
 
 
-def _meetings(events: list[dict], kickoff: pd.Timestamp) -> tuple[str | None, list[dict]]:
-    """Split TheSportsDB events into this fixture's own artwork and earlier meetings."""
+def _meetings(events: list[dict], kickoff: pd.Timestamp) -> list[dict]:
+    """Earlier meetings between the two clubs, newest first, drawn on the site as score cards.
+
+    TheSportsDB's event thumbnails are a templated crest graphic rather than match photography,
+    so they are not exported.
+    """
     day = kickoff.strftime("%Y-%m-%d")
-    poster = next((e["thumb"] for e in events if e["date"] == day and e.get("thumb")), None)
     earlier = [
         {
             "date": e["date"],
             "home": e["home"],
             "away": e["away"],
-            "score": [e["home_score"], e["away_score"]] if e["home_score"] is not None else None,
+            "score": [e["home_score"], e["away_score"]],
             "competition": e["competition"],
-            "image": media.sized(e["thumb"], "medium"),
             "video": e["video"],
         }
         for e in events
         if e["date"] < day and e["home_score"] is not None
     ]
-    return media.sized(poster, "medium"), earlier[:MEETINGS_PER_FIXTURE]
+    return earlier[:MEETINGS_PER_FIXTURE]
 
 
 def _standings(
@@ -324,6 +326,11 @@ def run(config: RunConfig) -> dict:
 
     # Media (best effort).
     registry = media._load(media.TEAM_MEDIA_PATH)
+    if config.fetch_media:
+        try:
+            registry = media.classify_photos(registry)
+        except Exception:  # noqa: BLE001 - enrichment must never fail a run
+            log.exception("photo classification failed")
     meetings_cache = media.load_meetings()
     client = media.SportsDb() if config.fetch_media else None
 
@@ -351,7 +358,7 @@ def run(config: RunConfig) -> dict:
                 {"score": [int(i), int(j)], "p": r(grid[i, j])}
                 for i, j in zip(*np.unravel_index(flat, grid.shape), strict=True)
             ]
-            item["poster"], item["meetings"] = None, []
+            item["meetings"] = []
             home_media = registry.get(f"{league.id}/{row['home']}")
             away_media = registry.get(f"{league.id}/{row['away']}")
             if home_media and away_media:
@@ -369,7 +376,7 @@ def run(config: RunConfig) -> dict:
                         if client is not None and client.available
                         else _cached_meetings(meetings_cache, home_media, away_media, season)
                     )
-                    item["poster"], item["meetings"] = _meetings(events, row["date"])
+                    item["meetings"] = _meetings(events, row["date"])
                 except Exception:  # noqa: BLE001
                     log.exception("meeting lookup failed for %s", item["id"])
             fixtures.append(item)

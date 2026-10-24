@@ -1,4 +1,4 @@
-"""Club imagery from TheSportsDB: crests, fan-art and pictures of recent meetings.
+"""Club imagery from TheSportsDB: crests, club photographs and recent meetings.
 
 Everything here is best-effort enrichment. A failed lookup leaves a fixture without images and
 never fails the pipeline. Results are cached in two committed JSON files so the free API tier
@@ -12,8 +12,10 @@ Images are hot-linked from TheSportsDB's CDN rather than copied into the reposit
 
 from __future__ import annotations
 
+import io
 import json
 import logging
+import re
 import time
 import unicodedata
 from dataclasses import asdict, dataclass, field
@@ -21,6 +23,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
+from PIL import Image
 
 from predictor.config import DATA_DIR, League
 from predictor.data.teams import team_info
@@ -48,6 +51,63 @@ class TeamMedia:
     badge: str | None
     fanart: list[str] = field(default_factory=list)
     stadium: str | None = None
+    # Subset of ``fanart`` verified as photographs; ``None`` until classified.
+    photos: list[str] | None = None
+
+
+# --- Photograph detection -----------------------------------------------------------------
+#
+# TheSportsDB fan-art mixes real photographs (stadiums, players, supporters) with designed
+# wallpapers (crests on flags, branded renders). Nothing in the API says which is which, so
+# each image is classified once and the result cached in team_media.json:
+#
+# * flat graphics put most of their pixels into a handful of colours; photographs don't;
+# * the designed, league-branded wallpapers were all uploaded from 2024 onward, and the
+#   upload time is the Unix timestamp embedded in every file name.
+#
+# Both checks have to pass. Misses err towards showing fewer images, never a crest as a photo.
+FLAT_SHARE_LIMIT = 0.4
+WALLPAPER_ERA = datetime(2024, 1, 1).timestamp()
+_UPLOADED = re.compile(r"(\d{10})\.(?:jpe?g|png)$")
+
+
+def _uploaded_at(url: str) -> float | None:
+    match = _UPLOADED.search(url)
+    return float(match.group(1)) if match else None
+
+
+def _flat_share(raw: bytes) -> float:
+    """Share of pixels held by the three most common of 32 quantised colours."""
+    image = Image.open(io.BytesIO(raw)).convert("RGB").resize((160, 90))
+    counts = sorted(image.quantize(colors=32).histogram(), reverse=True)
+    return sum(counts[:3]) / (160 * 90)
+
+
+def is_photograph(url: str, session: requests.Session) -> bool:
+    uploaded = _uploaded_at(url)
+    if uploaded is None or uploaded >= WALLPAPER_ERA:
+        return False
+    try:
+        response = session.get(f"{url}/small", timeout=20)
+        response.raise_for_status()
+        return _flat_share(response.content) < FLAT_SHARE_LIMIT
+    except (requests.RequestException, OSError) as exc:
+        log.debug("could not classify %s: %s", url, exc)
+        return False
+
+
+def classify_photos(registry: dict) -> dict:
+    """Fill in ``photos`` for clubs not classified yet. Images come from the CDN, not the
+    rate-limited API, so this is cheap after the first run."""
+    pending = [entry for entry in registry.values() if entry.get("photos") is None]
+    if not pending:
+        return registry
+    session = requests.Session()
+    for entry in pending:
+        entry["photos"] = [url for url in entry.get("fanart") or [] if is_photograph(url, session)]
+    _save(TEAM_MEDIA_PATH, registry)
+    log.info("classified fan-art for %d clubs", len(pending))
+    return registry
 
 
 @dataclass

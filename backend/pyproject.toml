@@ -10,6 +10,7 @@ dependencies = [
     "scipy>=1.13",
     "scikit-learn>=1.5",
     "requests>=2.32",
+    "pillow>=11",
 ]
 
 [project.scripts]

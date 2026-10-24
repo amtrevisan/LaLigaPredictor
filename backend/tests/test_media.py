@@ -93,3 +93,34 @@ def test_pick_team_requires_the_searched_name() -> None:
     assert media._pick_team([reserve], la_liga, "Deportivo La Coruna") is None
     assert media._pick_team([unrelated], LEAGUES_BY_ID["ligue-1"], "Paris SG") is None
     assert media._pick_team([real], la_liga, "Deportivo La Coruna") is real
+
+
+def test_upload_time_is_read_from_the_file_name() -> None:
+    url = "https://r2.thesportsdb.com/images/media/team/fanart/tuuwpy1424110617.jpg"
+    assert media._uploaded_at(url) == 1424110617
+    assert media._uploaded_at("https://example.com/no-stamp.jpg") is None
+
+
+def test_recent_uploads_are_never_treated_as_photos() -> None:
+    # 2024-11 upload: the era of league-branded wallpapers. Rejected without any download.
+    url = "https://r2.thesportsdb.com/images/media/team/fanart/v2gwen1731827710.jpg"
+    assert not media.is_photograph(url, session=None)  # type: ignore[arg-type]
+
+
+def test_flat_graphics_are_told_apart_from_photographs() -> None:
+    import io
+
+    import numpy as np
+    from PIL import Image
+
+    def png(array: np.ndarray) -> bytes:
+        buffer = io.BytesIO()
+        Image.fromarray(array.astype("uint8")).save(buffer, format="PNG")
+        return buffer.getvalue()
+
+    flat = np.zeros((90, 160, 3))
+    flat[:, :80] = (20, 40, 160)
+    flat[30:60, 60:100] = (255, 255, 255)
+    noisy = np.random.default_rng(0).integers(0, 256, size=(90, 160, 3))
+    assert media._flat_share(png(flat)) > media.FLAT_SHARE_LIMIT
+    assert media._flat_share(png(noisy)) < media.FLAT_SHARE_LIMIT
