@@ -1,0 +1,67 @@
+.figure {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 440px;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--rule-faint);
+  stroke-width: 1;
+}
+
+.diagonal {
+  stroke: var(--paper);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+.tick {
+  fill: var(--dim);
+  font-family: var(--font);
+  font-size: 10px;
+}
+
+.model {
+  fill: var(--paper);
+}
+
+.market {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1;
+}
+
+.caption {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--dim);
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatchModel,
+.swatchMarket {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+.swatchModel {
+  background: var(--paper);
+}
+
+.swatchMarket {
+  box-shadow: inset 0 0 0 1px var(--paper);
+  margin-left: var(--space-3);
+}
