@@ -22,8 +22,9 @@ export function ModelView() {
   const report = useModelReport();
   const manifest = useManifest();
 
-  if (report.isPending) return <FieldSkeleton />;
-  if (report.isError) return <ErrorState onRetry={() => void report.refetch()} />;
+  if (!report.data) {
+    return report.isError ? <ErrorState onRetry={() => void report.refetch()} /> : <FieldSkeleton />;
+  }
 
   const data = report.data;
   const overall = data.backtest.overall;
@@ -63,7 +64,7 @@ export function ModelView() {
           {fill(t.model.matches, { n: integer(overall.matches, intl) })}.
         </p>
         <div className={styles.scroll}>
-          <table className={styles.table}>
+          <table className={styles.table} aria-labelledby="performance">
             <thead>
               <tr>
                 <th scope="col">{t.model.metric}</th>
@@ -121,7 +122,7 @@ export function ModelView() {
           {t.model.byLeague}
         </h2>
         <div className={styles.scroll}>
-          <table className={styles.table}>
+          <table className={styles.table} aria-labelledby="by-league">
             <thead>
               <tr>
                 <th scope="col">{t.model.league}</th>

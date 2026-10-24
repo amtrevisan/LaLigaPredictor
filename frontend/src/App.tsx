@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router";
 import { Shell } from "@/components/Shell";
 import { ErrorState } from "@/components/States";
 import { useI18n } from "@/i18n";
@@ -24,6 +24,12 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean
   }
 }
 
+/** Remounts the boundary per route, so navigating away from a crashed view recovers. */
+function RouteBoundary({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  return <ErrorBoundary key={pathname}>{children}</ErrorBoundary>;
+}
+
 function HomeRedirect() {
   const { locale } = useI18n();
   return <Navigate to={`/${homeLeague(locale)}`} replace />;
@@ -32,7 +38,7 @@ function HomeRedirect() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ErrorBoundary>
+      <RouteBoundary>
         <Routes>
           <Route element={<Shell />}>
             <Route index element={<HomeRedirect />} />
@@ -43,7 +49,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </ErrorBoundary>
+      </RouteBoundary>
     </BrowserRouter>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Crest } from "@/components/Crest";
 import { OutcomeBar } from "@/components/OutcomeBar";
 import { SeasonBarcode } from "@/components/SeasonBarcode";
@@ -11,9 +11,15 @@ import styles from "./views.module.css";
 export function ResultsView({ data }: { data: LeagueData }) {
   const { t, intl } = useI18n();
   const [round, setRound] = useState<number | "all">("all");
-  const rounds = [...new Set(data.results.map((r) => r.round))].sort((a, b) => b - a);
-  const rows = round === "all" ? data.results : data.results.filter((r) => r.round === round);
-  const hits = data.results.filter((r) => r.correct).length;
+  const rounds = useMemo(
+    () => [...new Set(data.results.map((r) => r.round))].sort((a, b) => b - a),
+    [data.results],
+  );
+  const rows = useMemo(
+    () => (round === "all" ? data.results : data.results.filter((r) => r.round === round)),
+    [data.results, round],
+  );
+  const hits = useMemo(() => data.results.filter((r) => r.correct).length, [data.results]);
 
   return (
     <div className={styles.stack}>
@@ -58,7 +64,7 @@ export function ResultsView({ data }: { data: LeagueData }) {
             </label>
           </div>
 
-          <table className={styles.table}>
+          <table className={styles.table} aria-label={t.results.title}>
             <thead>
               <tr>
                 <th scope="col">{t.fixtures.kickoff}</th>

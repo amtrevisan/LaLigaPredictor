@@ -15,9 +15,12 @@ export function LeaguePage({ view }: { view: keyof typeof VIEWS }) {
   const league = useLeague(valid ? leagueId : undefined);
 
   if (!valid) return <NotFound />;
-  if (league.isPending) return <FieldSkeleton />;
-  if (league.isError) return <ErrorState onRetry={() => void league.refetch()} />;
+  // A failed background refetch keeps showing the data we already have.
+  if (!league.data) {
+    return league.isError ? <ErrorState onRetry={() => void league.refetch()} /> : <FieldSkeleton />;
+  }
 
   const View = VIEWS[view];
-  return <View data={league.data} />;
+  // Keyed by league so view-local state (round filter, selection) resets on a league switch.
+  return <View key={leagueId} data={league.data} />;
 }

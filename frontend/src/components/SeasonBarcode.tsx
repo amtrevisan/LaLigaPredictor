@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { useI18n } from "@/i18n";
 import { probabilityOf } from "@/lib/format";
 import type { PlayedFixture } from "@/types/data";
@@ -18,10 +19,12 @@ const GAP = 1;
  * The season as a barcode: one bar per match, height = probability the model gave to what
  * actually happened. Solid bars were called correctly, outlined bars were misses.
  */
-export function SeasonBarcode({ results, limit, height = 64, label }: Props) {
+export const SeasonBarcode = memo(function SeasonBarcode({ results, limit, height = 64, label }: Props) {
   const { t } = useI18n();
-  const ordered = [...results].sort((a, b) => a.kickoff.localeCompare(b.kickoff));
-  const shown = limit ? ordered.slice(-limit) : ordered;
+  const shown = useMemo(() => {
+    const ordered = [...results].sort((a, b) => a.kickoff.localeCompare(b.kickoff));
+    return limit ? ordered.slice(-limit) : ordered;
+  }, [results, limit]);
   const width = Math.max(shown.length * (BAR + GAP) - GAP, 1);
   const hits = shown.filter((r) => r.correct).length;
 
@@ -55,4 +58,4 @@ export function SeasonBarcode({ results, limit, height = 64, label }: Props) {
       </svg>
     </figure>
   );
-}
+});
