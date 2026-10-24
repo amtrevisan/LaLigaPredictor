@@ -2,7 +2,7 @@ import type { Messages } from "./en";
 
 const it: Messages = {
   meta: {
-    title: "Matchfield: pronostici di calcio per sei campionati",
+    title: "Oddsless: pronostici di calcio per sei campionati",
     description:
       "Probabilità di vittoria, pareggio e sconfitta per Premier League, Liga, Serie A, Bundesliga, Ligue 1 e Brasileirão, confrontate con il mercato delle scommesse.",
   },

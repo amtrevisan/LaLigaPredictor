@@ -2,7 +2,7 @@ import type { Messages } from "./en";
 
 const fr: Messages = {
   meta: {
-    title: "Matchfield : pronostics de football pour six championnats",
+    title: "Oddsless : pronostics de football pour six championnats",
     description:
       "Probabilités de victoire, nul et défaite pour la Premier League, la Liga, la Serie A, la Bundesliga, la Ligue 1 et le Brasileirão, comparées au marché des paris.",
   },

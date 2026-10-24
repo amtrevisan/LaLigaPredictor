@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { isLeagueId, type LeagueId } from "./leagues";
 
-const STORAGE_KEY = "matchfield.league";
+const STORAGE_KEY = "oddsless.league";
 
 function read(): LeagueId | undefined {
   try {

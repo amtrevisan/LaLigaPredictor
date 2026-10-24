@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { I18nContext, type I18n } from "./context";
 import { LOCALES, detectLocale, isLocale, type Locale } from "./locales";
 
-const STORAGE_KEY = "matchfield.locale";
+const STORAGE_KEY = "oddsless.locale";
 
 function initialLocale(): Locale {
   try {

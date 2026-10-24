@@ -1,6 +1,6 @@
 const en = {
   meta: {
-    title: "Matchfield: football predictions for six leagues",
+    title: "Oddsless: football predictions for six leagues",
     description:
       "Win, draw and loss probabilities for the Premier League, La Liga, Serie A, Bundesliga, Ligue 1 and Brasileirão, scored against the betting market.",
   },
