@@ -1,0 +1,27 @@
+.figure {
+  width: 100%;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 64px;
+  overflow: visible;
+}
+
+.base {
+  stroke: var(--rule-faint);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.hit {
+  fill: var(--paper);
+}
+
+.miss {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}

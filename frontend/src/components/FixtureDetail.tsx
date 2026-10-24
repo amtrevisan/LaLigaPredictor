@@ -1,0 +1,216 @@
+import { useI18n } from "@/i18n";
+import { decimal, fill, integer, kickoffDay, kickoffTime, longDate, percent, points } from "@/lib/format";
+import type { Meeting, Team, Triple, UpcomingFixture } from "@/types/data";
+import { Crest } from "./Crest";
+import { DitherImage } from "./DitherImage";
+import { ArrowUpRight } from "./icons";
+import { OutcomeBar } from "./OutcomeBar";
+import styles from "./FixtureDetail.module.css";
+
+/**
+ * One club photograph per fixture, stable across renders. TheSportsDB's first fan-art slot is
+ * usually a crest illustration, so it is only used when it is the sole image.
+ */
+function pickPhoto(team: Team, seed: string): string | null {
+  const pool = team.fanart.length > 1 ? team.fanart.slice(1) : team.fanart;
+  if (pool.length === 0) return null;
+  let hash = 0;
+  for (const ch of seed) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+  return pool[hash % pool.length] ?? null;
+}
+
+function ProbabilityRow({ label, probs }: { label: string; probs: Triple }) {
+  const { intl } = useI18n();
+  return (
+    <div className={styles.probRow}>
+      <span className={styles.rowLabel}>{label}</span>
+      <OutcomeBar probs={probs} orientation="horizontal" />
+      <span className={styles.triple}>
+        {probs.map((p, i) => (
+          <span key={i}>{percent(p, intl)}</span>
+        ))}
+      </span>
+    </div>
+  );
+}
+
+function MeetingTile({ meeting }: { meeting: Meeting }) {
+  const { t, intl } = useI18n();
+  const score = meeting.score ? `${meeting.score[0]}–${meeting.score[1]}` : "–";
+  const caption = (
+    <figcaption className={styles.caption}>
+      <span className={styles.captionScore}>
+        {meeting.home} {score} {meeting.away}
+      </span>
+      <span>
+        {longDate(meeting.date, intl)}
+        {meeting.competition ? ` · ${meeting.competition}` : ""}
+      </span>
+    </figcaption>
+  );
+  const image = meeting.image ? (
+    <DitherImage src={meeting.image} alt={`${meeting.home} ${score} ${meeting.away}`} />
+  ) : (
+    <span className={styles.noImage} aria-hidden="true">
+      {score}
+    </span>
+  );
+  return (
+    <figure className={styles.tile}>
+      {meeting.video ? (
+        <a href={meeting.video} rel="noreferrer" target="_blank" className={styles.tileLink}>
+          {image}
+          <span className={styles.play}>
+            {t.fixtures.highlights} <ArrowUpRight />
+          </span>
+        </a>
+      ) : (
+        image
+      )}
+      {caption}
+    </figure>
+  );
+}
+
+export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: string }) {
+  const { t, intl } = useI18n();
+  const gap = fixture.market ? fixture.probs.map((p, i) => p - (fixture.market?.[i] ?? 0)) : null;
+  const topScore = fixture.scorelines[0]?.p ?? 1;
+  const photos = [pickPhoto(fixture.home, fixture.id), pickPhoto(fixture.away, fixture.id)];
+
+  return (
+    <section id={id} className={styles.detail} aria-live="polite" aria-labelledby={`${id}-title`}>
+      <header className={styles.head}>
+        <h2 id={`${id}-title`} className={styles.title}>
+          <span className={styles.side}>
+            <Crest team={fixture.home} size={56} />
+            {fixture.home.name}
+          </span>
+          <span className={styles.versus} aria-hidden="true">
+            –
+          </span>
+          <span className={`${styles.side} ${styles.away}`}>
+            {fixture.away.name}
+            <Crest team={fixture.away} size={56} />
+          </span>
+        </h2>
+        <p className={styles.sub}>
+          {kickoffDay(fixture.kickoff, intl)} · {kickoffTime(fixture.kickoff, intl)}
+          {fixture.home.stadium ? ` · ${fixture.home.stadium}` : ""}
+          {" · "}
+          {fill(t.fixtures.round, { n: fixture.round })}
+        </p>
+      </header>
+
+      {photos.some(Boolean) && (
+        <div className={styles.photos}>
+          {[fixture.home, fixture.away].map((team, i) => {
+            const photo = photos[i];
+            return photo ? (
+              <figure key={team.name} className={styles.photo}>
+                <DitherImage src={photo} alt={team.name} />
+                <figcaption className={styles.caption}>
+                  <span className={styles.captionScore}>{team.name}</span>
+                  {team.stadium && <span>{team.stadium}</span>}
+                </figcaption>
+              </figure>
+            ) : (
+              <span key={team.name} />
+            );
+          })}
+        </div>
+      )}
+
+      <div className={styles.grid}>
+        <div className={styles.block}>
+          <div className={styles.columnsHead} aria-hidden="true">
+            <span />
+            <span />
+            <span className={styles.triple}>
+              <span>{t.outcome.short.H}</span>
+              <span>{t.outcome.short.D}</span>
+              <span>{t.outcome.short.A}</span>
+            </span>
+          </div>
+          <ProbabilityRow label={t.fixtures.model} probs={fixture.probs} />
+          {fixture.market && <ProbabilityRow label={t.fixtures.market} probs={fixture.market} />}
+          {gap && (
+            <div className={styles.probRow}>
+              <span className={styles.rowLabel}>{t.fixtures.gap}</span>
+              <span />
+              <span className={styles.triple}>
+                {gap.map((g, i) => (
+                  <span key={i}>{points(g, intl)}</span>
+                ))}
+              </span>
+            </div>
+          )}
+          <dl className={styles.facts}>
+            {fixture.components.classifier && (
+              <div>
+                <dt>{t.fixtures.classifier}</dt>
+                <dd>{fixture.components.classifier.map((p) => percent(p, intl)).join(" · ")}</dd>
+              </div>
+            )}
+            {fixture.components.goals && (
+              <div>
+                <dt>{t.fixtures.goals}</dt>
+                <dd>{fixture.components.goals.map((p) => percent(p, intl)).join(" · ")}</dd>
+              </div>
+            )}
+            {fixture.xg && (
+              <div>
+                <dt>{t.fixtures.xg}</dt>
+                <dd>
+                  {decimal(fixture.xg[0], intl, 2)} – {decimal(fixture.xg[1], intl, 2)}
+                </dd>
+              </div>
+            )}
+            {fixture.elo && (
+              <div>
+                <dt>{t.fixtures.elo}</dt>
+                <dd>
+                  {integer(fixture.elo[0], intl)} – {integer(fixture.elo[1], intl)}
+                </dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        <div className={styles.block}>
+          <h3 className={styles.blockTitle}>{t.fixtures.likeliest}</h3>
+          <ol className={styles.scores}>
+            {fixture.scorelines.map(({ score, p }) => (
+              <li key={score.join("-")}>
+                <span className={styles.score}>
+                  {score[0]}–{score[1]}
+                </span>
+                <span className={styles.scoreBar} style={{ width: `${(p / topScore) * 100}%` }} />
+                <span>{percent(p, intl, 1)}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <div className={styles.media}>
+        <h3 className={styles.blockTitle}>{t.fixtures.meetings}</h3>
+        <div className={styles.tiles}>
+          {fixture.poster && (
+            <figure className={styles.tile}>
+              <DitherImage src={fixture.poster} alt={`${t.fixtures.preview}: ${fixture.home.name} – ${fixture.away.name}`} />
+              <figcaption className={styles.caption}>
+                <span className={styles.captionScore}>{t.fixtures.preview}</span>
+                <span>{longDate(fixture.kickoff, intl)}</span>
+              </figcaption>
+            </figure>
+          )}
+          {fixture.meetings.map((meeting) => (
+            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} />
+          ))}
+        </div>
+        {fixture.meetings.length === 0 && <p className={styles.note}>{t.fixtures.noMeetings}</p>}
+      </div>
+    </section>
+  );
+}

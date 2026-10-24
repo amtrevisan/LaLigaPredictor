@@ -1,0 +1,73 @@
+.rail {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--rule);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.title span {
+  color: var(--dim);
+  font-weight: 400;
+}
+
+.table th,
+.table td {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--rule-faint);
+  text-align: right;
+  font-weight: 400;
+}
+
+.table thead th {
+  color: var(--dim);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.table tbody th {
+  text-align: left;
+  color: var(--dim);
+}
+
+.table td:nth-child(2) {
+  font-weight: 700;
+  font-size: var(--step-2);
+}
+
+.note {
+  color: var(--dim);
+  font-size: var(--step--1);
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .rail {
+    padding-left: 0;
+    padding-top: var(--space-5);
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
