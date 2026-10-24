@@ -24,9 +24,7 @@ MAIN_FIXTURES_URL = f"{BASE_URL}/fixtures.csv"
 EXTRA_FIXTURES_URL = f"{BASE_URL}/new_league_fixtures.csv"
 
 _session = requests.Session()
-_session.headers["User-Agent"] = (
-    "predictor/2.0 (+https://github.com/AlexMoralesDev/LaLigaPredictor)"
-)
+_session.headers["User-Agent"] = "predictor/2.0 (+https://github.com/amtrevisan/LaLigaPredictor)"
 
 
 def season_code(season: int) -> str:

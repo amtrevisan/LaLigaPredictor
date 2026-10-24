@@ -6,7 +6,7 @@ import { homeLeague, isLeagueId, type LeagueId } from "@/lib/leagues";
 import { useLastLeague } from "@/lib/useLastLeague";
 import styles from "./Shell.module.css";
 
-export const SOURCE_URL = "https://github.com/AlexMoralesDev/LaLigaPredictor";
+export const SOURCE_URL = "https://github.com/amtrevisan/LaLigaPredictor";
 
 export function Shell() {
   const { t, intl, locale, setLocale } = useI18n();
