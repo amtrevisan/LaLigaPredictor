@@ -94,16 +94,18 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
 
 
-def _team(league: League, feed_name: str, registry: dict) -> dict:
+def _team(league: League, feed_name: str, registry: dict, photos: bool = True) -> dict:
+    """Club as exported. Photography is only needed for upcoming fixtures; a full season of
+    results would otherwise repeat every club's image list hundreds of times."""
     info = team_info(feed_name)
     entry = registry.get(f"{league.id}/{feed_name}", {})
-    fanart = entry.get("fanart") or []
+    fanart = (entry.get("fanart") or []) if photos else []
     return {
         "name": info.name,
         "short": info.short,
         "crest": media.sized(entry.get("badge"), "small"),
         "fanart": [media.sized(url, "medium") for url in fanart],
-        "stadium": entry.get("stadium"),
+        "stadium": entry.get("stadium") if photos else None,
     }
 
 
@@ -111,7 +113,9 @@ def _outcome(home_goals: float, away_goals: float) -> str:
     return "H" if home_goals > away_goals else "D" if home_goals == away_goals else "A"
 
 
-def _fixture_base(league: League, row: pd.Series, feature_row: pd.Series, registry: dict) -> dict:
+def _fixture_base(
+    league: League, row: pd.Series, feature_row: pd.Series, registry: dict, photos: bool = True
+) -> dict:
     probs = row[["p_h", "p_d", "p_a"]].to_numpy(dtype=float)
     odds = row[ODDS_COLS].to_numpy(dtype=float)
     market = metrics.implied_probabilities(odds[None, :])[0] if np.isfinite(odds).all() else None
@@ -119,8 +123,8 @@ def _fixture_base(league: League, row: pd.Series, feature_row: pd.Series, regist
         "id": f"{league.id}-{row['date']:%Y%m%d}-{_slug(row['home'])}-{_slug(row['away'])}",
         "round": int(feature_row["round"]),
         "kickoff": iso(row["date"]),
-        "home": _team(league, row["home"], registry),
-        "away": _team(league, row["away"], registry),
+        "home": _team(league, row["home"], registry, photos),
+        "away": _team(league, row["away"], registry, photos),
         "probs": triple(probs),
         "pick": OUTCOMES[int(np.argmax(probs))],
         "market": triple(market),
@@ -376,7 +380,7 @@ def run(config: RunConfig) -> dict:
         results = []
         league_walk = walk[(walk["league"] == league.id) & (walk["season"] == season)]
         for idx, row in league_walk.sort_values("date", ascending=False).iterrows():
-            item = _fixture_base(league, row, features.loc[idx], registry)
+            item = _fixture_base(league, row, features.loc[idx], registry, photos=False)
             outcome = _outcome(row["home_goals"], row["away_goals"])
             item["result"] = {
                 "score": [int(row["home_goals"]), int(row["away_goals"])],
