@@ -11,7 +11,7 @@ __pycache__/
 dist/
 build/
 
-# Design tooling scratch output (decision mockups, review screenshots)
+# Design tooling scratch output and local state
 .impeccable/mocks/
 .impeccable/review/
 .impeccable/build/
@@ -22,3 +22,6 @@ build/
 .idea/
 *.swp
 *.swo
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+.impeccable/questions/
