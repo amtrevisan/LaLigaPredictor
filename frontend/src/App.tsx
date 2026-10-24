@@ -1,70 +1,49 @@
-import React, { Component } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import TestPage from "./pages/TestPage";
-import MinimalIndex from "./pages/MinimalIndex";
-import NotFound from "./pages/NotFound";
+import { Component, type ErrorInfo, type ReactNode } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { Shell } from "@/components/Shell";
+import { ErrorState } from "@/components/States";
+import { useI18n } from "@/i18n";
+import { homeLeague } from "@/lib/leagues";
+import { LeaguePage } from "@/pages/LeaguePage";
+import { NotFound } from "@/pages/NotFound";
+import { ModelView } from "@/views/ModelView";
 
-const queryClient = new QueryClient();
+class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
 
-const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={
-              <ErrorBoundary>
-                <Index />
-              </ErrorBoundary>
-            } />
-            <Route path="/test" element={<TestPage />} />
-            <Route path="/full" element={
-              <ErrorBoundary>
-                <Index />
-              </ErrorBoundary>
-            } />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-};
-
-// Simple error boundary component
-interface ErrorBoundaryState {
-  hasError: boolean;
-}
-
-class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, ErrorBoundaryState> {
-  constructor(props: React.PropsWithChildren<{}>) {
-    super(props);
-    this.state = { hasError: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("Error boundary caught an error:", error, errorInfo);
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error("Unhandled render error", error, info.componentStack);
   }
 
   render() {
-    if (this.state.hasError) {
-      return <div>Something went wrong. Please refresh the page.</div>;
-    }
-
-    return this.props.children;
+    return this.state.failed ? <ErrorState onRetry={() => window.location.reload()} /> : this.props.children;
   }
 }
 
-export default App;
+function HomeRedirect() {
+  const { locale } = useI18n();
+  return <Navigate to={`/${homeLeague(locale)}`} replace />;
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ErrorBoundary>
+        <Routes>
+          <Route element={<Shell />}>
+            <Route index element={<HomeRedirect />} />
+            <Route path="model" element={<ModelView />} />
+            <Route path=":leagueId" element={<LeaguePage view="fixtures" />} />
+            <Route path=":leagueId/results" element={<LeaguePage view="results" />} />
+            <Route path=":leagueId/table" element={<LeaguePage view="table" />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </ErrorBoundary>
+    </BrowserRouter>
+  );
+}
