@@ -13,7 +13,7 @@ export const SOURCE_URL = "https://github.com/amtrevisan/oddsless";
 const AUTHOR = "Alex Morales Trevisan";
 const AUTHOR_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/alex-morales-dev/" },
-  { label: "GitHub", href: "https://github.com/AlexMoralesDev" },
+  { label: "GitHub", href: "https://github.com/amtrevisan" },
   { label: "YouTube", href: "https://www.youtube.com/@alexmoralesdev" },
   { label: "Instagram", href: "https://www.instagram.com/alexmoralesdev" },
   { label: "TikTok", href: "https://www.tiktok.com/@alexmoralesdev" },

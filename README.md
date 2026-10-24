@@ -118,5 +118,5 @@ Probabilities are model estimates, not betting advice.
 
 Designed and built by **Alex Morales Trevisan** ·
 [LinkedIn](https://www.linkedin.com/in/alex-morales-dev/) ·
-[GitHub](https://github.com/AlexMoralesDev) ·
+[GitHub](https://github.com/amtrevisan) ·
 [YouTube](https://www.youtube.com/@alexmoralesdev)
