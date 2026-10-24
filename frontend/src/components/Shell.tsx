@@ -4,9 +4,19 @@ import { useManifest } from "@/lib/api";
 import { dateTime, fill } from "@/lib/format";
 import { homeLeague, isLeagueId, type LeagueId } from "@/lib/leagues";
 import { useLastLeague } from "@/lib/useLastLeague";
+import { ArrowUpRight } from "./icons";
 import styles from "./Shell.module.css";
 
 export const SOURCE_URL = "https://github.com/amtrevisan/LaLigaPredictor";
+
+const AUTHOR = "Alex Morales Trevisan";
+const AUTHOR_LINKS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/alex-morales-dev/" },
+  { label: "GitHub", href: "https://github.com/AlexMoralesDev" },
+  { label: "YouTube", href: "https://www.youtube.com/@alexmoralesdev" },
+  { label: "Instagram", href: "https://www.instagram.com/alexmoralesdev" },
+  { label: "TikTok", href: "https://www.tiktok.com/@alexmoralesdev" },
+];
 
 export function Shell() {
   const { t, intl, locale, setLocale } = useI18n();
@@ -80,7 +90,23 @@ export function Shell() {
       </main>
 
       <footer className={styles.footer}>
-        <p>
+        <div className={styles.signature}>
+          <p className={styles.author}>
+            <span>{t.footer.builtBy}</span>
+            <strong>{AUTHOR}</strong>
+          </p>
+          <ul className={styles.social} aria-label={AUTHOR}>
+            {AUTHOR_LINKS.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} rel="noreferrer me" target="_blank">
+                  {link.label}
+                  <ArrowUpRight />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className={styles.credits}>
           <a href="https://www.football-data.co.uk" rel="noreferrer">
             {t.footer.data}
           </a>

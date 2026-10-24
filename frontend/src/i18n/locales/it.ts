@@ -153,6 +153,7 @@ const it: Messages = {
     home: "Torna alle partite",
   },
   footer: {
+    builtBy: "Progettato e sviluppato da",
     data: "Dati: football-data.co.uk",
     images: "Immagini: TheSportsDB",
     source: "Codice sorgente",

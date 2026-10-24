@@ -151,6 +151,7 @@ const en = {
     home: "Back to fixtures",
   },
   footer: {
+    builtBy: "Designed and built by",
     data: "Data: football-data.co.uk",
     images: "Images: TheSportsDB",
     source: "Source code",

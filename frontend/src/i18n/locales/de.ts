@@ -153,6 +153,7 @@ const de: Messages = {
     home: "Zurück zu den Spielen",
   },
   footer: {
+    builtBy: "Entworfen und entwickelt von",
     data: "Daten: football-data.co.uk",
     images: "Bilder: TheSportsDB",
     source: "Quellcode",
