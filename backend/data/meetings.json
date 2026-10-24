@@ -996,6 +996,25 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "133729-133816-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "133729-133816-2026": {
+  "events": [
+   {
+    "away": "Deportivo de A Coruña",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2026-10-24",
+    "home": "Atlético Madrid",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/m0mawa1784904535.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
  "133730-133735-2025": {
   "events": [
    {
@@ -1134,6 +1153,36 @@
    }
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "133816-133729-2025": {
+  "events": [
+   {
+    "away": "Atlético Madrid",
+    "away_score": 1,
+    "competition": "Copa del Rey",
+    "date": "2026-01-13",
+    "home": "Deportivo de La Coruña",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/b2f0sp1768122230.jpg",
+    "video": "https://www.youtube.com/watch?v=wG3xHeKyHiA"
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "133816-133729-2026": {
+  "events": [
+   {
+    "away": "Atlético Madrid",
+    "away_score": null,
+    "competition": "Spanish La Liga",
+    "date": "2027-01-24",
+    "home": "Deportivo de A Coruña",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/d2axn01784904703.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
  },
  "133818-134782-2025": {
   "events": [],
@@ -1301,6 +1350,164 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "134280-134297-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134280-134297-2026": {
+  "events": [
+   {
+    "away": "Athletico Paranaense",
+    "away_score": 0,
+    "competition": "Copa do Brasil",
+    "date": "2026-08-06",
+    "home": "Vitória",
+    "home_score": 4,
+    "thumb": "",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134282-134284-2025": {
+  "events": [
+   {
+    "away": "Corinthians",
+    "away_score": 2,
+    "competition": "Copa do Brasil",
+    "date": "2025-12-21",
+    "home": "Vasco da Gama",
+    "home_score": 1,
+    "thumb": "",
+    "video": "https://www.youtube.com/watch?v=V5EFvSHaXvY"
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134282-134284-2026": {
+  "events": [
+   {
+    "away": "Corinthians",
+    "away_score": null,
+    "competition": "Brazilian Serie A",
+    "date": "2026-10-24",
+    "home": "Vasco da Gama",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/hoykd01769684059.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134284-134282-2025": {
+  "events": [
+   {
+    "away": "Vasco da Gama",
+    "away_score": 0,
+    "competition": "Copa do Brasil",
+    "date": "2025-12-18",
+    "home": "Corinthians",
+    "home_score": 0,
+    "thumb": "",
+    "video": "https://www.youtube.com/watch?v=f3nd1oAn7qg"
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134284-134282-2026": {
+  "events": [
+   {
+    "away": "Vasco da Gama",
+    "away_score": 0,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-26",
+    "home": "Corinthians",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/jpdqto1769682918.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134287-134299-2025": {
+  "events": [
+   {
+    "away": "Atlético Mineiro",
+    "away_score": 1,
+    "competition": "Copa do Brasil",
+    "date": "2025-08-01",
+    "home": "Flamengo",
+    "home_score": 0,
+    "thumb": "",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134287-134299-2026": {
+  "events": [
+   {
+    "away": "Atlético Mineiro",
+    "away_score": null,
+    "competition": "Brazilian Serie A",
+    "date": "2026-10-26",
+    "home": "Flamengo",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/kk9fs91769684040.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134288-134298-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134288-134298-2026": {
+  "events": [
+   {
+    "away": "Coritiba",
+    "away_score": 0,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-26",
+    "home": "Grêmio",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/1jh3gc1769682943.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134291-141181-2025": {
+  "events": [
+   {
+    "away": "Mirassol",
+    "away_score": 1,
+    "competition": "Brazilian Campeonato Paulista",
+    "date": "2025-02-05",
+    "home": "São Paulo",
+    "home_score": 4,
+    "thumb": "",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134291-141181-2026": {
+  "events": [
+   {
+    "away": "Mirassol",
+    "away_score": 0,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-26",
+    "home": "São Paulo",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/pzidm91769682969.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
  "134294-137818-2025": {
   "events": [],
   "fetched": "2026-10-24T01:59:27.928935+00:00"
@@ -1319,6 +1526,93 @@
    }
   ],
   "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "134296-134464-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134296-134464-2026": {
+  "events": [
+   {
+    "away": "Chapecoense",
+    "away_score": 1,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-26",
+    "home": "Fluminense",
+    "home_score": 2,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/cy0ydh1769682940.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134297-134280-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134297-134280-2026": {
+  "events": [
+   {
+    "away": "Vitória",
+    "away_score": 0,
+    "competition": "Copa do Brasil",
+    "date": "2026-08-04",
+    "home": "Athletico Paranaense",
+    "home_score": 2,
+    "thumb": "",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134298-134288-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134298-134288-2026": {
+  "events": [
+   {
+    "away": "Grêmio",
+    "away_score": null,
+    "competition": "Brazilian Serie A",
+    "date": "2026-10-26",
+    "home": "Coritiba",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/08m1631769684015.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134299-134287-2025": {
+  "events": [
+   {
+    "away": "Flamengo",
+    "away_score": 1,
+    "competition": "Brazilian Serie A",
+    "date": "2025-11-26",
+    "home": "Atlético Mineiro",
+    "home_score": 1,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/9aggfm1764434169.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134299-134287-2026": {
+  "events": [
+   {
+    "away": "Flamengo",
+    "away_score": 4,
+    "competition": "Brazilian Serie A",
+    "date": "2026-04-26",
+    "home": "Atlético Mineiro",
+    "home_score": 0,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/ndmvt81769682903.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
  },
  "134355-133617-2025": {
   "events": [],
@@ -1368,6 +1662,25 @@
    }
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
+ },
+ "134464-134296-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "134464-134296-2026": {
+  "events": [
+   {
+    "away": "Fluminense",
+    "away_score": null,
+    "competition": "Brazilian Serie A",
+    "date": "2026-10-24",
+    "home": "Chapecoense",
+    "home_score": null,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/kjzxz41769683993.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
  },
  "134695-138411-2025": {
   "events": [],
@@ -1565,6 +1878,10 @@
   ],
   "fetched": "2026-10-24T01:40:30.804658+00:00"
  },
+ "137818-134294-2025": {
+  "events": [],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
  "137818-134294-2026": {
   "events": [
    {
@@ -1598,6 +1915,36 @@
    }
   ],
   "fetched": "2026-10-24T01:59:27.928935+00:00"
+ },
+ "141181-134291-2025": {
+  "events": [
+   {
+    "away": "São Paulo",
+    "away_score": 0,
+    "competition": "Brazilian Serie A",
+    "date": "2025-10-19",
+    "home": "Mirassol",
+    "home_score": 3,
+    "thumb": "https://r2.thesportsdb.com/images/media/event/thumb/73y3m81745579094.jpg",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
+ },
+ "141181-134291-2026": {
+  "events": [
+   {
+    "away": "São Paulo",
+    "away_score": 0,
+    "competition": "Brazilian Campeonato Paulista",
+    "date": "2026-01-11",
+    "home": "Mirassol",
+    "home_score": 3,
+    "thumb": "",
+    "video": null
+   }
+  ],
+  "fetched": "2026-10-24T09:31:24.389427+00:00"
  },
  "153855-133713-2025": {
   "events": [],
