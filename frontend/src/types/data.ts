@@ -41,8 +41,8 @@ export interface Team {
   name: string;
   short: string;
   crest: string | null;
-  /** Club photography (stadium, squad, fans), possibly empty. */
-  fanart: string[];
+  /** Verified club photographs (stadium, players, supporters); often empty. */
+  photos: string[];
   stadium: string | null;
 }
 
@@ -50,9 +50,8 @@ export interface Meeting {
   date: string;
   home: string;
   away: string;
-  score: [number, number] | null;
+  score: [number, number];
   competition: string | null;
-  image: string | null;
   video: string | null;
 }
 
@@ -72,7 +71,6 @@ export interface Fixture {
 
 export interface UpcomingFixture extends Fixture {
   scorelines: { score: [number, number]; p: number }[];
-  poster: string | null;
   meetings: Meeting[];
 }
 

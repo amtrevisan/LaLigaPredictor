@@ -8,7 +8,7 @@ const team = (name: string) => ({
   name,
   short: name.slice(0, 3).toUpperCase(),
   crest: null,
-  fanart: [],
+  photos: [],
   stadium: null,
 });
 
@@ -25,7 +25,6 @@ const fixture = (id: string, home: string, away: string): UpcomingFixture => ({
   components: { classifier: null, goals: null },
   elo: [1760, 1674],
   scorelines: [],
-  poster: null,
   meetings: [],
 });
 

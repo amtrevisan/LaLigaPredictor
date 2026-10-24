@@ -8,16 +8,12 @@ import { ArrowUpRight } from "./icons";
 import { OutcomeBar } from "./OutcomeBar";
 import styles from "./FixtureDetail.module.css";
 
-/**
- * One club photograph per fixture, stable across renders. TheSportsDB's first fan-art slot is
- * usually a crest illustration, so it is only used when it is the sole image.
- */
+/** One club photograph per fixture, stable across renders. */
 function pickPhoto(team: Team, seed: string): string | null {
-  const pool = team.fanart.length > 1 ? team.fanart.slice(1) : team.fanart;
-  if (pool.length === 0) return null;
+  if (team.photos.length === 0) return null;
   let hash = 0;
   for (const ch of seed) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
-  return pool[hash % pool.length] ?? null;
+  return team.photos[hash % team.photos.length] ?? null;
 }
 
 function ProbabilityRow({ label, probs }: { label: string; probs: Triple }) {
@@ -45,50 +41,33 @@ function safeHttps(url: string | null): string | null {
   }
 }
 
-function MeetingTile({ meeting }: { meeting: Meeting }) {
+/** A past meeting drawn in the site's own terms: the score is the picture. */
+function MeetingCard({ meeting }: { meeting: Meeting }) {
   const { t, intl } = useI18n();
-  const score = meeting.score ? `${meeting.score[0]}–${meeting.score[1]}` : "–";
-  const caption = (
-    <figcaption className={styles.caption}>
-      <span className={styles.captionScore}>
-        {meeting.home} {score} {meeting.away}
-      </span>
-      <span>
-        {longDate(meeting.date, intl)}
-        {meeting.competition ? ` · ${meeting.competition}` : ""}
-      </span>
-    </figcaption>
-  );
-  const placeholder = (
-    <span className={styles.noImage} aria-hidden="true">
-      {score}
-    </span>
-  );
-  // The caption carries the facts, so the image itself is decorative.
-  const image = meeting.image ? (
-    <DitherImage src={meeting.image} alt="" fallback={placeholder} />
-  ) : (
-    placeholder
-  );
   const video = safeHttps(meeting.video);
   return (
-    <figure className={styles.tile}>
-      {video ? (
-        <a href={video} rel="noreferrer" target="_blank" className={styles.tileLink}>
-          {image}
-          <span className={styles.play}>
-            {t.fixtures.highlights} <ArrowUpRight />
-            <span className="visually-hidden">
-              {" "}
-              ({meeting.home} {score} {meeting.away})
-            </span>
+    <li className={styles.card}>
+      <p className={styles.cardMeta}>
+        {longDate(meeting.date, intl)}
+        {meeting.competition ? ` · ${meeting.competition}` : ""}
+      </p>
+      <p className={styles.cardScore}>
+        <span className={styles.cardTeam}>{meeting.home}</span>
+        <b>
+          {meeting.score[0]}–{meeting.score[1]}
+        </b>
+        <span className={styles.cardTeam}>{meeting.away}</span>
+      </p>
+      {video && (
+        <a href={video} rel="noreferrer" target="_blank" className={styles.play}>
+          {t.fixtures.highlights} <ArrowUpRight />
+          <span className="visually-hidden">
+            {" "}
+            ({meeting.home} {meeting.score[0]}–{meeting.score[1]} {meeting.away})
           </span>
         </a>
-      ) : (
-        image
       )}
-      {caption}
-    </figure>
+    </li>
   );
 }
 
@@ -106,28 +85,11 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
   }, []);
   const gap = fixture.market ? fixture.probs.map((p, i) => p - (fixture.market?.[i] ?? 0)) : null;
   const topScore = fixture.scorelines[0]?.p ?? 1;
-  // Club imagery either side of this match's own artwork, when each exists.
-  const band = [
-    ...[fixture.home].flatMap((team) => {
-      const src = pickPhoto(team, fixture.id);
-      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null, club: true }] : [];
-    }),
-    ...(fixture.poster
-      ? [
-          {
-            key: "poster",
-            src: fixture.poster,
-            title: t.fixtures.preview,
-            detail: longDate(fixture.kickoff, intl),
-            club: false,
-          },
-        ]
-      : []),
-    ...[fixture.away].flatMap((team) => {
-      const src = pickPhoto(team, fixture.id);
-      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null, club: true }] : [];
-    }),
-  ];
+  // Verified club photographs only; a club without one simply has no slot.
+  const band = [fixture.home, fixture.away].flatMap((team) => {
+    const src = pickPhoto(team, fixture.id);
+    return src ? [{ key: team.name, src, title: team.name }] : [];
+  });
 
   return (
     <section id={id} className={styles.detail} aria-labelledby={`${id}-title`}>
@@ -160,14 +122,11 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
               <DitherImage
                 src={item.src}
                 alt=""
-                // Only club colour belongs on the page: TheSportsDB's templated match artwork
-                // stays 1-bit unless pointed at.
-                revealed={revealed && item.club}
+                revealed={revealed}
                 fallback={<span className={styles.noImage} />}
               />
               <figcaption className={styles.caption}>
                 <span className={styles.captionScore}>{item.title}</span>
-                {item.detail && <span>{item.detail}</span>}
               </figcaption>
             </figure>
           ))}
@@ -248,11 +207,13 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
 
       <div className={styles.media}>
         <h3 className={styles.blockTitle}>{t.fixtures.meetings}</h3>
-        <div className={styles.tiles}>
-          {fixture.meetings.map((meeting) => (
-            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} />
-          ))}
-        </div>
+        {fixture.meetings.length > 0 && (
+          <ol className={styles.cards}>
+            {fixture.meetings.map((meeting) => (
+              <MeetingCard key={`${meeting.date}-${meeting.home}`} meeting={meeting} />
+            ))}
+          </ol>
+        )}
         {fixture.meetings.length === 0 && <p className={styles.note}>{t.fixtures.noMeetings}</p>}
       </div>
     </section>

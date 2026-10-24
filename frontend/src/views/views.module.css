@@ -110,7 +110,7 @@
 }
 
 .table tbody tr:hover {
-  background: #111;
+  background: var(--rule-faint);
 }
 
 .caption {
