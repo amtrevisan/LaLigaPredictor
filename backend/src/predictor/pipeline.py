@@ -102,7 +102,7 @@ def _team(league: League, feed_name: str, registry: dict) -> dict:
         "name": info.name,
         "short": info.short,
         "crest": media.sized(entry.get("badge"), "small"),
-        "fanart": media.sized(fanart[0], "medium") if fanart else None,
+        "fanart": [media.sized(url, "medium") for url in fanart],
         "stadium": entry.get("stadium"),
     }
 
@@ -357,13 +357,16 @@ def run(config: RunConfig) -> dict:
                             season,
                             now.to_pydatetime(),
                         )
-                        if client is not None
+                        if client is not None and client.available
                         else _cached_meetings(meetings_cache, home_media, away_media, season)
                     )
                     item["poster"], item["meetings"] = _meetings(events, row["date"])
                 except Exception:  # noqa: BLE001
                     log.exception("meeting lookup failed for %s", item["id"])
             fixtures.append(item)
+        if client is not None:
+            # Persist per league so an interrupted run keeps the lookups it already paid for.
+            media.save_meetings(meetings_cache)
 
         results = []
         league_walk = walk[(walk["league"] == league.id) & (walk["season"] == season)]
@@ -415,8 +418,6 @@ def run(config: RunConfig) -> dict:
                 "record": record,
             }
         )
-    if client is not None:
-        media.save_meetings(meetings_cache)
 
     model_payload = {
         "schemaVersion": SCHEMA_VERSION,
