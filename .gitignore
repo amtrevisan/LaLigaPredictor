@@ -15,6 +15,9 @@ build/
 .impeccable/mocks/
 .impeccable/review/
 .impeccable/build/
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+.impeccable/questions/
 
 # OS / IDE
 .DS_Store
@@ -22,6 +25,3 @@ build/
 .idea/
 *.swp
 *.swo
-.impeccable/hook.cache.json
-.impeccable/config.local.json
-.impeccable/questions/
