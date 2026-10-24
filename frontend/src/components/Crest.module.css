@@ -1,0 +1,15 @@
+.crest {
+  object-fit: contain;
+  flex: none;
+}
+
+.fallback {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 1px currentColor;
+  font-size: 9px;
+  font-weight: 700;
+  font-stretch: var(--dense);
+  letter-spacing: 0.02em;
+}
