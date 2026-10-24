@@ -31,7 +31,7 @@ from predictor.config import BACKTEST_SEASONS, LEAGUES, LEAGUES_BY_ID, OUTCOMES,
 from predictor.data.loader import load_matches
 from predictor.data.teams import team_info
 from predictor.evaluation import backtest, metrics
-from predictor.export import SCHEMA_VERSION, iso, r, triple, write_json
+from predictor.export import SCHEMA_VERSION, iso, r, triple, write_all
 from predictor.features.build import build_features, model_columns
 from predictor.models.classifier import HYPERPARAMETERS, OutcomeClassifier
 from predictor.models.dixon_coles import DixonColes, outcome_probabilities
@@ -254,6 +254,8 @@ def run(config: RunConfig) -> dict:
         for league in config.leagues
     }
     future = matches[upcoming].copy()
+    # Created up front so an off-season run (no fixtures at all) still has every column.
+    future[DC_COLS + ["xg_h", "xg_a"]] = np.nan
     future[GB_COLS] = (
         final_classifier.predict_proba(features[upcoming]) if len(future) else np.empty((0, 3))
     )
@@ -270,7 +272,10 @@ def run(config: RunConfig) -> dict:
 
     # Evaluation tables.
     rates = base_rates(matches, validation_season)
-    scored = walk[~is_validation & walk[ODDS_COLS].notna().all(axis=1).to_numpy()]
+    # Score against closing prices only: opening odds are a softer benchmark and would flatter
+    # the model. Every evaluated season currently has closing odds for every match.
+    has_closing = (walk["odds_kind"] == "closing") & walk[ODDS_COLS].notna().all(axis=1)
+    scored = walk[~is_validation & has_closing.to_numpy()]
     y_scored = backtest.outcomes(scored)
 
     def evaluate(rows: pd.DataFrame, y: np.ndarray) -> dict:
@@ -319,7 +324,7 @@ def run(config: RunConfig) -> dict:
     client = media.SportsDb() if config.fetch_media else None
 
     export_dir = config.export_dir
-    changed: list[str] = []
+    outputs: dict[Path, dict] = {}
     manifest_leagues = []
     for league in config.leagues:
         season = int(current_season[matches["league"] == league.id].iloc[0])
@@ -402,8 +407,7 @@ def run(config: RunConfig) -> dict:
                 league, season_rows, ratings.get(league.id, {}), dc_models[league.id], registry
             ),
         }
-        if write_json(export_dir / "leagues" / f"{league.id}.json", payload):
-            changed.append(f"leagues/{league.id}.json")
+        outputs[export_dir / "leagues" / f"{league.id}.json"] = payload
         next_kickoff = future.loc[future["league"] == league.id, "date"].min()
         manifest_leagues.append(
             {
@@ -453,8 +457,7 @@ def run(config: RunConfig) -> dict:
         },
         "importance": importance[:20],
     }
-    if write_json(export_dir / "model.json", model_payload):
-        changed.append("model.json")
+    outputs[export_dir / "model.json"] = model_payload
 
     manifest = {
         "schemaVersion": SCHEMA_VERSION,
@@ -462,8 +465,8 @@ def run(config: RunConfig) -> dict:
         "dataAsOf": iso(matches.loc[played, "date"].max()),
         "leagues": manifest_leagues,
     }
-    if write_json(export_dir / "manifest.json", manifest):
-        changed.append("manifest.json")
+    outputs[export_dir / "manifest.json"] = manifest
+    changed = [str(path.relative_to(export_dir)) for path in write_all(outputs)]
 
     log.info(
         "export complete in %.1fs; changed: %s",

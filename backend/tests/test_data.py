@@ -95,3 +95,22 @@ def test_write_json_ignores_timestamp_only_changes(tmp_path) -> None:
     assert not write_json(path, {"generatedAt": "b", "value": 1})
     assert json.loads(path.read_text())["generatedAt"] == "a"
     assert write_json(path, {"generatedAt": "c", "value": 2})
+
+
+def test_write_json_refuses_nan_and_keeps_previous_file(tmp_path) -> None:
+    import pytest
+
+    from predictor.export import write_all
+
+    path = tmp_path / "x.json"
+    write_json(path, {"value": 1})
+    with pytest.raises(ValueError):
+        write_all({path: {"value": float("nan")}, tmp_path / "y.json": {"value": 2}})
+    assert json.loads(path.read_text()) == {"value": 1}
+    assert not (tmp_path / "y.json").exists()
+
+
+def test_commit_hash_alone_does_not_rewrite(tmp_path) -> None:
+    path = tmp_path / "model.json"
+    write_json(path, {"commit": "abc1234", "value": 1})
+    assert not write_json(path, {"commit": "def5678", "value": 1})
