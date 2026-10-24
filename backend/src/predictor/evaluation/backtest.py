@@ -46,6 +46,9 @@ def fit_dixon_coles(history: pd.DataFrame, as_of: pd.Timestamp) -> DixonColes:
         & (history["date"] < as_of)
         & (history["date"] >= as_of - pd.Timedelta(days=DIXON_COLES_WINDOW_DAYS))
     ]
+    if window.empty:
+        # No history yet (first weeks of a league's data): every club gets the neutral prior.
+        return DixonColes.empty()
     age_days = (as_of - window["date"]).dt.total_seconds().to_numpy() / 86400.0
     return DixonColes.fit(
         window["home"].to_numpy(),

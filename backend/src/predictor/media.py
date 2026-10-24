@@ -30,6 +30,11 @@ API = "https://www.thesportsdb.com/api/v1/json/123"
 REQUEST_INTERVAL = 2.1
 # A fixture's own event often gets its artwork close to kick-off; re-check after this long.
 EVENT_REFRESH = timedelta(hours=20)
+# A lookup that found nothing is retried after this long, in case the free tier dropped it.
+EMPTY_REFRESH = timedelta(days=7)
+# Wall-clock budget for all lookups in one run; the scheduled job must stay well inside its
+# timeout even when the API is slow rather than refusing.
+RUN_BUDGET_SECONDS = 15 * 60
 
 TEAM_MEDIA_PATH = DATA_DIR / "team_media.json"
 MEETINGS_PATH = DATA_DIR / "meetings.json"
@@ -64,43 +69,52 @@ class SportsDb:
     """Throttled client for the shared free API key.
 
     The free key is shared by every user of TheSportsDB, so 429s are routine. Each request gets
-    a bounded exponential backoff; after ``MAX_STRIKES`` requests in a row are refused, the
-    client gives up for the rest of the run and every later call fails fast. Cached media is
-    still exported, so a rate-limited run degrades to slightly stale images, never to a hang.
+    a bounded exponential backoff. Any failed request (rate limit, server error, timeout) is a
+    strike; after ``MAX_STRIKES`` in a row, or once the run's time budget is spent, the client
+    gives up and every later call fails fast. Cached media is still exported, so a bad run
+    degrades to slightly stale images, never to a hang.
     """
 
     BACKOFF = (15.0, 45.0, 90.0)
     MAX_STRIKES = 3
 
-    def __init__(self) -> None:
+    def __init__(self, budget_seconds: float = RUN_BUDGET_SECONDS) -> None:
         self._session = requests.Session()
         self._last = 0.0
         self._strikes = 0
+        self._deadline = time.monotonic() + budget_seconds
 
     @property
     def available(self) -> bool:
-        return self._strikes < self.MAX_STRIKES
+        return self._strikes < self.MAX_STRIKES and time.monotonic() < self._deadline
+
+    def _strike(self, reason: str) -> MediaUnavailable:
+        self._strikes += 1
+        if not self.available:
+            log.warning("TheSportsDB unavailable (%s); skipping remaining media lookups", reason)
+        return MediaUnavailable(reason)
 
     def get(self, endpoint: str, **params: str) -> dict:
         if not self.available:
-            raise MediaUnavailable("TheSportsDB is rate limiting this client")
+            raise MediaUnavailable("TheSportsDB lookups disabled for this run")
         for delay in (*self.BACKOFF, None):
             wait = REQUEST_INTERVAL - (time.monotonic() - self._last)
             if wait > 0:
                 time.sleep(wait)
             self._last = time.monotonic()
-            response = self._session.get(f"{API}/{endpoint}", params=params, timeout=20)
-            if response.status_code != 429:
-                response.raise_for_status()
-                self._strikes = 0
-                return response.json() or {}
-            if delay is not None:
-                log.info("TheSportsDB rate limit, retrying in %.0fs", delay)
-                time.sleep(delay)
-        self._strikes += 1
-        if not self.available:
-            log.warning("TheSportsDB unavailable; skipping remaining media lookups this run")
-        raise MediaUnavailable(f"{endpoint} still rate limited after retries")
+            try:
+                response = self._session.get(f"{API}/{endpoint}", params=params, timeout=20)
+                if response.status_code != 429:
+                    response.raise_for_status()
+                    self._strikes = 0
+                    return response.json() or {}
+            except (requests.RequestException, ValueError) as exc:
+                raise self._strike(f"{endpoint}: {exc}") from exc
+            if delay is None or time.monotonic() + delay > self._deadline:
+                break
+            log.info("TheSportsDB rate limit, retrying in %.0fs", delay)
+            time.sleep(delay)
+        raise self._strike(f"{endpoint} still rate limited after retries")
 
 
 def _load(path: Path) -> dict:
@@ -225,8 +239,11 @@ def meetings_for(
         key = f"{first['id']}-{second['id']}-{year}"
         entry = cache.get(key)
         is_current = year == season
-        stale = entry is None or (
-            is_current and now - datetime.fromisoformat(entry["fetched"]) > EVENT_REFRESH
+        age = now - datetime.fromisoformat(entry["fetched"]) if entry else None
+        stale = (
+            entry is None
+            or (is_current and age > EVENT_REFRESH)
+            or (not entry["events"] and age > EMPTY_REFRESH)
         )
         if stale:
             name = f"{first['name']}_vs_{second['name']}".replace(" ", "_")

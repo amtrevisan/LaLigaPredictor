@@ -82,6 +82,11 @@ class DixonColes:
         rho = optimize.minimize_scalar(rho_nll, bounds=(-0.25, 0.25), method="bounded").x
         return cls(teams=teams, attack=att, defence=dfn, home=float(home_adv), rho=float(rho))
 
+    @classmethod
+    def empty(cls) -> DixonColes:
+        """A model with no fitted clubs: average league home advantage, no low-score correction."""
+        return cls(teams={}, attack=np.zeros(0), defence=np.zeros(0), home=0.25, rho=0.0)
+
     def _params(self, team: str) -> tuple[float, float]:
         index = self.teams.get(team)
         if index is None:
@@ -125,6 +130,8 @@ def score_matrix(lam: float, mu: float, rho: float, max_goals: int = MAX_GOALS) 
     matrix[0, 1] *= 1 + lam * rho
     matrix[1, 0] *= 1 + mu * rho
     matrix[1, 1] *= 1 - rho
+    # With rho > 0 and large rates the 0-0 correction can dip below zero; probabilities can't.
+    np.clip(matrix, 0.0, None, out=matrix)
     return matrix / matrix.sum()
 
 

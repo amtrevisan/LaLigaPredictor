@@ -55,3 +55,15 @@ def test_classifier_outputs_probabilities() -> None:
     probs = model.predict_proba(features.tail(5))
     assert probs.shape == (5, 3)
     assert np.allclose(probs.sum(axis=1), 1.0)
+
+
+def test_empty_model_gives_neutral_prediction() -> None:
+    probs, xg = DixonColes.empty().predict(np.array(["A"]), np.array(["B"]))
+    assert np.isclose(probs.sum(), 1.0)
+    assert xg[0, 0] > xg[0, 1]
+
+
+def test_score_matrix_stays_non_negative_for_extreme_rho() -> None:
+    grid = score_matrix(3.5, 3.0, 0.25)
+    assert (grid >= 0).all()
+    assert np.isclose(grid.sum(), 1.0)

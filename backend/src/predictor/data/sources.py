@@ -57,9 +57,19 @@ def _cached(url: str, path: Path, max_age: timedelta | None) -> bytes:
         age = time.time() - path.stat().st_mtime
         if max_age is None or age < max_age.total_seconds():
             return path.read_bytes()
-    content = _download(url)
+    try:
+        content = _download(url)
+    except (requests.RequestException, OSError) as exc:
+        if isinstance(exc, FileNotFoundError) or not path.exists():
+            raise
+        # A stale copy beats no copy: the run publishes slightly older data instead of dropping
+        # a whole season.
+        log.warning("refresh of %s failed (%s); using cached copy", url, exc)
+        return path.read_bytes()
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(content)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_bytes(content)
+    tmp.replace(path)
     return content
 
 

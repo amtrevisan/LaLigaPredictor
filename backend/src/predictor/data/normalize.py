@@ -60,7 +60,12 @@ def _parse_kickoff(dates: pd.Series, times: pd.Series | None) -> pd.Series:
     short = parsed.isna()
     if short.any():
         parsed[short] = pd.to_datetime(stamp[short], format="%d/%m/%y %H:%M", errors="coerce")
-    localized = parsed.dt.tz_localize(FEED_TIMEZONE, ambiguous="NaT", nonexistent="shift_forward")
+    # Kick-offs in the repeated autumn hour are read as the later (GMT) occurrence rather than
+    # dropped.
+    ambiguous = np.zeros(len(parsed), dtype=bool)
+    localized = parsed.dt.tz_localize(
+        FEED_TIMEZONE, ambiguous=ambiguous, nonexistent="shift_forward"
+    )
     return localized.dt.tz_convert("UTC")
 
 
