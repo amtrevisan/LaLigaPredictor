@@ -56,22 +56,51 @@ class Meeting:
     video: str | None
 
 
+class MediaUnavailable(requests.RequestException):
+    """TheSportsDB keeps refusing requests; no further lookups are attempted this run."""
+
+
 class SportsDb:
+    """Throttled client for the shared free API key.
+
+    The free key is shared by every user of TheSportsDB, so 429s are routine. Each request gets
+    a bounded exponential backoff; after ``MAX_STRIKES`` requests in a row are refused, the
+    client gives up for the rest of the run and every later call fails fast. Cached media is
+    still exported, so a rate-limited run degrades to slightly stale images, never to a hang.
+    """
+
+    BACKOFF = (15.0, 45.0, 90.0)
+    MAX_STRIKES = 3
+
     def __init__(self) -> None:
         self._session = requests.Session()
         self._last = 0.0
+        self._strikes = 0
+
+    @property
+    def available(self) -> bool:
+        return self._strikes < self.MAX_STRIKES
 
     def get(self, endpoint: str, **params: str) -> dict:
-        wait = REQUEST_INTERVAL - (time.monotonic() - self._last)
-        if wait > 0:
-            time.sleep(wait)
-        self._last = time.monotonic()
-        response = self._session.get(f"{API}/{endpoint}", params=params, timeout=20)
-        if response.status_code == 429:
-            time.sleep(30)
-            return self.get(endpoint, **params)
-        response.raise_for_status()
-        return response.json() or {}
+        if not self.available:
+            raise MediaUnavailable("TheSportsDB is rate limiting this client")
+        for delay in (*self.BACKOFF, None):
+            wait = REQUEST_INTERVAL - (time.monotonic() - self._last)
+            if wait > 0:
+                time.sleep(wait)
+            self._last = time.monotonic()
+            response = self._session.get(f"{API}/{endpoint}", params=params, timeout=20)
+            if response.status_code != 429:
+                response.raise_for_status()
+                self._strikes = 0
+                return response.json() or {}
+            if delay is not None:
+                log.info("TheSportsDB rate limit, retrying in %.0fs", delay)
+                time.sleep(delay)
+        self._strikes += 1
+        if not self.available:
+            log.warning("TheSportsDB unavailable; skipping remaining media lookups this run")
+        raise MediaUnavailable(f"{endpoint} still rate limited after retries")
 
 
 def _load(path: Path) -> dict:
@@ -83,14 +112,37 @@ def _save(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
 
 
+# The free tier returns a single search hit, which is often a women's, youth or other-sport
+# namesake ("Nottingham Forest" is also a netball club). Anything else is rejected rather than
+# shown with the wrong crest.
+_NOT_FIRST_TEAM = ("women", "femen", "femin", "frauen", "ladies", "u19", "u21", "u23", " ii", " b")
+
+
+def _is_first_team(team: dict, league: League) -> bool:
+    name = f" {team.get('strTeam', '').lower()}"
+    return (
+        team.get("strSport") == "Soccer"
+        and team.get("strGender") != "Female"
+        and team.get("strCountry") == league.country
+        and not any(marker in name for marker in _NOT_FIRST_TEAM)
+    )
+
+
 def _pick_team(candidates: list[dict], league: League) -> dict | None:
-    soccer = [t for t in candidates if t.get("strSport") == "Soccer"]
-    for team in soccer:
+    valid = [t for t in candidates if _is_first_team(t, league)]
+    for team in valid:
         leagues = {team.get(f"strLeague{suffix}") for suffix in ("", "2", "3", "4", "5", "6", "7")}
         if league.sportsdb_league in leagues:
             return team
-    same_country = [t for t in soccer if t.get("strCountry") == league.country]
-    return (same_country or soccer or [None])[0]
+    return valid[0] if valid else None
+
+
+def _lookup(client: SportsDb, feed_name: str, league: League) -> dict | None:
+    info = team_info(feed_name)
+    if info.sportsdb_id:
+        teams = client.get("lookupteam.php", id=info.sportsdb_id).get("teams") or []
+        return teams[0] if teams else None
+    return _pick_team(client.get("searchteams.php", t=info.search).get("teams") or [], league)
 
 
 def resolve_teams(client: SportsDb, league: League, feed_names: list[str]) -> dict[str, dict]:
@@ -101,14 +153,15 @@ def resolve_teams(client: SportsDb, league: League, feed_names: list[str]) -> di
         key = f"{league.id}/{feed_name}"
         if key in registry:
             continue
-        search = team_info(feed_name).search
         try:
-            found = _pick_team(client.get("searchteams.php", t=search).get("teams") or [], league)
+            found = _lookup(client, feed_name, league)
+        except MediaUnavailable:
+            break
         except requests.RequestException as exc:
-            log.warning("team lookup failed for %s: %s", search, exc)
+            log.warning("team lookup failed for %s: %s", feed_name, exc)
             continue
         if found is None:
-            log.warning("no TheSportsDB match for %s (%s)", feed_name, search)
+            log.warning("no TheSportsDB first team found for %s; add an id in teams.py", feed_name)
             continue
         fanart = [
             found[k]

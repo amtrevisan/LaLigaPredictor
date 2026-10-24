@@ -16,6 +16,7 @@ class TeamInfo:
     name: str
     short: str
     search: str
+    sportsdb_id: str | None = None
 
 
 # (feed name) -> (display name, short code, TheSportsDB search term or None to reuse the name)
@@ -23,7 +24,7 @@ _TEAMS: dict[str, tuple[str, str, str | None]] = {
     # Premier League
     "Arsenal": ("Arsenal", "ARS", None),
     "Aston Villa": ("Aston Villa", "AVL", None),
-    "Bournemouth": ("Bournemouth", "BOU", "AFC Bournemouth"),
+    "Bournemouth": ("Bournemouth", "BOU", None),
     "Brentford": ("Brentford", "BRE", None),
     "Brighton": ("Brighton & Hove Albion", "BHA", "Brighton and Hove Albion"),
     "Burnley": ("Burnley", "BUR", None),
@@ -174,10 +175,17 @@ _TEAMS: dict[str, tuple[str, str, str | None]] = {
 }
 
 
+# Clubs whose name search on TheSportsDB's free tier lands on a namesake (another sport, the
+# women's side). Resolved by id instead.
+_SPORTSDB_IDS: dict[str, str] = {
+    "Nott'm Forest": "133720",
+}
+
+
 def team_info(feed_name: str) -> TeamInfo:
     entry = _TEAMS.get(feed_name)
     if entry is None:
         letters = "".join(ch for ch in feed_name.upper() if ch.isalpha())
         return TeamInfo(feed_name, letters[:3] or "???", feed_name)
     name, short, search = entry
-    return TeamInfo(name, short, search or name)
+    return TeamInfo(name, short, search or name, _SPORTSDB_IDS.get(feed_name))
