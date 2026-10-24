@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useI18n } from "@/i18n";
 import { decimal, fill, integer, kickoffDay, kickoffTime, longDate, percent, points } from "@/lib/format";
 import type { Meeting, Team, Triple, UpcomingFixture } from "@/types/data";
@@ -44,7 +45,7 @@ function safeHttps(url: string | null): string | null {
   }
 }
 
-function MeetingTile({ meeting }: { meeting: Meeting }) {
+function MeetingTile({ meeting, revealed }: { meeting: Meeting; revealed: boolean }) {
   const { t, intl } = useI18n();
   const score = meeting.score ? `${meeting.score[0]}–${meeting.score[1]}` : "–";
   const caption = (
@@ -64,7 +65,11 @@ function MeetingTile({ meeting }: { meeting: Meeting }) {
     </span>
   );
   // The caption carries the facts, so the image itself is decorative.
-  const image = meeting.image ? <DitherImage src={meeting.image} alt="" fallback={placeholder} /> : placeholder;
+  const image = meeting.image ? (
+    <DitherImage src={meeting.image} alt="" fallback={placeholder} revealed={revealed} />
+  ) : (
+    placeholder
+  );
   const video = safeHttps(meeting.video);
   return (
     <figure className={styles.tile}>
@@ -87,14 +92,34 @@ function MeetingTile({ meeting }: { meeting: Meeting }) {
   );
 }
 
+// The detail band opens in 1-bit and wipes to colour a beat later: the second half of the
+// signature move that starts with the column inversion.
+const REVEAL_DELAY_MS = 450;
+
 export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: string }) {
   const { t, intl } = useI18n();
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    // Remounted per selection (keyed by fixture), so this runs once per selected fixture.
+    const timer = window.setTimeout(() => setRevealed(true), REVEAL_DELAY_MS);
+    return () => window.clearTimeout(timer);
+  }, []);
   const gap = fixture.market ? fixture.probs.map((p, i) => p - (fixture.market?.[i] ?? 0)) : null;
   const topScore = fixture.scorelines[0]?.p ?? 1;
-  const photos = [fixture.home, fixture.away].flatMap((team) => {
-    const src = pickPhoto(team, fixture.id);
-    return src ? [{ team, src }] : [];
-  });
+  // Club imagery either side of this match's own artwork, when each exists.
+  const band = [
+    ...[fixture.home].flatMap((team) => {
+      const src = pickPhoto(team, fixture.id);
+      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null }] : [];
+    }),
+    ...(fixture.poster
+      ? [{ key: "poster", src: fixture.poster, title: t.fixtures.preview, detail: longDate(fixture.kickoff, intl) }]
+      : []),
+    ...[fixture.away].flatMap((team) => {
+      const src = pickPhoto(team, fixture.id);
+      return src ? [{ key: team.name, src, title: team.name, detail: null as string | null }] : [];
+    }),
+  ];
 
   return (
     <section id={id} className={styles.detail} aria-labelledby={`${id}-title`}>
@@ -120,14 +145,19 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
         </p>
       </header>
 
-      {photos.length > 0 && (
+      {band.length > 0 && (
         <div className={styles.photos}>
-          {photos.map(({ team, src }) => (
-            <figure key={team.name} className={styles.photo}>
-              <DitherImage src={src} alt="" fallback={<span className={styles.noImage} />} />
+          {band.map((item) => (
+            <figure key={item.key} className={styles.photo}>
+              <DitherImage
+                src={item.src}
+                alt=""
+                revealed={revealed}
+                fallback={<span className={styles.noImage} />}
+              />
               <figcaption className={styles.caption}>
-                <span className={styles.captionScore}>{team.name}</span>
-                {team.stadium && <span>{team.stadium}</span>}
+                <span className={styles.captionScore}>{item.title}</span>
+                {item.detail && <span>{item.detail}</span>}
               </figcaption>
             </figure>
           ))}
@@ -209,17 +239,8 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
       <div className={styles.media}>
         <h3 className={styles.blockTitle}>{t.fixtures.meetings}</h3>
         <div className={styles.tiles}>
-          {fixture.poster && (
-            <figure className={styles.tile}>
-              <DitherImage src={fixture.poster} alt={`${t.fixtures.preview}: ${fixture.home.name} – ${fixture.away.name}`} />
-              <figcaption className={styles.caption}>
-                <span className={styles.captionScore}>{t.fixtures.preview}</span>
-                <span>{longDate(fixture.kickoff, intl)}</span>
-              </figcaption>
-            </figure>
-          )}
           {fixture.meetings.map((meeting) => (
-            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} />
+            <MeetingTile key={`${meeting.date}-${meeting.home}`} meeting={meeting} revealed={revealed} />
           ))}
         </div>
         {fixture.meetings.length === 0 && <p className={styles.note}>{t.fixtures.noMeetings}</p>}

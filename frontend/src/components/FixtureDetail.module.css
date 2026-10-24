@@ -39,7 +39,7 @@
 
 .photos {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: var(--space-4);
 }
 
@@ -161,7 +161,7 @@
 
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
   gap: var(--space-4);
 }
 
@@ -236,8 +236,24 @@
     grid-template-columns: 1fr;
   }
 
+  /* Stack the sides: crest + name each, no orphaned dash. */
   .title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
     font-size: var(--step-3);
+  }
+
+  .versus {
+    display: none;
+  }
+
+  .away > :last-child {
+    order: -1;
+  }
+
+  .side {
+    gap: var(--space-3);
   }
 
   .columnsHead,

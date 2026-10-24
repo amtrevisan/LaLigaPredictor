@@ -30,6 +30,7 @@ export function RecordRail({ leagueId, season, record, results }: Props) {
                 <th scope="col" />
                 <th scope="col">{t.record.model}</th>
                 <th scope="col">{t.record.market}</th>
+                {record.baseline && <th scope="col">{t.model.baseline}</th>}
               </tr>
             </thead>
             <tbody>
@@ -37,16 +38,19 @@ export function RecordRail({ leagueId, season, record, results }: Props) {
                 <th scope="row">{t.record.accuracy}</th>
                 <td>{percent(record.model.accuracy, intl, 1)}</td>
                 <td>{percent(record.market.accuracy, intl, 1)}</td>
+                {record.baseline && <td>{percent(record.baseline.accuracy, intl, 1)}</td>}
               </tr>
               <tr>
                 <th scope="row">{t.record.logLoss}</th>
                 <td>{decimal(record.model.logLoss, intl)}</td>
                 <td>{decimal(record.market.logLoss, intl)}</td>
+                {record.baseline && <td>{decimal(record.baseline.logLoss, intl)}</td>}
               </tr>
               <tr>
                 <th scope="row">{t.record.rps}</th>
                 <td>{decimal(record.model.rps, intl)}</td>
                 <td>{decimal(record.market.rps, intl)}</td>
+                {record.baseline && <td>{decimal(record.baseline.rps, intl)}</td>}
               </tr>
             </tbody>
           </table>
@@ -54,6 +58,7 @@ export function RecordRail({ leagueId, season, record, results }: Props) {
             {fill(t.record.matches, { n: record.matches })}. {t.record.lowerBetter}
           </p>
           <SeasonBarcode results={results} limit={60} label={t.results.title} />
+          <p className={styles.note}>{t.results.barcode}</p>
           <Link to={`/${leagueId}/results`} className={styles.more}>
             {t.nav.results} <ArrowRight />
           </Link>

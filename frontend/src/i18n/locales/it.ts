@@ -35,7 +35,7 @@ const it: Messages = {
     highlights: "Highlights",
     preview: "Locandina della partita",
     select: "Seleziona una partita per il dettaglio completo.",
-    gap: "Modello meno mercato",
+    gap: "Differenza",
     empty: "Nessuna partita in programma. La prossima giornata comparirà qui appena pubblicata.",
     legend: "Le barre mostrano la probabilità del modello di vittoria in casa, pareggio e vittoria in trasferta.",
   },

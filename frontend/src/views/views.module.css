@@ -29,6 +29,7 @@
 .viewTitle span {
   color: var(--dim);
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .viewMeta {

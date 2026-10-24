@@ -47,6 +47,16 @@
   font-size: var(--step-2);
 }
 
+.table td:nth-child(n + 3),
+.table thead th {
+  font-stretch: var(--dense);
+}
+
+.table thead th + th,
+.table td {
+  padding-left: var(--space-3);
+}
+
 .note {
   color: var(--dim);
   font-size: var(--step--1);

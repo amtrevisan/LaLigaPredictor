@@ -15,6 +15,7 @@ export interface SeasonRecord {
   matches: number;
   model: Scores;
   market: Scores;
+  baseline: Scores;
 }
 
 export interface LeagueSummary {

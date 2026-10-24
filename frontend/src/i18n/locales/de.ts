@@ -35,7 +35,7 @@ const de: Messages = {
     highlights: "Highlights",
     preview: "Spielplakat",
     select: "Wähle ein Spiel für die vollständige Aufschlüsselung.",
-    gap: "Modell minus Markt",
+    gap: "Differenz",
     empty: "Noch keine Spiele angesetzt. Der nächste Spieltag erscheint hier, sobald er veröffentlicht ist.",
     legend: "Die Balken zeigen die Modellwahrscheinlichkeit für Heimsieg, Remis und Auswärtssieg.",
   },

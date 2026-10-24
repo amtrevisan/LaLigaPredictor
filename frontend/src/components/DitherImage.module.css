@@ -20,7 +20,10 @@
   inset: 0;
   isolation: isolate;
   filter: grayscale(1) contrast(40);
-  transition: opacity var(--wipe) var(--ease-out);
+  clip-path: inset(0 0 0 0);
+  transition:
+    opacity var(--wipe) var(--ease-out),
+    clip-path 600ms var(--ease-out);
 }
 
 .dither img {
@@ -38,7 +41,11 @@
 }
 
 .frame:hover .dither,
-.revealed .dither,
 a:focus-visible .dither {
   opacity: 0;
+}
+
+/* Selection reveal: the 1-bit layer wipes away top to bottom, echoing the column inversion. */
+.revealed .dither {
+  clip-path: inset(100% 0 0 0);
 }
