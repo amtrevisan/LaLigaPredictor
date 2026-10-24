@@ -91,7 +91,10 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
   const { t, intl } = useI18n();
   const gap = fixture.market ? fixture.probs.map((p, i) => p - (fixture.market?.[i] ?? 0)) : null;
   const topScore = fixture.scorelines[0]?.p ?? 1;
-  const photos = [pickPhoto(fixture.home, fixture.id), pickPhoto(fixture.away, fixture.id)];
+  const photos = [fixture.home, fixture.away].flatMap((team) => {
+    const src = pickPhoto(team, fixture.id);
+    return src ? [{ team, src }] : [];
+  });
 
   return (
     <section id={id} className={styles.detail} aria-labelledby={`${id}-title`}>
@@ -117,22 +120,17 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
         </p>
       </header>
 
-      {photos.some(Boolean) && (
+      {photos.length > 0 && (
         <div className={styles.photos}>
-          {[fixture.home, fixture.away].map((team, i) => {
-            const photo = photos[i];
-            return photo ? (
-              <figure key={team.name} className={styles.photo}>
-                <DitherImage src={photo} alt="" fallback={<span className={styles.noImage} />} />
-                <figcaption className={styles.caption}>
-                  <span className={styles.captionScore}>{team.name}</span>
-                  {team.stadium && <span>{team.stadium}</span>}
-                </figcaption>
-              </figure>
-            ) : (
-              <span key={team.name} />
-            );
-          })}
+          {photos.map(({ team, src }) => (
+            <figure key={team.name} className={styles.photo}>
+              <DitherImage src={src} alt="" fallback={<span className={styles.noImage} />} />
+              <figcaption className={styles.caption}>
+                <span className={styles.captionScore}>{team.name}</span>
+                {team.stadium && <span>{team.stadium}</span>}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       )}
 

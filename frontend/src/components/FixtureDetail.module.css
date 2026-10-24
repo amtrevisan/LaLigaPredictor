@@ -232,6 +232,10 @@
 }
 
 @media (max-width: 640px) {
+  .photos {
+    grid-template-columns: 1fr;
+  }
+
   .title {
     font-size: var(--step-3);
   }
