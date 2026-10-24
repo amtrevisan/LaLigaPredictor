@@ -31,7 +31,7 @@ const de: Messages = {
     elo: "Elo",
     venue: "Stadion",
     meetings: "Letzte Duelle",
-    noMeetings: "Keine Duelle in den letzten zwei Spielzeiten.",
+    noMeetings: "Keine früheren Ligaduelle erfasst.",
     highlights: "Highlights",
     preview: "Spielplakat",
     select: "Wähle ein Spiel für die vollständige Aufschlüsselung.",

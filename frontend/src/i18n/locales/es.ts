@@ -31,7 +31,7 @@ const es: Messages = {
     elo: "Elo",
     venue: "Estadio",
     meetings: "Enfrentamientos anteriores",
-    noMeetings: "Sin enfrentamientos en las dos últimas temporadas.",
+    noMeetings: "Sin enfrentamientos de liga registrados.",
     highlights: "Resumen",
     preview: "Cartel del partido",
     select: "Selecciona un partido para ver el desglose completo.",

@@ -29,7 +29,7 @@ const en = {
     elo: "Elo",
     venue: "Venue",
     meetings: "Previous meetings",
-    noMeetings: "No earlier meetings in the last two seasons.",
+    noMeetings: "No earlier league meetings on record.",
     highlights: "Highlights",
     preview: "Match artwork",
     select: "Select a fixture for the full breakdown.",

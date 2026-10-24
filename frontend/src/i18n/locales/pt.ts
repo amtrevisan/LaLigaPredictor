@@ -31,7 +31,7 @@ const pt: Messages = {
     elo: "Elo",
     venue: "Estádio",
     meetings: "Confrontos anteriores",
-    noMeetings: "Nenhum confronto nas duas últimas temporadas.",
+    noMeetings: "Nenhum confronto no campeonato registrado.",
     highlights: "Melhores momentos",
     preview: "Arte do jogo",
     select: "Selecione um jogo para ver o detalhamento completo.",

@@ -31,7 +31,7 @@ const fr: Messages = {
     elo: "Elo",
     venue: "Stade",
     meetings: "Confrontations précédentes",
-    noMeetings: "Aucune confrontation lors des deux dernières saisons.",
+    noMeetings: "Aucune confrontation en championnat enregistrée.",
     highlights: "Résumé",
     preview: "Affiche du match",
     select: "Sélectionnez un match pour le détail complet.",

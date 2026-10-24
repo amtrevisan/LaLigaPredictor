@@ -31,7 +31,7 @@ const it: Messages = {
     elo: "Elo",
     venue: "Stadio",
     meetings: "Precedenti",
-    noMeetings: "Nessun precedente nelle ultime due stagioni.",
+    noMeetings: "Nessun precedente in campionato registrato.",
     highlights: "Highlights",
     preview: "Locandina della partita",
     select: "Seleziona una partita per il dettaglio completo.",
