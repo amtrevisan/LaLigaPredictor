@@ -1,5 +1,5 @@
 ---
-name: Match/Field
+name: Oddsless
 description: Six leagues of football predictions as one black field of hairline probability columns.
 colors:
   ink: "#000000"
@@ -104,11 +104,11 @@ components:
     padding: "1px 8px"
 ---
 
-# Design System: Match/Field
+# Design System: Oddsless
 
 ## Overview
 
-**Creative North Star: "The Matchfield"**
+**Creative North Star: "The Match Field"**
 
 One field of black, one figure of white, one monospace face. Every fixture is a data column: the round reads as a single black field of hairline rules, stacked outcome bars and dense tabular numbers, the way a stadium scoreboard or a printed coupon reads, not as a stack of rounded dark cards. The page is drawn, not painted: structure comes from 1px rules, values come from bar lengths and pattern, and hierarchy comes from weight, width and inversion.
 

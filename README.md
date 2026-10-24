@@ -1,15 +1,15 @@
-# Matchfield
+# Oddsless
 
 **Football match predictions for six leagues, from a model that never sees betting odds, and is
 scored against them in public.**
 
-[![Live site](https://img.shields.io/badge/live-laligapredictor.netlify.app-000?style=flat-square)](https://laligapredictor.netlify.app)
-[![CI](https://img.shields.io/github/actions/workflow/status/amtrevisan/LaLigaPredictor/ci.yml?branch=main&label=ci&style=flat-square&color=000)](https://github.com/amtrevisan/LaLigaPredictor/actions/workflows/ci.yml)
-[![Predictions](https://img.shields.io/github/actions/workflow/status/amtrevisan/LaLigaPredictor/predictions.yml?branch=main&label=data%20refresh&style=flat-square&color=000)](https://github.com/amtrevisan/LaLigaPredictor/actions/workflows/predictions.yml)
+[![Live site](https://img.shields.io/badge/live-oddsless.netlify.app-000?style=flat-square)](https://oddsless.netlify.app)
+[![CI](https://img.shields.io/github/actions/workflow/status/amtrevisan/oddsless/ci.yml?branch=main&label=ci&style=flat-square&color=000)](https://github.com/amtrevisan/oddsless/actions/workflows/ci.yml)
+[![Predictions](https://img.shields.io/github/actions/workflow/status/amtrevisan/oddsless/predictions.yml?branch=main&label=data%20refresh&style=flat-square&color=000)](https://github.com/amtrevisan/oddsless/actions/workflows/predictions.yml)
 ![Python](https://img.shields.io/badge/python-3.12-000?style=flat-square)
 ![React](https://img.shields.io/badge/react-19-000?style=flat-square)
 
-[![La Liga round 10 on the live site](docs/img/fixtures.webp)](https://laligapredictor.netlify.app/la-liga)
+[![La Liga round 10 on the live site](docs/img/fixtures.webp)](https://oddsless.netlify.app/la-liga)
 
 |  44k matches  |  6 leagues  |  6,396 backtested predictions  |  refreshed 4× a day  |  6 languages  |
 | :---: | :---: | :---: | :---: | :---: |
@@ -75,7 +75,7 @@ The full write-up is in [docs/model.md](docs/model.md).
 Each fixture opens into the model's 1X2 probabilities next to the market's, the two component
 models, expected goals and the likeliest scorelines.
 
-[![Barcelona v Real Madrid detail](docs/img/match.webp)](https://laligapredictor.netlify.app/la-liga)
+[![Barcelona v Real Madrid detail](docs/img/match.webp)](https://oddsless.netlify.app/la-liga)
 
 ## Stack
 

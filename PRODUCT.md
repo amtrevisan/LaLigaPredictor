@@ -25,7 +25,7 @@ The model never sees bookmaker odds. Odds are used only as the benchmark it is s
 - Leagues: Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Brasileirão Série A.
 - Data: public football-data.co.uk CSVs (results, match stats where available, closing odds, upcoming fixtures). No API keys required.
 - Delivery: a scheduled CI job runs the pipeline and commits versioned static JSON into the frontend; the static site rebuilds on commit. No database, no secrets in the browser.
-- Previously known as "La Liga Predictor" (single league, Supabase-backed); live at laligapredictor.netlify.app.
+- Live at oddsless.netlify.app. Previously "La Liga Predictor", a single-league, Supabase-backed app.
 
 ## Capabilities and Constraints
 

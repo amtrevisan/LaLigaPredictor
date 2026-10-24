@@ -8,7 +8,7 @@ import { ArrowUpRight } from "./icons";
 import { LogoMark } from "./Logo";
 import styles from "./Shell.module.css";
 
-export const SOURCE_URL = "https://github.com/amtrevisan/LaLigaPredictor";
+export const SOURCE_URL = "https://github.com/amtrevisan/oddsless";
 
 const AUTHOR = "Alex Morales Trevisan";
 const AUTHOR_LINKS = [
