@@ -13,6 +13,7 @@ const pt: Messages = {
     table: "Classificação",
     model: "Modelo",
     language: "Idioma",
+    sections: "Seções",
     leagues: "Ligas",
     updated: "Dados de {time}",
   },

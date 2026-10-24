@@ -34,7 +34,7 @@ export function Shell() {
         <NavLink to={`/${league}`} className={styles.wordmark} aria-label="Matchfield">
           MATCH<span aria-hidden="true">/</span>FIELD
         </NavLink>
-        <nav className={styles.tabs}>
+        <nav className={styles.tabs} aria-label={t.nav.sections}>
           {tabs.map((tab) => (
             <NavLink key={tab.to} to={tab.to} end={tab.end} className={styles.tab}>
               {tab.label}

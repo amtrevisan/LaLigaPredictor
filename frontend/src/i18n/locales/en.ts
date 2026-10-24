@@ -11,6 +11,7 @@ const en = {
     table: "Table",
     model: "Model",
     language: "Language",
+    sections: "Sections",
     leagues: "Leagues",
     updated: "Data as of {time}",
   },

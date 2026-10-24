@@ -10,6 +10,7 @@ import type { LeagueData } from "@/types/data";
 import styles from "./views.module.css";
 
 const DETAIL_ID = "fixture-detail";
+const LEGEND_ID = "fixture-legend";
 
 export function FixturesView({ data }: { data: LeagueData }) {
   const { t } = useI18n();
@@ -40,13 +41,28 @@ export function FixturesView({ data }: { data: LeagueData }) {
           <EmptyState>{t.fixtures.empty}</EmptyState>
         ) : (
           <>
-            <p className="visually-hidden">{t.fixtures.legend}</p>
+            <p id={LEGEND_ID} className="visually-hidden">
+              {t.fixtures.legend}
+            </p>
             <FixtureField
               fixtures={fixtures}
               selectedId={selected.id}
-              detailId={DETAIL_ID}
-              onSelect={(id) => setParams({ match: id }, { replace: true, preventScrollReset: true })}
+              describedBy={LEGEND_ID}
+              onSelect={(id) =>
+                setParams(
+                  (current) => {
+                    const next = new URLSearchParams(current);
+                    next.set("match", id);
+                    return next;
+                  },
+                  { replace: true, preventScrollReset: true },
+                )
+              }
             />
+            {/* Persistent live region: announces the newly selected fixture, not the whole band. */}
+            <p className="visually-hidden" role="status">
+              {selected.home.name} – {selected.away.name}
+            </p>
             <FixtureDetail key={selected.id} fixture={selected} id={DETAIL_ID} />
           </>
         )}

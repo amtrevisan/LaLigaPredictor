@@ -21,14 +21,20 @@ export function CalibrationChart({ model, market }: Props) {
   const { t, intl } = useI18n();
   const maxCount = Math.max(...model.map((b) => b.count), ...market.map((b) => b.count), 1);
   const side = (count: number) => 4 + 10 * Math.sqrt(count / maxCount);
+  const describe = (bins: CalibrationBin[]) =>
+    bins.map((b) => `${percent(b.predicted, intl)} → ${percent(b.observed, intl)}`).join(", ");
 
   return (
     <figure className={styles.figure}>
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className={styles.svg} role="img" aria-labelledby="calibration-desc">
+      <svg
+        viewBox={`0 0 ${SIZE} ${SIZE}`}
+        className={styles.svg}
+        role="img"
+        aria-labelledby="calibration-title calibration-desc"
+      >
+        <title id="calibration-title">{t.model.calibration}</title>
         <desc id="calibration-desc">
-          {model
-            .map((b) => `${percent(b.predicted, intl)} → ${percent(b.observed, intl)}`)
-            .join(", ")}
+          {`${t.model.blend}: ${describe(model)}. ${t.model.market}: ${describe(market)}.`}
         </desc>
         {TICKS.map((tick) => (
           <g key={tick}>
@@ -43,11 +49,11 @@ export function CalibrationChart({ model, market }: Props) {
           </g>
         ))}
         <line x1={x(0)} y1={y(0)} x2={x(1)} y2={y(1)} className={styles.diagonal} />
-        {market.map((b) => {
+        {market.map((b, i) => {
           const s = side(b.count);
           return (
             <rect
-              key={`m-${b.predicted}`}
+              key={`market-${i}`}
               x={x(b.predicted) - s / 2}
               y={y(b.observed) - s / 2}
               width={s}
@@ -56,11 +62,11 @@ export function CalibrationChart({ model, market }: Props) {
             />
           );
         })}
-        {model.map((b) => {
+        {model.map((b, i) => {
           const s = side(b.count);
           return (
             <rect
-              key={`p-${b.predicted}`}
+              key={`model-${i}`}
               x={x(b.predicted) - s / 2}
               y={y(b.observed) - s / 2}
               width={s}
@@ -72,7 +78,7 @@ export function CalibrationChart({ model, market }: Props) {
       </svg>
       <figcaption className={styles.caption}>
         <span className={styles.axis}>
-          x: {t.model.predicted} · y: {t.model.observed} (%)
+          {t.model.predicted} (x) · {t.model.observed} (y), %
         </span>
         <span className={styles.legend}>
           <span className={styles.swatchModel} aria-hidden="true" /> {t.model.blend}

@@ -26,12 +26,12 @@
     color var(--wipe) var(--ease-out);
 }
 
-.column:hover:not([aria-expanded="true"]) {
+.column:hover:not([aria-pressed="true"]) {
   background-size: 100% 3px;
 }
 
 /* The signature move: the selected fixture wipes from white down, and every mark inverts. */
-.column[aria-expanded="true"] {
+.column[aria-pressed="true"] {
   background-size: 100% 100%;
   color: var(--ink);
 }

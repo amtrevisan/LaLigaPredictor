@@ -38,33 +38,35 @@ describe("FixtureField", () => {
           fixtures={[fixture("a", "Barcelona", "Real Madrid"), fixture("b", "Sevilla", "Osasuna")]}
           selectedId="a"
           onSelect={onSelect}
-          detailId="detail"
+          describedBy="legend"
         />
       </I18nProvider>,
     );
 
     const first = screen.getByRole("button", { name: /Barcelona – Real Madrid/ });
     const second = screen.getByRole("button", { name: /Sevilla – Osasuna/ });
-    expect(first).toHaveAttribute("aria-expanded", "true");
-    expect(second).toHaveAttribute("aria-expanded", "false");
+    expect(first).toHaveAttribute("aria-pressed", "true");
+    expect(second).toHaveAttribute("aria-pressed", "false");
 
     fireEvent.click(second);
     expect(onSelect).toHaveBeenCalledWith("b");
   });
 
-  it("describes the probability bar in words, in the visitor's language", () => {
+  it("names each fixture with teams, kick-off and probabilities, in the visitor's language", () => {
     render(
       <I18nProvider locale="es">
         <FixtureField
           fixtures={[fixture("a", "Barcelona", "Real Madrid")]}
           selectedId="a"
           onSelect={() => {}}
-          detailId="d"
+          describedBy="legend"
         />
       </I18nProvider>,
     );
     expect(
-      screen.getByRole("img", { name: /Local 49\s?%, Empate 23\s?%, Visitante 28\s?%/ }),
+      screen.getByRole("button", {
+        name: /Barcelona – Real Madrid\. .+\. Local 49\s?%, Empate 23\s?%, Visitante 28\s?%/,
+      }),
     ).toBeInTheDocument();
   });
 });

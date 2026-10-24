@@ -34,6 +34,16 @@ function ProbabilityRow({ label, probs }: { label: string; probs: Triple }) {
   );
 }
 
+/** Highlight links come from third-party data; only plain https URLs are rendered as links. */
+function safeHttps(url: string | null): string | null {
+  if (!url) return null;
+  try {
+    return new URL(url).protocol === "https:" ? url : null;
+  } catch {
+    return null;
+  }
+}
+
 function MeetingTile({ meeting }: { meeting: Meeting }) {
   const { t, intl } = useI18n();
   const score = meeting.score ? `${meeting.score[0]}–${meeting.score[1]}` : "–";
@@ -48,20 +58,25 @@ function MeetingTile({ meeting }: { meeting: Meeting }) {
       </span>
     </figcaption>
   );
-  const image = meeting.image ? (
-    <DitherImage src={meeting.image} alt={`${meeting.home} ${score} ${meeting.away}`} />
-  ) : (
+  const placeholder = (
     <span className={styles.noImage} aria-hidden="true">
       {score}
     </span>
   );
+  // The caption carries the facts, so the image itself is decorative.
+  const image = meeting.image ? <DitherImage src={meeting.image} alt="" fallback={placeholder} /> : placeholder;
+  const video = safeHttps(meeting.video);
   return (
     <figure className={styles.tile}>
-      {meeting.video ? (
-        <a href={meeting.video} rel="noreferrer" target="_blank" className={styles.tileLink}>
+      {video ? (
+        <a href={video} rel="noreferrer" target="_blank" className={styles.tileLink}>
           {image}
           <span className={styles.play}>
             {t.fixtures.highlights} <ArrowUpRight />
+            <span className="visually-hidden">
+              {" "}
+              ({meeting.home} {score} {meeting.away})
+            </span>
           </span>
         </a>
       ) : (
@@ -79,7 +94,7 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
   const photos = [pickPhoto(fixture.home, fixture.id), pickPhoto(fixture.away, fixture.id)];
 
   return (
-    <section id={id} className={styles.detail} aria-live="polite" aria-labelledby={`${id}-title`}>
+    <section id={id} className={styles.detail} aria-labelledby={`${id}-title`}>
       <header className={styles.head}>
         <h2 id={`${id}-title`} className={styles.title}>
           <span className={styles.side}>
@@ -108,7 +123,7 @@ export function FixtureDetail({ fixture, id }: { fixture: UpcomingFixture; id: s
             const photo = photos[i];
             return photo ? (
               <figure key={team.name} className={styles.photo}>
-                <DitherImage src={photo} alt={team.name} />
+                <DitherImage src={photo} alt="" fallback={<span className={styles.noImage} />} />
                 <figcaption className={styles.caption}>
                   <span className={styles.captionScore}>{team.name}</span>
                   {team.stadium && <span>{team.stadium}</span>}

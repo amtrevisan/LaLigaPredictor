@@ -13,6 +13,7 @@ const de: Messages = {
     table: "Tabelle",
     model: "Modell",
     language: "Sprache",
+    sections: "Bereiche",
     leagues: "Ligen",
     updated: "Datenstand {time}",
   },

@@ -13,6 +13,7 @@ const fr: Messages = {
     table: "Classement",
     model: "Modèle",
     language: "Langue",
+    sections: "Rubriques",
     leagues: "Championnats",
     updated: "Données au {time}",
   },
