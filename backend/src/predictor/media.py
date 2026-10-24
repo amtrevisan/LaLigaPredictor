@@ -165,7 +165,9 @@ def _load(path: Path) -> dict:
 
 def _save(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
+    tmp.replace(path)
 
 
 # The free tier returns a single search hit, which is often a women's, youth or other-sport

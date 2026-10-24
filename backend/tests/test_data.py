@@ -1,16 +1,25 @@
 from __future__ import annotations
 
 import json
+from datetime import timedelta
 
 import numpy as np
 import pandas as pd
+import pytest
 
+from predictor import pipeline
 from predictor.config import LEAGUES_BY_ID
-from predictor.data import normalize
+from predictor.data import normalize, sources
 from predictor.data.teams import team_info
 from predictor.export import write_json
 from predictor.models.dixon_coles import outcome_probabilities, score_matrix
-from predictor.pipeline import _meetings, align_scoreline_grid, choose_blend_weight
+from predictor.pipeline import (
+    RunConfig,
+    _meetings,
+    align_scoreline_grid,
+    choose_blend_weight,
+    run,
+)
 from tests.factories import make_matches
 
 LA_LIGA = LEAGUES_BY_ID["la-liga"]
@@ -134,3 +143,35 @@ def test_meetings_come_from_earlier_results_between_the_pair():
     assert [m["date"][:4] for m in meetings] == ["2016", "2016", "2015", "2015"]
     assert all({m["home"], m["away"]} == {"T0", "T1"} for m in meetings)
     assert meetings[0]["competition"] == "La Liga"
+
+
+def test_failed_refresh_falls_back_to_cache_even_on_404(tmp_path, monkeypatch) -> None:
+    def missing(url: str) -> bytes:
+        raise FileNotFoundError(url)
+
+    monkeypatch.setattr(sources, "_download", missing)
+    cached = tmp_path / "2526.csv"
+    cached.write_bytes(b"cached")
+    assert sources._cached("u", cached, timedelta(0)) == b"cached"
+    # No cached copy: the file does not exist yet, which callers treat as "no season".
+    with pytest.raises(FileNotFoundError):
+        sources._cached("u", tmp_path / "2627.csv", timedelta(0))
+
+
+def test_run_writes_the_contract_the_frontend_reads(tmp_path, monkeypatch) -> None:
+    matches = make_matches(n_seasons=8, teams=10, league="la-liga")
+    upcoming = matches.index[-10:]
+    matches.loc[upcoming, ["home_goals", "away_goals"]] = np.nan
+    monkeypatch.setattr(pipeline, "load_matches", lambda now, leagues: matches)
+    now = matches.loc[upcoming[0], "date"] - pd.Timedelta(days=1)
+
+    run(RunConfig(now=now, export_dir=tmp_path, fetch_media=False, leagues=(LA_LIGA,)))
+
+    manifest = json.loads((tmp_path / "manifest.json").read_text())
+    league = json.loads((tmp_path / "leagues" / "la-liga.json").read_text())
+    model = json.loads((tmp_path / "model.json").read_text())
+    assert manifest["leagues"][0]["upcoming"] == 10
+    assert set(league) >= {"league", "season", "record", "upcoming", "results", "standings"}
+    assert set(league["upcoming"][0]) >= {"probs", "market", "xg", "scorelines", "meetings"}
+    assert {"result", "correct"} <= set(league["results"][0])
+    assert set(model["backtest"]) >= {"overall", "byLeague", "calibration"}

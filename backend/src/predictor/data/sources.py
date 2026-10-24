@@ -58,7 +58,8 @@ def _cached(url: str, path: Path, max_age: timedelta | None) -> bytes:
     try:
         content = _download(url)
     except (requests.RequestException, OSError) as exc:
-        if isinstance(exc, FileNotFoundError) or not path.exists():
+        # Without a cached copy a 404 means the file does not exist yet (a season not started).
+        if not path.exists():
             raise
         # A stale copy beats no copy: the run publishes slightly older data instead of dropping
         # a whole season.

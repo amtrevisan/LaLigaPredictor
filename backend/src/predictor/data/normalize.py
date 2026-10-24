@@ -152,9 +152,8 @@ def combine(frames: list[pd.DataFrame]) -> pd.DataFrame:
     """
     matches = pd.concat([f for f in frames if not f.empty], ignore_index=True)
     matches["_played"] = matches["home_goals"].notna()
-    matches["_day"] = matches["date"].dt.floor("D")
     matches = matches.sort_values(["_played"], kind="stable")
     matches = matches.drop_duplicates(["league", "home", "away", "season"], keep="last")
-    matches = matches.drop(columns=["_played", "_day"])
+    matches = matches.drop(columns=["_played"])
     matches = matches.sort_values(["date", "league", "home"], kind="stable").reset_index(drop=True)
     return matches
